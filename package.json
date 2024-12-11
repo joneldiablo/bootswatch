@@ -1,16 +1,15 @@
 {
-  "name": "bootswatch",
-  "description": "Bootswatch is a collection of themes for Bootstrap.",
+  "name": "cpa-bs-themes",
+  "description": "A collection of themes for Bootstrap for the CPA products.",
   "version": "5.3.3",
-  "author": "Thomas Park",
-  "homepage": "https://bootswatch.com",
-  "license": "MIT",
+  "author": "CPAvision",
+  "homepage": "{{}}",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thomaspark/bootswatch.git"
+    "url": "git+https://bitbucket.com/{{}}.git"
   },
   "bugs": {
-    "url": "https://github.com/thomaspark/bootswatch/issues"
+    "url": "https://github.com/{{}}/issues"
   },
   "scripts": {
     "build": "grunt swatch",

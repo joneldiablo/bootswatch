@@ -6,31 +6,7 @@ const autoprefixer = require('autoprefixer');
 const pkg = require('./package.json');
 
 const SWATCHES = [
-  'cerulean',
-  'cosmo',
-  'cyborg',
-  'darkly',
-  'flatly',
-  'journal',
-  'litera',
-  'lumen',
-  'lux',
-  'materia',
-  'minty',
-  'morph',
-  'pulse',
-  'quartz',
-  'sandstone',
-  'simplex',
-  'sketchy',
-  'slate',
-  'solar',
-  'spacelab',
-  'superhero',
-  'united',
-  'vapor',
-  'yeti',
-  'zephyr'
+  'CPA'
 ];
 
 const BUILD_DIR = 'build/';

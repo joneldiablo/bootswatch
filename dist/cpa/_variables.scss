@@ -1,0 +1,184 @@
+// CPA 5.3.3
+// Bootswatch
+
+$theme: "CPA" !default;
+
+//
+// Color system
+//
+
+$white: #fff !default;
+$gray-25: #F4F5FA !default;
+$gray-50: #E7E9F3 !default;
+$gray-100: #C3CBD8 !default;
+$gray-200: #9FA8B9 !default;
+$gray-300: #7B879C !default;
+$gray-400: #626F86 !default;
+$gray-500: #495872 !default;
+$gray-600: #3D4C63 !default;
+$gray-700: #2E3A4E !default;
+$gray-800: #1F2939 !default;
+$gray-900: #0E1623 !default;
+$black: #000 !default;
+
+$blue: #1F4FB2 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #DC2626 !default;
+$orange: #F97316 !default;
+$yellow: #F59E0B !default;
+$green: #84CC16 !default;
+$teal: #20c997 !default;
+$cyan: #06B6D4 !default;
+
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $orange !default;
+$danger: $red !default;
+$light: $gray-200 !default;
+$dark: #232A37 !default;
+
+$min-contrast-ratio: 2.05 !default;
+
+$body-color: $gray-900 !default;
+$body-bg: $gray-25 !default;
+
+$grays: ("25": $gray-25,
+  "50": $gray-50,
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900) !default;
+
+$rounded-radius: 3rem;
+
+// Links
+
+$link-color: $primary !default;
+
+// Fonts
+
+// stylelint-disable-next-line value-keyword-case
+$font-family-sans-serif: Roboto,
+Lato,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+"Helvetica Neue",
+Arial,
+sans-serif,
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol" !default;
+
+$font-size-base: 1rem !default;
+
+$h1-font-size: $font-size-base * 1.85 !default;
+$h2-font-size: $font-size-base * 1.60 !default;
+$h3-font-size: $font-size-base * 1.50 !default;
+$h4-font-size: $font-size-base * 1.40 !default;
+$h5-font-size: $font-size-base * 1.20 !default;
+$h6-font-size: $font-size-base !default;
+
+// Tables
+
+$table-bg-scale: 0% !default;
+
+// Dropdowns
+
+$dropdown-border-color: $gray-400 !default;
+$dropdown-link-color: $gray-700 !default;
+$dropdown-link-hover-color: $white !default;
+$dropdown-link-hover-bg: $primary !default;
+
+// Navs
+
+$nav-link-padding-y: .5rem !default;
+$nav-link-padding-x: 2rem !default;
+$nav-link-disabled-color: $gray-600 !default;
+
+$nav-tabs-border-color: $dropdown-border-color !default;
+$nav-tabs-link-hover-border-color: $nav-tabs-border-color $nav-tabs-border-color transparent !default;
+$nav-tabs-link-active-color: $primary !default;
+$nav-tabs-link-active-border-color: $nav-tabs-link-hover-border-color !default;
+
+
+// Navbar
+
+$navbar-padding-y: 1rem !default;
+$navbar-dark-color: $white !default;
+$navbar-dark-hover-color: $light !default;
+$navbar-dark-active-color: $dark !default;
+
+$navbar-dark-brand-color: $white !default;
+$navbar-dark-brand-hover-color: $navbar-dark-hover-color !default;
+
+// Pagination
+
+$pagination-color: $dark !default;
+$pagination-bg: $white !default;
+$pagination-border-width: 1px !default;
+$pagination-border-radius: $rounded-radius !default;
+$pagination-border-radius-sm: $rounded-radius !default;
+$pagination-border-radius-lg: $rounded-radius !default;
+$pagination-border-color: $gray-300 !default;
+$pagination-hover-color: lighten($primary, 15%) !default;
+$pagination-hover-bg: tint-color($primary, 60%) !default;
+$pagination-hover-border-color: $gray-300 !default;
+$pagination-active-color: $white !default;
+$pagination-active-bg: $primary !default;
+$pagination-active-border-color: $gray-300 !default;
+$pagination-disabled-color: $gray-300 !default;
+$pagination-disabled-bg: $gray-100 !default;
+$pagination-disabled-border-color: $gray-300 !default;
+
+// List group
+
+$list-group-hover-bg: $gray-200 !default;
+$list-group-disabled-bg: $gray-200 !default;
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: .375rem !default;
+$breadcrumb-padding-x: .75rem !default;
+$breadcrumb-border-radius: .25rem !default;
+
+// Close
+
+$btn-close-color: $white !default;
+$btn-close-opacity: .4 !default;
+$btn-close-hover-opacity: 1 !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius: $rounded-radius !default;
+$btn-border-radius-sm: $rounded-radius !default;
+$btn-border-radius-lg: $rounded-radius !default;
+
+$alert-border-radius: 0 !default;
+$alert-border-width: 0 !default;
+
+$dark-text-emphasis: $gray-100 !default;
+
+$primary-bg-subtle: tint-color($primary, 60%) !default;
+$secondary-bg-subtle: tint-color($secondary, 60%) !default;
+$success-bg-subtle: tint-color($success, 60%) !default;
+$danger-bg-subtle: tint-color($danger, 60%) !default;
+$warning-bg-subtle: tint-color($warning, 60%) !default;
+$info-bg-subtle: tint-color($info, 70%) !default;
+$dark-bg-subtle: tint-color($dark, 0%) !default;
+
+$primary-border-subtle: tint-color($primary, 40%) !default;
+$secondary-border-subtle: tint-color($secondary, 40%) !default;
+$success-border-subtle: tint-color($success, 40%) !default;
+$danger-border-subtle: tint-color($danger, 40%) !default;
+$warning-border-subtle: tint-color($warning, 40%) !default;
+$info-border-subtle: tint-color($info, 40%) !default;
+$dark-border-subtle: $gray-100 !default;

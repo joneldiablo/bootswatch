@@ -1,6 +1,6 @@
 // stylelint-disable selector-max-id
 
-$gradient: linear-gradient(145deg, #375ee3 0%, #6543e0 80%) !default;
+$gradient: linear-gradient(145deg, #232f37 0%, #24333d 80%) !default;
 
 body {
   padding-top: 120px;
@@ -42,7 +42,6 @@ iframe {
   margin-top: 4em;
   .page-header h1 {
     padding: 2rem 0;
-    font-size: 3rem;
   }
 }
 
@@ -137,7 +136,7 @@ iframe {
   padding: 12em 0 6em;
   color: #fff;
   text-align: center;
-  background-color: #375ee3;
+  background-color: #232A37;
   background-image: url("../img/splash.svg"), $gradient;
   background-repeat: no-repeat;
   background-size: cover;
@@ -146,7 +145,6 @@ iframe {
     width: 160px;
   }
   h1 {
-    font-size: 3em;
     color: #fff;
   }
   #social {
@@ -251,9 +249,6 @@ iframe {
     padding-top: 8em;
     .logo {
       width: 100px;
-    }
-    h1 {
-      font-size: 2em;
     }
   }
   #banner {
