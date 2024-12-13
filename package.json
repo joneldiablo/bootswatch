@@ -1,6 +1,6 @@
 {
   "name": "cpa-bs-themes",
-  "description": "A collection of themes for Bootstrap for the CPA products.",
+  "description": "Patrones de diseño de la familia de productos CPA basados en bootstrap.",
   "version": "5.3.3",
   "author": "CPAvision",
   "homepage": "{{}}",
@@ -9,10 +9,12 @@
     "url": "git+https://bitbucket.com/{{}}.git"
   },
   "bugs": {
-    "url": "https://github.com/{{}}/issues"
+    "url": "https://bitbucket.com/{{}}/issues"
   },
   "scripts": {
-    "build": "grunt swatch",
+    "start": "serve ./docs",
+    "build": "npm run swatch && npm run docs",
+    "swatch": "grunt swatch",
     "docs": "grunt docs",
     "htmllint": "grunt htmllint",
     "stylelint": "stylelint \"dist/**/*.scss\"",
@@ -41,6 +43,7 @@
     "prismjs": "^1.29.0",
     "rtlcss": "^4.1.1",
     "sass": "^1.71.0",
+    "serve": "^14.2.4",
     "stylelint": "^15.10.2",
     "stylelint-config-twbs-bootstrap": "^11.0.1"
   }
