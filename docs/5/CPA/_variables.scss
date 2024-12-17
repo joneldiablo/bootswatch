@@ -7,7 +7,7 @@ $theme: "CPA" !default;
 // Color system
 //
 
-$white: #fff !default;
+$white: #fefefe !default;
 $gray-25: #F4F5FA !default;
 $gray-50: #E7E9F3 !default;
 $gray-100: #C3CBD8 !default;
@@ -44,7 +44,7 @@ $dark: #232A37 !default;
 $min-contrast-ratio: 2.05 !default;
 
 $body-color: $gray-900 !default;
-$body-bg: $gray-25 !default;
+$body-bg: $white !default;
 
 $grays: ("25": $gray-25,
   "50": $gray-50,
