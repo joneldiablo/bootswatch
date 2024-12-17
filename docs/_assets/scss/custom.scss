@@ -23,6 +23,7 @@ iframe {
   .navbar {
     background: $gradient;
   }
+
   .navbar-brand {
     .nav-link {
       display: inline-block;
@@ -33,6 +34,7 @@ iframe {
 
 #home {
   padding-top: 0;
+
   .btn {
     padding: .5rem .9rem;
   }
@@ -40,6 +42,7 @@ iframe {
 
 .bs-docs-section {
   margin-top: 4em;
+
   .page-header h1 {
     padding: 2rem 0;
   }
@@ -61,12 +64,15 @@ iframe {
 
 .bs-component {
   position: relative;
-  + .bs-component {
+
+  +.bs-component {
     margin-top: 1rem;
   }
+
   .card {
     margin-bottom: 1rem;
   }
+
   .modal {
     position: relative;
     top: auto;
@@ -76,9 +82,11 @@ iframe {
     z-index: 1;
     display: block;
   }
+
   .modal-dialog {
     width: 90%;
   }
+
   .popover {
     position: relative;
     display: inline-block;
@@ -120,11 +128,13 @@ iframe {
 
 #footer {
   margin: 5em 0;
+
   li {
     float: left;
     margin-right: 1.5em;
     margin-bottom: 1.5em;
   }
+
   p {
     margin-bottom: 0;
     clear: left;
@@ -144,16 +154,20 @@ iframe {
   .logo {
     width: 160px;
   }
+
   h1 {
     color: #fff;
   }
+
   #social {
     margin: 2em 0 3em;
   }
+
   .alert {
     margin: 2em 0;
     border: none;
   }
+
   .sponsor a {
     color: #fff;
   }
@@ -164,6 +178,7 @@ iframe {
   text-align: center;
   background-color: #eaf1f1;
   border-bottom: 1px solid rgba(0, 0, 0, .05);
+
   .icon {
     display: flex;
     align-items: center;
@@ -177,6 +192,7 @@ iframe {
     background: $gradient;
     border-radius: 50%;
   }
+
   p {
     margin-bottom: 5em;
   }
@@ -184,9 +200,11 @@ iframe {
 
 .section-preview {
   padding: 4em 0;
+
   .preview {
     margin-bottom: 4em;
     background-color: #eaf1f1;
+
     .image {
       position: relative;
 
@@ -195,18 +213,22 @@ iframe {
         height: auto;
       }
     }
+
     .options {
       padding: 2em;
       text-align: center;
       border-top: 1px solid rgba(0, 0, 0, .125);
+
       p {
         margin-bottom: 2em;
       }
     }
   }
+
   .dropdown-menu {
     text-align: left;
   }
+
   .lead {
     margin-bottom: 2em;
   }
@@ -216,15 +238,18 @@ iframe {
   a {
     text-decoration: none;
   }
+
   #carbonads {
     max-width: 240px;
     margin: 0 auto;
   }
+
   .carbon-text {
     display: block;
     margin-top: 1em;
     font-size: 12px;
   }
+
   .carbon-poweredby {
     float: right;
     margin-top: 1em;
@@ -247,10 +272,12 @@ iframe {
 @media (max-width: 767px) {
   .splash {
     padding-top: 8em;
+
     .logo {
       width: 100px;
     }
   }
+
   #banner {
     margin-bottom: 2em;
     text-align: center;
@@ -263,9 +290,9 @@ iframe {
   }
 }
 
-.bs-component > .btn,
-.bs-component > .btn-toolbar > .btn-group,
-.bs-component > .btn-group,
+.bs-component>.btn,
+.bs-component>.btn-toolbar>.btn-group,
+.bs-component>.btn-group,
 #home .section-preview .card .btn-group {
   margin-bottom: .25rem;
 }

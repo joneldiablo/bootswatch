@@ -1904,6 +1904,122 @@
       </div>
     </div>
 
+    <!-- CPA design -->
+    <div class="bs-docs-section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="page-header">
+            <h1 id="dialogs">Notificaciones</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-2">
+        <div class="col">
+          <h2>Card</h2>
+          <div class="bs-component">
+            <div class="card">
+              <div class="row border-start border-4 border-warning g-0">
+                <div class="col col-md-auto flex-shrink-1 py-2 ps-3">
+                  <i class="cpa cpa-icon-forward-to-inbox mx-2 text-warning" style="font-size:50px;"></i>
+                </div>
+                <div class="col flex-grow-1">
+                  <div class="card-header bg-transparent border-0">
+                    <h5 class="card-title text-warning" id="titleResendNotifPartners">Reenvío de Notificaciones
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="m-0">¿Estás seguro de reenviar las notificaciones a estos usuarios?</p>
+                  </div>
+                  <div class="card-footer gap-2 justify-content-start border-0 bg-transparent">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="acceptResendNotifPartners" type="button" class="btn btn-primary">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <h2>Dialogs</h2>
+          <button id="stbtn" class="btn btn-primary">mostrar toast</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#resendNotifPartnersModal1">
+            Abrir Modal
+          </button>
+          <br />
+          <br />
+          <div class="bs-component">
+            <!--TOAST-->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"
+              id="toastNotif" style="--bs-toast-max-width:100%">
+              <button type="button" class="btn-close float-end m-2" data-bs-dismiss="toast" aria-label="Close"></button>
+              <div class="row border-start border-4 border-warning g-0">
+                <div class="col col-md-auto flex-shrink-1 py-2 ps-3">
+                  <i class="cpa cpa-icon-forward-to-inbox mx-2 text-warning" style="font-size:50px;"></i>
+                </div>
+                <div class="col flex-grow-1">
+                  <div class="toast-header bg-transparent border-0">
+                    <h5 class="text-warning" id="titleResendNotifPartners">Reenvío de Notificaciones
+                    </h5>
+                  </div>
+                  <div class="toast-body">
+                    <p class="m-0">¿Estás seguro de reenviar las notificaciones a estos usuarios?</p>
+                    <div class="d-flex gap-2 border-0 mt-3">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="toast">Cancelar</button>
+                      <button id="acceptResendNotifPartners" type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- HELP OPEN toast-->
+            <script type="application/javascript">
+              document.addEventListener('DOMContentLoaded', (e) => {
+                const toastTrigger = document.getElementById('stbtn')
+                const toastLiveExample = document.getElementById('toastNotif')
+
+                if (toastTrigger) {
+                  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                  toastTrigger.addEventListener('click', () => {
+                    toastBootstrap.show()
+                  })
+                }
+              })
+            </script>
+
+            <!-- MODAL -->
+            <div class="modal fade" id="resendNotifPartnersModal" tabindex="-1"
+              aria-labelledby="titleResendNotifPartners" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content overflow-hidden" style="border-radius: var(--bs-border-radius) !important">
+                  <div class="row border-start border-4 border-warning g-0">
+                    <div class="col col-md-auto flex-shrink-1 py-2 ps-3">
+                      <i class="cpa cpa-icon-forward-to-inbox mx-2 text-warning" style="font-size:50px;"></i>
+                    </div>
+                    <div class="col flex-grow-1">
+                      <div class="modal-header bg-transparent border-0">
+                        <h5 class="modal-title text-warning" id="titleResendNotifPartners">Reenvío de Notificaciones
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="m-0">¿Estás seguro de reenviar las notificaciones a estos usuarios?</p>
+                      </div>
+                      <div class="modal-footer gap-2 justify-content-start border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="acceptResendNotifPartners" type="button" class="btn btn-primary">Aceptar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Icons
       ================================================== -->
     <div class="bs-docs-section">
@@ -1916,7 +2032,9 @@
           </div>
           <a href="./cpa-icons-v1.0/demo.html">Full list icons preview</a>
         </div>
-        <div class="col"></div>
+        <div class="col">
+
+        </div>
       </div>
     </div>
 
@@ -1954,6 +2072,32 @@
         </div>
       </div>
     </footer>
+  </div>
+
+  <div class="modal fade" id="resendNotifPartnersModal1" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content overflow-hidden" style="border-radius: var(--bs-border-radius) !important">
+        <div class="row border-start border-4 border-warning g-0">
+          <div class="col col-md-auto flex-shrink-1 py-2 ps-3">
+            <i class="cpa cpa-icon-forward-to-inbox mx-2 text-warning" style="font-size:50px;"></i>
+          </div>
+          <div class="col flex-grow-1">
+            <div class="modal-header bg-transparent border-0">
+              <h5 class="modal-title text-warning" id="titleResendNotifPartners1">Reenvío de Notificaciones
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="m-0">¿Estás seguro de reenviar las notificaciones a estos usuarios?</p>
+            </div>
+            <div class="modal-footer gap-2 justify-content-start border-0">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button id="acceptResendNotifPartners1" type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

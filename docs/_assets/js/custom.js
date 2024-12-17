@@ -6,10 +6,10 @@
   //  Helper functions
   function escapeHtml(html) {
     return html.replace(/×/g, '&times;')
-               .replace(/«/g, '&laquo;')
-               .replace(/»/g, '&raquo;')
-               .replace(/←/g, '&larr;')
-               .replace(/→/g, '&rarr;');
+      .replace(/«/g, '&laquo;')
+      .replace(/»/g, '&raquo;')
+      .replace(/←/g, '&larr;')
+      .replace(/→/g, '&rarr;');
   }
 
   function cleanSource(html) {
