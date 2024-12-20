@@ -3,6 +3,8 @@
 
 $theme: "CPAdark" !default;
 
+//$variable-prefix: cpa- !default;
+
 //
 // Color system
 //
@@ -101,8 +103,6 @@ $dropdown-link-hover-bg: $primary !default;
 
 // Navs
 
-$nav-link-padding-y: .5rem !default;
-$nav-link-padding-x: 2rem !default;
 $nav-link-disabled-color: $gray-600 !default;
 
 $nav-tabs-border-color: $dropdown-border-color !default;
@@ -113,7 +113,6 @@ $nav-tabs-link-active-border-color: $nav-tabs-link-hover-border-color !default;
 
 // Navbar
 
-$navbar-padding-y: 1rem !default;
 $navbar-dark-color: $white !default;
 $navbar-dark-hover-color: $light !default;
 $navbar-dark-active-color: $dark !default;
