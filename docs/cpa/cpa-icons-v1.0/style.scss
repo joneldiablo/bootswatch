@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?kh23h7') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?kh23h7') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?kh23h7##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?36dvv2') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?36dvv2') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?36dvv2##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,61 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-download {
+  &:before {
+    content: $cpa-icon-download; 
+  }
+}
+.cpa-icon-not-upload {
+  &:before {
+    content: $cpa-icon-not-upload; 
+  }
+}
+.cpa-icon-create-profile {
+  &:before {
+    content: $cpa-icon-create-profile; 
+  }
+}
+.cpa-icon-disabling-profile {
+  &:before {
+    content: $cpa-icon-disabling-profile; 
+  }
+}
+.cpa-icon-enabling-profile {
+  &:before {
+    content: $cpa-icon-enabling-profile; 
+  }
+}
+.cpa-icon-remove-profile {
+  &:before {
+    content: $cpa-icon-remove-profile; 
+  }
+}
+.cpa-icon-file-info1 {
+  &:before {
+    content: $cpa-icon-file-info1; 
+  }
+}
+.cpa-icon-upload {
+  &:before {
+    content: $cpa-icon-upload; 
+  }
+}
+.cpa-icon-create-module {
+  &:before {
+    content: $cpa-icon-create-module; 
+  }
+}
+.cpa-icon-x {
+  &:before {
+    content: $cpa-icon-x; 
+  }
+}
+.cpa-icon-remove-module {
+  &:before {
+    content: $cpa-icon-remove-module; 
+  }
+}
 .cpa-icon-access .path1 {
   &:before {
     content: $cpa-icon-access-path1;  

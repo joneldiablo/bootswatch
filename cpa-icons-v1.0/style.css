@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'cpa-icons';
   src:
-    url('fonts/cpa-icons.ttf?kh23h7') format('truetype'),
-    url('fonts/cpa-icons.woff?kh23h7') format('woff'),
-    url('fonts/cpa-icons.svg?kh23h7#cpa-icons') format('svg');
+    url('fonts/cpa-icons.ttf?36dvv2') format('truetype'),
+    url('fonts/cpa-icons.woff?36dvv2') format('woff'),
+    url('fonts/cpa-icons.svg?36dvv2#cpa-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-download:before {
+  content: "\e945";
+}
+.cpa-icon-not-upload:before {
+  content: "\e946";
+}
+.cpa-icon-create-profile:before {
+  content: "\e97c";
+}
+.cpa-icon-disabling-profile:before {
+  content: "\e97d";
+}
+.cpa-icon-enabling-profile:before {
+  content: "\e97e";
+}
+.cpa-icon-remove-profile:before {
+  content: "\e97f";
+}
+.cpa-icon-file-info1:before {
+  content: "\e980";
+}
+.cpa-icon-upload:before {
+  content: "\e981";
+}
+.cpa-icon-create-module:before {
+  content: "\e982";
+}
+.cpa-icon-x:before {
+  content: "\e983";
+}
+.cpa-icon-remove-module:before {
+  content: "\e984";
+}
 .cpa-icon-access .path1:before {
   content: "\e900";
   color: rgb(118, 164, 216);
