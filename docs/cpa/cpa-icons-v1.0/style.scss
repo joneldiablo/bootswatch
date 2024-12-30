@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?36dvv2') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?36dvv2') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?36dvv2##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?mymubr') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?mymubr') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?mymubr##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-keyboard-o {
+  &:before {
+    content: $cpa-icon-keyboard-o; 
+  }
+}
+.cpa-icon-zoom-in {
+  &:before {
+    content: $cpa-icon-zoom-in; 
+  }
+}
+.cpa-icon-plus {
+  &:before {
+    content: $cpa-icon-plus; 
+  }
+}
+.cpa-icon-eye-plus {
+  &:before {
+    content: $cpa-icon-eye-plus; 
+  }
+}
+.cpa-icon-password {
+  &:before {
+    content: $cpa-icon-password; 
+  }
+}
 .cpa-icon-download {
   &:before {
     content: $cpa-icon-download; 

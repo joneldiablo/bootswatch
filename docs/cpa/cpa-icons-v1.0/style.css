@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'cpa-icons';
   src:
-    url('fonts/cpa-icons.ttf?36dvv2') format('truetype'),
-    url('fonts/cpa-icons.woff?36dvv2') format('woff'),
-    url('fonts/cpa-icons.svg?36dvv2#cpa-icons') format('svg');
+    url('fonts/cpa-icons.ttf?mymubr') format('truetype'),
+    url('fonts/cpa-icons.woff?mymubr') format('woff'),
+    url('fonts/cpa-icons.svg?mymubr#cpa-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-keyboard-o:before {
+  content: "\e988";
+}
+.cpa-icon-zoom-in:before {
+  content: "\e985";
+}
+.cpa-icon-plus:before {
+  content: "\e986";
+}
+.cpa-icon-eye-plus:before {
+  content: "\e987";
+}
+.cpa-icon-password:before {
+  content: "\e989";
+}
 .cpa-icon-download:before {
   content: "\e945";
 }
