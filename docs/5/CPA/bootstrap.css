@@ -2,7 +2,7 @@
 /*!
  * Bootswatch v5.3.3 ({{}})
  * Theme: CPA
- * Copyright 2012-2024 CPAvision
+ * Copyright 2012-2025 CPAvision
  * Licensed under undefined
  * Based on Bootstrap
 */
@@ -12097,7 +12097,7 @@ nav[data-bs-theme=dark] .nav-link.active {
 
 @font-face {
   font-family: "cpa-icons";
-  src: url("fonts/cpa-icons.ttf?36dvv2") format("truetype"), url("fonts/cpa-icons.woff?36dvv2") format("woff"), url("fonts/cpa-icons.svg?36dvv2#cpa-icons") format("svg");
+  src: url("fonts/cpa-icons.ttf?c0z69i") format("truetype"), url("fonts/cpa-icons.woff?c0z69i") format("woff"), url("fonts/cpa-icons.svg?c0z69i#cpa-icons") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12114,6 +12114,70 @@ nav[data-bs-theme=dark] .nav-link.active {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.cpa-icon-minus-circle:before {
+  content: "\e994";
+}
+
+.cpa-icon-chevron-circle-down:before {
+  content: "\e98a";
+}
+
+.cpa-icon-chevron-circle-up:before {
+  content: "\e98b";
+}
+
+.cpa-icon-chevron-circle-right:before {
+  content: "\e98c";
+}
+
+.cpa-icon-chevron-circle-left:before {
+  content: "\e98d";
+}
+
+.cpa-icon-keyboard-o:before {
+  content: "\e988";
+}
+
+.cpa-icon-radio-unchecked:before {
+  content: "\e992";
+}
+
+.cpa-icon-radio-checked:before {
+  content: "\e993";
+}
+
+.cpa-icon-circle-left:before {
+  content: "\e98e";
+}
+
+.cpa-icon-circle-right:before {
+  content: "\e98f";
+}
+
+.cpa-icon-circle-up:before {
+  content: "\e990";
+}
+
+.cpa-icon-circle-down:before {
+  content: "\e991";
+}
+
+.cpa-icon-zoom-in:before {
+  content: "\e985";
+}
+
+.cpa-icon-plus:before {
+  content: "\e986";
+}
+
+.cpa-icon-eye-plus:before {
+  content: "\e987";
+}
+
+.cpa-icon-password:before {
+  content: "\e989";
 }
 
 .cpa-icon-download:before {
@@ -12617,7 +12681,7 @@ nav[data-bs-theme=dark] .nav-link.active {
   content: "\e970";
 }
 
-.cpa-icon-minus-circle:before {
+.cpa-icon-minus-circle1:before {
   content: "\e971";
 }
 

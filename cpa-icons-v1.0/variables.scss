@@ -1,7 +1,18 @@
 $icomoon-font-family: "cpa-icons" !default;
 $icomoon-font-path: "fonts" !default;
 
+$cpa-icon-minus-circle: unquote('"\\e994"');
+$cpa-icon-chevron-circle-down: unquote('"\\e98a"');
+$cpa-icon-chevron-circle-up: unquote('"\\e98b"');
+$cpa-icon-chevron-circle-right: unquote('"\\e98c"');
+$cpa-icon-chevron-circle-left: unquote('"\\e98d"');
 $cpa-icon-keyboard-o: unquote('"\\e988"');
+$cpa-icon-radio-unchecked: unquote('"\\e992"');
+$cpa-icon-radio-checked: unquote('"\\e993"');
+$cpa-icon-circle-left: unquote('"\\e98e"');
+$cpa-icon-circle-right: unquote('"\\e98f"');
+$cpa-icon-circle-up: unquote('"\\e990"');
+$cpa-icon-circle-down: unquote('"\\e991"');
 $cpa-icon-zoom-in: unquote('"\\e985"');
 $cpa-icon-plus: unquote('"\\e986"');
 $cpa-icon-eye-plus: unquote('"\\e987"');
@@ -128,7 +139,7 @@ $cpa-icon-add-task: unquote('"\\e96d"');
 $cpa-icon-cancel-circle-filled: unquote('"\\e96e"');
 $cpa-icon-x-circle: unquote('"\\e96f"');
 $cpa-icon-x-square: unquote('"\\e970"');
-$cpa-icon-minus-circle: unquote('"\\e971"');
+$cpa-icon-minus-circle1: unquote('"\\e971"');
 $cpa-icon-forbidden: unquote('"\\e972"');
 $cpa-icon-disabled-visible: unquote('"\\e973"');
 $cpa-icon-add-circle: unquote('"\\e974"');
