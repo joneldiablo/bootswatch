@@ -1797,8 +1797,8 @@
             <div class="modal">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                  <div class="modal-header text-bg-dark" data-bs-theme="dark">
+                    <h5 class="modal-title text-uppercase">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true"></span>
                     </button>
@@ -1806,9 +1806,15 @@
                   <div class="modal-body">
                     <p>Modal body text goes here.</p>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <div class="modal-footer bg-light bg-opacity-10 border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      <i class="cpa cpa-icon-x"></i>
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      <i class="cpa cpa-icon-target"></i>
+                      Save changes
+                    </button>
                   </div>
                 </div>
               </div>
@@ -2016,6 +2022,64 @@
             </div>
 
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-docs-section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="page-header">
+            <h1 id="panel">Panel lateral</h1>
+            <p>Panel auto ajustable, ancho dinámico, se ajusta al tamaño del contenido.
+              <button class="btn btn-primary" id="toggleLogo" onclick="toggleLogo()">Colapsar/expandir</button>
+            </p>
+            <script>
+              function toggleLogo() {
+                const img = document.getElementById('logoImg');
+                let imgSrc = img.src;
+                let dislplayText;
+                if (imgSrc.endsWith('/_assets/img/Logotipo.png')) {
+                  imgSrc = '/_assets/img/Logotipo-short.png';
+                  dislplayText = 'none';
+                } else {
+                  imgSrc = '/_assets/img/Logotipo.png';
+                  dislplayText = 'unset';
+                }
+                img.src = imgSrc;
+                const textButtons = document.getElementsByClassName('text-menuElem');
+                for (const element of textButtons) {
+                  element.style.display = dislplayText;
+                }
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+      <div class="bs-component border">
+        <div class="row g-0 overflow-hidden w-100" style="height:100vh">
+          <div class="col h-100 overflow-y-auto overflow-x-hidden text-bg-dark col-auto p-3" style="max-width: 300px;">
+            <img src="/_assets/img/Logotipo.png" alt="CPA VISION" class="text-center d-block m-auto" height="45px"
+              id="logoImg" />
+            <div class="py-4 d-flex flex-column gap-4">
+              <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-title="Menus En el Panel Lateral 1">
+                <i class="cpa cpa-icon-target m-auto fs-3"></i>
+                <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 1</span>
+              </div>
+              <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-title="Menus En el Panel Lateral 2 más largo">
+                <i class="cpa cpa-icon-target m-auto fs-3"></i>
+                <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 2 más largo</span>
+              </div>
+              <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-title="Menus En el Panel Lateral 3 más, mucho más largo">
+                <i class="cpa cpa-icon-target m-auto fs-3"></i>
+                <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 3 más, mucho más largo</span>
+              </div>
+            </div>
+          </div>
+          <div class="col overflow-x-hidden overflow-y-auto">page content</div>
         </div>
       </div>
     </div>
