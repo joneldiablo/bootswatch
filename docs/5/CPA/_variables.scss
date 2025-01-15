@@ -10,9 +10,9 @@ $theme: "CPAdark" !default;
 //
 
 $white: #fefefe !default;
-$gray-25: #F4F5FA !default;
-$gray-50: #E7E9F3 !default;
-$gray-100: #C3CBD8 !default;
+$gray-50: #F4F5FA !default;
+$gray-100: #E7E9F3 !default;
+//$gray-100: #C3CBD8 !default;
 $gray-200: #9FA8B9 !default;
 $gray-300: #7B879C !default;
 $gray-400: #626F86 !default;
@@ -21,7 +21,7 @@ $gray-600: #3D4C63 !default;
 $gray-700: #2E3A4E !default;
 $gray-800: #1F2939 !default;
 $gray-900: #0E1623 !default;
-$black: #000 !default;
+$black: #0D0E0F !default;
 
 $blue: #1F4FB2 !default;
 $indigo: #6610f2 !default;
@@ -40,7 +40,7 @@ $success: $green !default;
 $info: $cyan !default;
 $warning: $yellow !default;
 $danger: $red !default;
-$light: $gray-200 !default;
+$light: $gray-50 !default;
 $dark: #232A37 !default;
 
 $min-contrast-ratio: 2.05 !default;
@@ -48,8 +48,8 @@ $min-contrast-ratio: 2.05 !default;
 $body-color: $gray-900 !default;
 $body-bg: $white !default;
 
-$grays: ("25": $gray-25,
-  "50": $gray-50,
+$grays: ("50": $gray-50,
+  //"50": $gray-50,
   "100": $gray-100,
   "200": $gray-200,
   "300": $gray-300,

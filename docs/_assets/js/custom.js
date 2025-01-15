@@ -35,7 +35,7 @@
     }
 
     window.addEventListener('scroll', () => {
-      const scroll = document.documentElement.scrollTop;
+      const scroll = document.querySelector('main').scrollTop;
 
       if (scroll > 50) {
         navBarElement.classList.remove('navbar-transparent');

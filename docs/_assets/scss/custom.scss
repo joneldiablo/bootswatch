@@ -2,8 +2,8 @@
 
 $gradient: linear-gradient(145deg, #232f37 0%, #24333d 80%) !default;
 
-body {
-  padding-top: 120px;
+* {
+  scroll-behavior: smooth;
 }
 
 iframe {
@@ -118,7 +118,7 @@ iframe {
 
 #source-modal {
   pre {
-    max-height: calc(100vh - 11rem);
+    max-height: calc(100vh - 16rem);
   }
 }
 
@@ -295,4 +295,18 @@ iframe {
 .bs-component>.btn-group,
 #home .section-preview .card .btn-group {
   margin-bottom: .25rem;
+}
+
+.go-top {
+  &:not(:hover) {
+    opacity: .5;
+  }
+}
+
+.submenu .nav-link {
+  padding: 0;
+
+  &.active {
+    text-decoration: underline;
+  }
 }
