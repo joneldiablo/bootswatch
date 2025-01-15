@@ -1,15 +1,15 @@
 @font-face {
   font-family: 'cpa-icons';
   src:
-    url('fonts/cpa-icons.ttf?c0z69i') format('truetype'),
-    url('fonts/cpa-icons.woff?c0z69i') format('woff'),
-    url('fonts/cpa-icons.svg?c0z69i#cpa-icons') format('svg');
+    url('fonts/cpa-icons.ttf?gke2h2') format('truetype'),
+    url('fonts/cpa-icons.woff?gke2h2') format('woff'),
+    url('fonts/cpa-icons.svg?gke2h2#cpa-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-.cpa {
+.cpa-icons {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'cpa-icons' !important;
   speak: never;
@@ -24,6 +24,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-ingresos:before {
+  content: "\e995";
+}
+.cpa-icon-deducciones:before {
+  content: "\e996";
+}
+.cpa-icon-nomina:before {
+  content: "\e997";
+}
+.cpa-icon-retenciones:before {
+  content: "\e998";
+}
+.cpa-icon-complementos-pago:before {
+  content: "\e999";
+}
+.cpa-icon-cfdis:before {
+  content: "\e99a";
+}
+.cpa-icon-cfdis-nominas:before {
+  content: "\e99b";
+}
+.cpa-icon-ingresos-plus:before {
+  content: "\e99c";
+}
+.cpa-icon-salud-financiera:before {
+  content: "\e99d";
+}
 .cpa-icon-minus-circle:before {
   content: "\e994";
 }
@@ -47,6 +74,12 @@
 }
 .cpa-icon-radio-checked:before {
   content: "\e993";
+}
+.cpa-icon-pin:before {
+  content: "\e900";
+}
+.cpa-icon-pin-circle:before {
+  content: "\e901";
 }
 .cpa-icon-circle-left:before {
   content: "\e98e";
@@ -104,40 +137,6 @@
 }
 .cpa-icon-remove-module:before {
   content: "\e984";
-}
-.cpa-icon-access .path1:before {
-  content: "\e900";
-  color: rgb(118, 164, 216);
-}
-.cpa-icon-access .path2:before {
-  content: "\e901";
-  margin-left: -1em;
-  color: rgb(123, 140, 193);
-}
-.cpa-icon-access .path3:before {
-  content: "\e902";
-  margin-left: -1em;
-  color: rgb(76, 109, 167);
-}
-.cpa-icon-access .path4:before {
-  content: "\e903";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.cpa-icon-access .path5:before {
-  content: "\e904";
-  margin-left: -1em;
-  color: rgb(255, 255, 255);
-}
-.cpa-icon-access .path6:before {
-  content: "\e905";
-  margin-left: -1em;
-  color: rgb(76, 109, 167);
-}
-.cpa-icon-access .path7:before {
-  content: "\e906";
-  margin-left: -1em;
-  color: rgb(76, 109, 167);
 }
 .cpa-icon-refresh:before {
   content: "\e907";
