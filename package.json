@@ -19,7 +19,8 @@
     "htmllint": "grunt htmllint",
     "stylelint": "stylelint \"dist/**/*.scss\"",
     "release": "grunt release",
-    "test": "npm run stylelint"
+    "test": "npm run stylelint",
+    "risk":"npm run build && node ./tools/purge-css-cli.js --html='../risk-dark-maqueta-vanilla/index.html' -o='../risk-dark-maqueta-vanilla/assets/css/risk.css'"
   },
   "files": [
     "dist/**/*.{css,scss,map}"

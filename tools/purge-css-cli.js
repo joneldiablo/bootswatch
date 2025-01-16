@@ -12,14 +12,22 @@ const args = yargs(hideBin(process.argv))
     describe: "Path to the HTML file used for purging",
     demandOption: true,
   })
+  .option("output", {
+    alias: "o",
+    type: "string",
+    describe: "Path to where put the css file generated",
+    demandOption: false,
+  })
   .help()
   .alias("help", "h").argv;
 
 try {
-  const cssFilePath = "./dist/bootstrap.css";
+  const cssFilePath = "./dist/cpa/bootstrap.css";
   // Procesar el archivo HTML y generar el output CSS
   const htmlFilePath = path.resolve(args.html);
-  const outputCssFilePath = htmlFilePath.replace(/\.html$/, ".css");
+  const outputCssFilePath = args.output
+    ? path.resolve(args.output)
+    : htmlFilePath.replace(/\.html$/, ".css");
 
   purgeCss(cssFilePath, htmlFilePath, outputCssFilePath)
     .then(() => {
