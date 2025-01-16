@@ -111,7 +111,7 @@
   const bsComponents = document.querySelectorAll('.bs-component');
 
   for (const element of bsComponents) {
-    const button = '<button class="source-button btn btn-primary btn-xs" type="button" tabindex="0"><i class="bi bi-code"></i></button>';
+    const button = '<button class="source-button btn btn-primary btn-sm rounded" type="button" tabindex="0"><i class="bi bi-code"></i></button>';
     element.insertAdjacentHTML('beforeend', button);
   }
 
