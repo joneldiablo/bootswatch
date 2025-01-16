@@ -13,39 +13,81 @@
 
 <body>
   <div class="row g-0 overflow-hidden w-100" style="height:100vh">
-    <aside class="col h-100 overflow-y-auto overflow-x-hidden text-bg-dark col-auto p-3" id="menu-tab" role="tablist"
-      aria-orientation="vertical" style="max-width: 300px;">
-      <a class="nav-link active" id="menu-home-link" data-bs-toggle="pill" href="#menu-home" role="tab"
-        aria-controls="menu-home" aria-selected="true">
-        <img src="/_assets/img/logo-full.svg" alt="CPA VISION" class="text-center d-block m-auto" height="70"
-          id="logoImgDocs" />
-      </a>
-      <div class="py-4 d-flex flex-column gap-4">
-        <a class="d-flex align-items-center text-truncate nav-link" id="menu-base-bootstrap-tab" data-bs-toggle="pill"
-          href="#menu-base-bootstrap" role="tab" aria-controls="menu-base-bootstrap" aria-selected="false">
-          <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
-            data-bs-title="Base Bootstrap"></i>
-          <span class="text-menu-docs ms-2 flex-grow-1">Base Bootstrap</span>
+    <aside class="panel col h-100 text-bg-dark col-auto position-relative order-first" style="display:none;">
+      <span class="toggle-panel position-absolute end-0 bg-info rounded-circle z-3">
+        <i class="cpa-icons cpa-icon-circle-left fs-4"></i>
+      </span>
+      <script type="application/javascript">
+        (() => document.addEventListener('DOMContentLoaded', () => {
+          function togglePanelMenu(evt) {
+            const img = this.parentNode.querySelector('#logoImgDocs');
+            const iconNode = this.querySelector('i');
+            let imgSrc = img.src;
+            let dislplayText;
+            let isOpen = localStorage.getItem('panelIsOpen');
+            isOpen = isOpen ? JSON.parse(isOpen) : false;
+            isOpen = evt === 'init' ? !isOpen : isOpen;
+            if (isOpen) {
+              imgSrc = '/_assets/img/logo-short.svg';
+              dislplayText = 'none';
+              iconNode.classList.replace('cpa-icon-circle-left', 'cpa-icon-circle-right');
+              this.parentNode.classList.remove('open');
+            } else {
+              imgSrc = '/_assets/img/logo-full.svg';
+              dislplayText = null;
+              icon = 'cpa-icon-circle-right';
+              iconNode.classList.replace('cpa-icon-circle-right', 'cpa-icon-circle-left');
+              this.parentNode.classList.add('open');
+            }
+            img.src = imgSrc;
+            const textButtons = document.getElementsByClassName('text-menu-docs');
+
+            for (const element of textButtons) {
+              element.style.display = dislplayText;
+            }
+            if (evt !== 'init')
+              localStorage.setItem('panelIsOpen', JSON.stringify(!isOpen));
+            this.parentNode.style.display = null;
+          }
+          const btnToggleMenu = document.querySelector('.toggle-panel');
+          btnToggleMenu.addEventListener('click', togglePanelMenu);
+          togglePanelMenu.bind(btnToggleMenu)('init');
+        }))();
+      </script>
+      <div class="h-100 p-3 overflow-y-auto" id="menu-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="menu-home-link" data-bs-toggle="pill" href="#menu-home" role="tab"
+          aria-controls="menu-home" aria-selected="true">
+          <img src="/_assets/img/logo-full.svg" alt="CPA VISION" class="text-center d-block m-auto" height="70"
+            id="logoImgDocs" />
         </a>
-        <a class="d-flex align-items-center text-truncate nav-link" id="menu-complex-tab" data-bs-toggle="pill"
-          href="#menu-complex" role="tab" aria-controls="menu-complex" aria-selected="true">
-          <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
-            data-bs-title="Componentes Compuestos"></i>
-          <span class="text-menu-docs ms-2 flex-grow-1">Componentes Compuestos</span>
-        </a>
-        <a class="d-flex align-items-center text-truncate nav-link" id="menu-icons-tab" data-bs-toggle="pill"
-          href="#menu-icons" role="tab" aria-controls="menu-icons" aria-selected="true">
-          <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
-            data-bs-title="Íconos"></i>
-          <span class="text-menu-docs ms-2 flex-grow-1">Íconos</span>
-        </a>
+        <div class="menu py-4 d-flex flex-column gap-4">
+          <a class="d-flex align-items-center text-truncate nav-link" id="menu-base-bootstrap-tab" data-bs-toggle="pill"
+            href="#menu-base-bootstrap" role="tab" aria-controls="menu-base-bootstrap" aria-selected="false">
+            <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
+              data-bs-title="Base Bootstrap"></i>
+            <span class="text-menu-docs ms-2 flex-grow-1">Base Bootstrap</span>
+          </a>
+          <a class="d-flex align-items-center text-truncate nav-link" id="menu-complex-tab" data-bs-toggle="pill"
+            href="#menu-complex" role="tab" aria-controls="menu-complex" aria-selected="true">
+            <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
+              data-bs-title="Componentes Compuestos"></i>
+            <span class="text-menu-docs ms-2 flex-grow-1">Componentes Compuestos</span>
+          </a>
+          <a class="d-flex align-items-center text-truncate nav-link" id="menu-icons-tab" data-bs-toggle="pill"
+            href="#menu-icons" role="tab" aria-controls="menu-icons" aria-selected="true">
+            <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip" data-bs-placement="right"
+              data-bs-title="Íconos"></i>
+            <span class="text-menu-docs ms-2 flex-grow-1">Íconos</span>
+          </a>
+        </div>
       </div>
     </aside>
-    <main class="col h-100 overflow-x-hidden overflow-y-auto">
+    <main class="col h-100 overflow-x-hidden overflow-y-auto pb-5">
       <div class="container sticky-top" style="height: 90px;">
         <!-- HEADER -->
       </div>
       <div class="tab-content" id="menu-tabContent">
+        <span id="top"></span>
         <div class="tab-pane fade show active" id="menu-home" role="tabpanel" aria-labelledby="menu-home-link"
           tabindex="0">
           <div class="d-flex">
@@ -71,7 +113,6 @@
               </div>
             </div>
             <div class="flex-grow-1">
-              <span id="top"></span>
               <div class="container">
                 <h1 class="text-dark">Sistema de Diseño</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
@@ -166,9 +207,8 @@
               </div>
             </div>
             <div class="flex-grow-1">
-              <span id="top"></span>
               <div class="container">
-                <h1 class="text-dark">Sistema de Diseño</h1>
+                <h1 class="text-dark">Base Bootstrap</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
                   cursus
                   ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
@@ -183,88 +223,159 @@
                 <div class="tab-pane fade" id="submenu-text-bs" role="tabpanel" aria-labelledby="submenu-text-bs-tab"
                   tabindex="0">
                   <h2 class="text-dark">Texto</h2>
-                  <p>S</p>
-                  <!-- Typography
-              ================================================== -->
+                  <p>En esta sección encontrarás todas las clases necesarias para estilizar cualquier elemento de
+                    texto, como títulos, citas, enlaces, parrafos, etc.</p>
+                  <!-- headings ================================================== -->
                   <div class="bs-docs-section">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="page-header">
-                          <h1 id="typography">Typography</h1>
-                        </div>
-                      </div>
+
+                    <h3>Color</h3>
+                    <div class="bs-component">
+                      <p class="text-primary">.text-primary</p>
+                      <p class="text-primary-emphasis">.text-primary-emphasis</p>
+                      <p class="text-secondary">.text-secondary</p>
+                      <p class="text-secondary-emphasis">.text-secondary-emphasis</p>
+                      <p class="text-success">.text-success</p>
+                      <p class="text-success-emphasis">.text-success-emphasis</p>
+                      <p class="text-danger">.text-danger</p>
+                      <p class="text-danger-emphasis">.text-danger-emphasis</p>
+                      <p class="text-warning bg-dark">.text-warning</p>
+                      <p class="text-warning-emphasis">.text-warning-emphasis</p>
+                      <p class="text-info bg-dark">.text-info</p>
+                      <p class="text-info-emphasis">.text-info-emphasis</p>
+                      <p class="text-light bg-dark">.text-light</p>
+                      <p class="text-light-emphasis">.text-light-emphasis</p>
+                      <p class="text-dark bg-white">.text-dark</p>
+                      <p class="text-dark-emphasis bg-dark">.text-dark-emphasis</p>
+
+                      <p class="text-body">.text-body</p>
+                      <p class="text-body-emphasis">.text-body-emphasis</p>
+                      <p class="text-body-secondary">.text-body-secondary</p>
+                      <p class="text-body-tertiary">.text-body-tertiary</p>
+
+                      <p class="text-black bg-white">.text-black</p>
+                      <p class="text-white bg-dark">.text-white</p>
+                      <p class="text-black-50 bg-white">.text-black-50</p>
+                      <p class="text-white-50 bg-dark">.text-white-50</p>
+                    </div>
+                    <p>Transparencia</p>
+                    <div class="bs-component">
+                      <div class="text-primary">This is default primary text</div>
+                      <div class="text-primary" style="--bs-text-opacity: .5;">This is 50% opacity primary text</div>
+                      <div class="text-primary">This is default primary text</div>
+                      <div class="text-primary text-opacity-75">This is 75% opacity primary text</div>
+                      <div class="text-primary text-opacity-50">This is 50% opacity primary text</div>
+                      <div class="text-primary text-opacity-25">This is 25% opacity primary text</div>
                     </div>
 
-                    <!-- Headings -->
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <div class="bs-component">
-                          <h1>Heading 1</h1>
-                          <h2>Heading 2</h2>
-                          <h3>Heading 3</h3>
-                          <h4>Heading 4</h4>
-                          <h5>Heading 5</h5>
-                          <h6>Heading 6</h6>
-                          <h3>
-                            Heading
-                            <small class="text-body-secondary">with faded secondary text</small>
-                          </h3>
-                          <p class="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="bs-component">
-                          <h2>Example body text</h2>
-                          <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque
-                            penatibus et
-                            magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies
-                            vehicula.
-                          </p>
-                          <p><small>This line of text is meant to be treated as fine print.</small></p>
-                          <p>The following is <strong>rendered as bold text</strong>.</p>
-                          <p>The following is <em>rendered as italicized text</em>.</p>
-                          <p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="bs-component">
-                          <h2>Emphasis classes</h2>
-                          <p class="text-primary">.text-primary</p>
-                          <p class="text-primary-emphasis">.text-primary-emphasis</p>
-                          <p class="text-secondary">.text-secondary</p>
-                          <p class="text-secondary-emphasis">.text-secondary-emphasis</p>
-                          <p class="text-success">.text-success</p>
-                          <p class="text-success-emphasis">.text-success-emphasis</p>
-                          <p class="text-danger">.text-danger</p>
-                          <p class="text-danger-emphasis">.text-danger-emphasis</p>
-                          <p class="text-warning">.text-warning</p>
-                          <p class="text-warning-emphasis">.text-warning-emphasis</p>
-                          <p class="text-info">.text-info</p>
-                          <p class="text-info">.text-info-emphasis</p>
-                          <p class="text-light">.text-light</p>
-                          <p class="text-light">.text-light-emphasis</p>
-                          <p class="text-dark">.text-dark</p>
-                          <p class="text-dark">.text-dark-emphasis</p>
-                          <p class="text-body">.text-body</p>
-                          <p class="text-body">.text-body-emphasis</p>
-                          <p class="text-body-secondary">.text-body-secondary</p>
-                          <p class="text-body-tertiary">.text-body-tertiary</p>
-                        </div>
-                      </div>
+                    <h3>
+                      Títulos
+                    </h3>
+
+                    <div class="bs-component">
+                      <h1>h1 Título CPA</h1>
+                      <h2>h2 Título CPA</h2>
+                      <h3>h3 Título CPA</h3>
+                      <h4>h4 Título CPA</h4>
+                      <h5>h5 Título CPA</h5>
+                      <h6>h6 Título CPA</h6>
                     </div>
+
+                    <p>Las clases de <b>.h1</b> a <b>.h6</b> también se encuentran disponibles, para cuando se requiera
+                      estilizar algún otro elemento con la tipografía y letra de cabecera pero no se pueda usar la
+                      etiqueta específica.</p>
+
+                    <div class="bs-component">
+                      <p class="h1">.h1 Título CPA</p>
+                      <p class="h2">.h2 Título CPA</p>
+                      <p class="h3">.h3 Título CPA</p>
+                      <p class="h4">.h4 Título CPA</p>
+                      <p class="h5">.h5 Título CPA</p>
+                      <p class="h6">.h6 Título CPA</p>
+                    </div>
+
+                    <p>
+                      De igual forma se puede estilizar texto dentro de una cabecera.
+                    </p>
+                    <div class="bs-component">
+                      <h3>
+                        Fancy display heading
+                        <small class="text-body-secondary">With faded secondary text</small>
+                      </h3>
+                    </div>
+
+                    <p>En ocasiones se requerirá mostrar título en un formato más amplio, para ello podemos utilizar las
+                      clases <b>display-*</b>.</p>
+                    <div class="bs-component">
+                      <h1 class="display-1">Display 1</h1>
+                      <h1 class="display-2">Display 2</h1>
+                      <h1 class="display-3">Display 3</h1>
+                      <h1 class="display-4">Display 4</h1>
+                      <h1 class="display-5">Display 5</h1>
+                      <h1 class="display-6">Display 6</h1>
+                    </div>
+
+                    <h3>Decoraciones en los textos</h3>
+                    <div class="bs-component">
+                      <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+                      <p><del>This line of text is meant to be treated as deleted text.</del></p>
+                      <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+                      <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+                      <p><u>This line of text will render as underlined.</u></p>
+                      <p><small>This line of text is meant to be treated as fine print.</small></p>
+                      <p><strong>This line rendered as bold text.</strong></p>
+                      <p><em>This line rendered as italicized text.</em></p>
+                    </div>
+
+                    <p>También se cuenta con las clases necesarias para dar el estilo a otros elementos cuando no se
+                      puede usar la etiqueta correspondiente. Se incluen clases para otros estilos sin una etiqueta
+                      específica.</p>
+
+                    <div class="bs-component">
+                      <p class="mark">.mark will apply the same styles as &lt;mark&gt;.</p>
+                      <p class="text-decoration-line-through">.text-decoration-line-through will apply the same styles
+                        as &lt;s&gt;.</p>
+                      <p class="text-decoration-underline">.text-decoration-underline will apply the same styles as
+                        &lt;u&gt;.</p>
+                      <a href="#" class="text-decoration-none">This link has its text decoration removed</a>
+                      <p class="small">.small will apply the same styles as &lt;small&gt;.</p>
+                      <p class="fw-bold">.fw-bold will apply the same styles as &lt;b&gt;.</p>
+                      <p class="fw-bolder">Bolder weight text (relative to the parent element).</p>
+                      <p class="fw-semibold">Semibold weight text.</p>
+                      <p class="fw-medium">Medium weight text.</p>
+                      <p class="fw-normal">Normal weight text.</p>
+                      <p class="fw-light">Light weight text.</p>
+                      <p class="fw-lighter">Lighter weight text (relative to the parent element).</p>
+                      <p class="fst-italic">Italic text.</p>
+                      <p class="fst-normal">Text with normal font style</p>
+                    </div>
+
+                    <h3>Alto de fila</h3>
+                    <div class="bs-component">
+                      <p class="lh-1">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                      <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                      <p class="lh-base">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                      <p class="lh-lg">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                    </div>
+
+
+                    <h3 id="type-blockquotes">Citas</h3>
 
                     <!-- Blockquotes -->
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <h2 id="type-blockquotes">Blockquotes</h2>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-lg-4">
                         <div class="bs-component">
                           <figure>
                             <blockquote class="blockquote">
-                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Integer posuere
                                 erat
                                 a
                                 ante.
@@ -281,7 +392,8 @@
                         <div class="bs-component">
                           <figure class="text-center">
                             <blockquote class="blockquote">
-                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Integer posuere
                                 erat
                                 a
                                 ante.
@@ -298,7 +410,8 @@
                         <div class="bs-component">
                           <figure class="text-end">
                             <blockquote class="blockquote">
-                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Integer posuere
                                 erat
                                 a
                                 ante.
@@ -312,6 +425,78 @@
                         </div>
                       </div>
                     </div>
+
+                    <h3>Enlaces</h3>
+
+                    <p>Transparencia persistente y al pasar el mouse.</p>
+                    <div class="bs-component">
+                      <p><a class="link-opacity-10" href="#">Link opacity 10</a></p>
+                      <p><a class="link-opacity-25" href="#">Link opacity 25</a></p>
+                      <p><a class="link-opacity-50" href="#">Link opacity 50</a></p>
+                      <p><a class="link-opacity-75" href="#">Link opacity 75</a></p>
+                      <p><a class="link-opacity-100" href="#">Link opacity 100</a></p>
+                      <p><a class="link-opacity-10-hover" href="#">Link hover opacity 10</a></p>
+                      <p><a class="link-opacity-25-hover" href="#">Link hover opacity 25</a></p>
+                      <p><a class="link-opacity-50-hover" href="#">Link hover opacity 50</a></p>
+                      <p><a class="link-opacity-75-hover" href="#">Link hover opacity 75</a></p>
+                      <p><a class="link-opacity-100-hover" href="#">Link hover opacity 100</a></p>
+                    </div>
+
+                    <p>Color de línea bajo el texto del enlace, separación y transparencia.</p>
+                    <div class="bs-component">
+                      <p><a href="#" class="link-underline-primary">Primary underline</a></p>
+                      <p><a href="#" class="link-underline-secondary">Secondary underline</a></p>
+                      <p><a href="#" class="link-underline-success">Success underline</a></p>
+                      <p><a href="#" class="link-underline-danger">Danger underline</a></p>
+                      <p><a href="#" class="link-underline-warning">Warning underline</a></p>
+                      <p><a href="#" class="link-underline-info">Info underline</a></p>
+                      <p><a href="#" class="link-underline-light">Light underline</a></p>
+                      <p><a href="#" class="link-underline-dark">Dark underline</a></p>
+                      <p><a href="#">Default link</a></p>
+                      <p><a class="link-offset-1" href="#">Offset 1 link</a></p>
+                      <p><a class="link-offset-2" href="#">Offset 2 link</a></p>
+                      <p><a class="link-offset-3" href="#">Offset 3 link</a></p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-0" href="#">Underline opacity
+                          0</a>
+                      </p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-10" href="#">Underline opacity
+                          10</a></p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-25" href="#">Underline opacity
+                          25</a></p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-50" href="#">Underline opacity
+                          50</a></p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-75" href="#">Underline opacity
+                          75</a></p>
+                      <p><a class="link-offset-2 link-underline link-underline-opacity-100" href="#">Underline opacity
+                          100</a></p>
+                    </div>
+
+
+
+                    <p>
+                      Todas las clases de espaciado y opacidad de la línea del enlace tienen su version <b>-hover</b>
+                      para aplicar únicamente cuando el mouse pase por encima de el enlace.</p>
+
+                    <div class="bs-component">
+                      <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                        href="#">
+                        Underline opacity 0
+                      </a>
+                    </div>
+
+                    <p>Colores de Enlaces</p>
+                    <div class="bs-component">
+                      <p><a href="#" class="link-primary">Primary link</a></p>
+                      <p><a href="#" class="link-secondary">Secondary link</a></p>
+                      <p><a href="#" class="link-success">Success link</a></p>
+                      <p><a href="#" class="link-danger">Danger link</a></p>
+                      <p><a href="#" class="link-warning">Warning link</a></p>
+                      <p><a href="#" class="link-info">Info link</a></p>
+                      <p><a href="#" class="link-light bg-dark">Light link</a></p>
+                      <p><a href="#" class="link-dark">Dark link</a></p>
+                      <p><a href="#" class="link-body-emphasis">Emphasis link</a></p>
+                    </div>
+
                   </div>
                 </div>
                 <div class="tab-pane fade" id="submenu-layout-bs" role="tabpanel"
@@ -323,215 +508,10 @@
                   aria-labelledby="submenu-components-bs-tab" tabindex="0">
                   <h2 class="text-dark">Componentes</h2>
                   <p>S</p>
-                  <!-- Navbar ================================================== -->
-                  <div class="bs-docs-section clearfix">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="page-header">
-                          <h1 id="navbars">Navbars</h1>
-                        </div>
-
-                        <div class="bs-component">
-                          <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-                            <div class="container-fluid">
-                              <a class="navbar-brand" href="#">Navbar</a>
-                              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-
-                              <div class="collapse navbar-collapse" id="navbarColor01">
-                                <ul class="navbar-nav me-auto">
-                                  <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home
-                                      <span class="visually-hidden">(current)</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                  </li>
-                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
-                                  </li>
-                                </ul>
-                                <form class="d-flex">
-                                  <input class="form-control me-sm-2" type="search" placeholder="Search">
-                                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                              </div>
-                            </div>
-                          </nav>
-                        </div>
-
-                        <div class="bs-component">
-                          <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-                            <div class="container-fluid">
-                              <a class="navbar-brand" href="#">Navbar</a>
-                              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-
-                              <div class="collapse navbar-collapse" id="navbarColor02">
-                                <ul class="navbar-nav me-auto">
-                                  <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home
-                                      <span class="visually-hidden">(current)</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                  </li>
-                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
-                                  </li>
-                                </ul>
-                                <form class="d-flex">
-                                  <input class="form-control me-sm-2" type="search" placeholder="Search">
-                                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                              </div>
-                            </div>
-                          </nav>
-                        </div>
-
-                        <div class="bs-component">
-                          <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
-                            <div class="container-fluid">
-                              <a class="navbar-brand" href="#">Navbar</a>
-                              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-
-                              <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="navbar-nav me-auto">
-                                  <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home
-                                      <span class="visually-hidden">(current)</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                  </li>
-                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
-                                  </li>
-                                </ul>
-                                <form class="d-flex">
-                                  <input class="form-control me-sm-2" type="search" placeholder="Search">
-                                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                              </div>
-                            </div>
-                          </nav>
-                        </div>
-
-                        <div class="bs-component">
-                          <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                            <div class="container-fluid">
-                              <a class="navbar-brand" href="#">Navbar</a>
-                              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                              </button>
-
-                              <div class="collapse navbar-collapse" id="navbarColor04">
-                                <ul class="navbar-nav me-auto">
-                                  <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home
-                                      <span class="visually-hidden">(current)</span>
-                                    </a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                  </li>
-                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      <div class="dropdown-divider"></div>
-                                      <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
-                                  </li>
-                                </ul>
-                                <form class="d-flex">
-                                  <input class="form-control me-sm-2" type="search" placeholder="Search">
-                                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                              </div>
-                            </div>
-                          </nav>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
 
                   <!-- Buttons ================================================== -->
                   <div class="bs-docs-section">
-                    <div class="page-header">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <h1 id="buttons">Buttons</h1>
-                        </div>
-                      </div>
-                    </div>
+                    <h3 id="buttons">Botones</h3>
 
                     <div class="row">
                       <div class="col-lg-7">
@@ -634,7 +614,7 @@
                           </div>
                         </div>
 
-                        <div class="bs-component mb-3">
+                        <div class="bs-component">
                           <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                             <input type="checkbox" class="btn-check" id="btncheck1" checked autocomplete="off">
                             <label class="btn btn-primary" for="btncheck1">Checkbox 1</label>
@@ -645,7 +625,7 @@
                           </div>
                         </div>
 
-                        <div class="bs-component mb-3">
+                        <div class="bs-component">
                           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
                               checked>
@@ -670,7 +650,7 @@
                           </div>
                         </div>
 
-                        <div class="bs-component mb-3">
+                        <div class="bs-component">
                           <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary">Left</button>
                             <button type="button" class="btn btn-secondary">Middle</button>
@@ -678,7 +658,7 @@
                           </div>
                         </div>
 
-                        <div class="bs-component mb-3">
+                        <div class="bs-component">
                           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                             <div class="btn-group me-2" role="group" aria-label="First group">
                               <button type="button" class="btn btn-secondary">1</button>
@@ -782,229 +762,6 @@
                             </tbody>
                           </table>
                         </div><!-- /example -->
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Forms ================================================== -->
-                  <div class="bs-docs-section">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="page-header">
-                          <h1 id="forms">Forms</h1>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <div class="bs-component">
-                          <form>
-                            <fieldset>
-                              <legend>Legend</legend>
-                              <div class="row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                  <input type="text" readonly class="form-control-plaintext" id="staticEmail"
-                                    value="email@example.com">
-                                </div>
-                              </div>
-                              <div>
-                                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                  aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                                  anyone
-                                  else.</small>
-                              </div>
-                              <div>
-                                <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                  placeholder="Password" autocomplete="off">
-                              </div>
-                              <div>
-                                <label for="exampleSelect1" class="form-label mt-4">Example select</label>
-                                <select class="form-select" id="exampleSelect1">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                              </div>
-                              <div>
-                                <label for="exampleSelect1" class="form-label mt-4">Example disabled select</label>
-                                <select class="form-select" id="exampleDisabledSelect1" disabled>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                              </div>
-                              <div>
-                                <label for="exampleSelect2" class="form-label mt-4">Example multiple select</label>
-                                <select multiple class="form-select" id="exampleSelect2">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                </select>
-                              </div>
-                              <div>
-                                <label for="exampleTextarea" class="form-label mt-4">Example textarea</label>
-                                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                              </div>
-                              <div>
-                                <label for="formFile" class="form-label mt-4">Default file input example</label>
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                              <fieldset>
-                                <legend class="mt-4">Radio buttons</legend>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1"
-                                    value="option1" checked>
-                                  <label class="form-check-label" for="optionsRadios1">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2"
-                                    value="option2">
-                                  <label class="form-check-label" for="optionsRadios2">
-                                    Option two can be something else and selecting it will deselect option one
-                                  </label>
-                                </div>
-                                <div class="form-check disabled">
-                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios3"
-                                    value="option3" disabled>
-                                  <label class="form-check-label" for="optionsRadios3">
-                                    Option three is disabled
-                                  </label>
-                                </div>
-                              </fieldset>
-                              <fieldset>
-                                <legend class="mt-4">Checkboxes</legend>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                  <label class="form-check-label" for="flexCheckDefault">
-                                    Default checkbox
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                                    checked>
-                                  <label class="form-check-label" for="flexCheckChecked">
-                                    Checked checkbox
-                                  </label>
-                                </div>
-                              </fieldset>
-                              <fieldset>
-                                <legend class="mt-4">Switches</legend>
-                                <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox
-                                    input</label>
-                                </div>
-                                <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                  <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox
-                                    input</label>
-                                </div>
-                              </fieldset>
-                              <fieldset>
-                                <legend class="mt-4">Ranges</legend>
-                                <label for="customRange1" class="form-label">Example range</label>
-                                <input type="range" class="form-range" id="customRange1">
-                                <label for="disabledRange" class="form-label">Disabled range</label>
-                                <input type="range" class="form-range" id="disabledRange" disabled>
-                                <label for="customRange3" class="form-label">Example range</label>
-                                <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
-                              </fieldset>
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                            </fieldset>
-                          </form>
-                        </div>
-                      </div>
-                      <div class="col-lg-4 offset-lg-1">
-                        <form class="bs-component">
-                          <div>
-                            <fieldset disabled>
-                              <label class="form-label" for="disabledInput">Disabled input</label>
-                              <input class="form-control" id="disabledInput" type="text"
-                                placeholder="Disabled input here..." disabled>
-                            </fieldset>
-                          </div>
-
-                          <div>
-                            <fieldset>
-                              <label class="form-label mt-4" for="readOnlyInput">Readonly input</label>
-                              <input class="form-control" id="readOnlyInput" type="text"
-                                placeholder="Readonly input here..." readonly>
-                            </fieldset>
-                          </div>
-
-                          <div class="has-success">
-                            <label class="form-label mt-4" for="inputValid">Valid input</label>
-                            <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
-                            <div class="valid-feedback">Success! You've done it.</div>
-                          </div>
-
-                          <div class="has-danger">
-                            <label class="form-label mt-4" for="inputInvalid">Invalid input</label>
-                            <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
-                            <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
-                          </div>
-
-                          <div>
-                            <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Large input</label>
-                            <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg"
-                              id="inputLarge">
-                          </div>
-
-                          <div>
-                            <label class="col-form-label mt-4" for="inputDefault">Default input</label>
-                            <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
-                          </div>
-
-                          <div>
-                            <label class="col-form-label col-form-label-sm mt-4" for="inputSmall">Small input</label>
-                            <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"
-                              id="inputSmall">
-                          </div>
-
-                          <div>
-                            <label class="form-label mt-4">Input addons</label>
-                            <div>
-                              <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                <span class="input-group-text">.00</span>
-                              </div>
-                              <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Recipient's username"
-                                  aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <button class="btn btn-primary" type="button" id="button-addon2">Button</button>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div>
-                            <label class="form-label mt-4">Floating labels</label>
-                            <div class="form-floating mb-3">
-                              <input type="email" class="form-control" id="floatingInput"
-                                placeholder="name@example.com">
-                              <label for="floatingInput">Email address</label>
-                            </div>
-                            <div class="form-floating">
-                              <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                                autocomplete="off">
-                              <label for="floatingPassword">Password</label>
-                            </div>
-                          </div>
-                        </form>
-
                       </div>
                     </div>
                   </div>
@@ -2132,7 +1889,7 @@
                       </div>
                       <div class="col-lg-6">
                         <h2>Popovers</h2>
-                        <div class="bs-component mb-5">
+                        <div class="bs-component">
                           <button type="button" class="btn btn-secondary" title="Popover Title" data-bs-container="body"
                             data-bs-toggle="popover" data-bs-placement="left"
                             data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Left</button>
@@ -2150,7 +1907,7 @@
                             data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Right</button>
                         </div>
                         <h2>Tooltips</h2>
-                        <div class="bs-component mb-5">
+                        <div class="bs-component">
                           <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip"
                             data-bs-placement="left" title="Tooltip on left">Left</button>
 
@@ -2189,6 +1946,221 @@
                   tabindex="0">
                   <h2 class="text-dark">Formularios y Campos</h2>
                   <p>S</p>
+                  <!-- Forms ================================================== -->
+                  <div class="bs-docs-section">
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="bs-component">
+                          <form>
+                            <fieldset>
+                              <legend>Legend</legend>
+                              <div class="row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                  <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                    value="email@example.com">
+                                </div>
+                              </div>
+                              <div>
+                                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                  aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                  anyone
+                                  else.</small>
+                              </div>
+                              <div>
+                                <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                  placeholder="Password" autocomplete="off">
+                              </div>
+                              <div>
+                                <label for="exampleSelect1" class="form-label mt-4">Example select</label>
+                                <select class="form-select" id="exampleSelect1">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label for="exampleSelect1" class="form-label mt-4">Example disabled select</label>
+                                <select class="form-select" id="exampleDisabledSelect1" disabled>
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label for="exampleSelect2" class="form-label mt-4">Example multiple select</label>
+                                <select multiple class="form-select" id="exampleSelect2">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label for="exampleTextarea" class="form-label mt-4">Example textarea</label>
+                                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                              </div>
+                              <div>
+                                <label for="formFile" class="form-label mt-4">Default file input example</label>
+                                <input class="form-control" type="file" id="formFile">
+                              </div>
+                              <fieldset>
+                                <legend class="mt-4">Radio buttons</legend>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1"
+                                    value="option1" checked>
+                                  <label class="form-check-label" for="optionsRadios1">
+                                    Option one is this and that&mdash;be sure to include why it's great
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2"
+                                    value="option2">
+                                  <label class="form-check-label" for="optionsRadios2">
+                                    Option two can be something else and selecting it will deselect option one
+                                  </label>
+                                </div>
+                                <div class="form-check disabled">
+                                  <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios3"
+                                    value="option3" disabled>
+                                  <label class="form-check-label" for="optionsRadios3">
+                                    Option three is disabled
+                                  </label>
+                                </div>
+                              </fieldset>
+                              <fieldset>
+                                <legend class="mt-4">Checkboxes</legend>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                  <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                    checked>
+                                  <label class="form-check-label" for="flexCheckChecked">
+                                    Checked checkbox
+                                  </label>
+                                </div>
+                              </fieldset>
+                              <fieldset>
+                                <legend class="mt-4">Switches</legend>
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox
+                                    input</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                  <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox
+                                    input</label>
+                                </div>
+                              </fieldset>
+                              <fieldset>
+                                <legend class="mt-4">Ranges</legend>
+                                <label for="customRange1" class="form-label">Example range</label>
+                                <input type="range" class="form-range" id="customRange1">
+                                <label for="disabledRange" class="form-label">Disabled range</label>
+                                <input type="range" class="form-range" id="disabledRange" disabled>
+                                <label for="customRange3" class="form-label">Example range</label>
+                                <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                              </fieldset>
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 offset-lg-1">
+                        <form class="bs-component">
+                          <div>
+                            <fieldset disabled>
+                              <label class="form-label" for="disabledInput">Disabled input</label>
+                              <input class="form-control" id="disabledInput" type="text"
+                                placeholder="Disabled input here..." disabled>
+                            </fieldset>
+                          </div>
+
+                          <div>
+                            <fieldset>
+                              <label class="form-label mt-4" for="readOnlyInput">Readonly input</label>
+                              <input class="form-control" id="readOnlyInput" type="text"
+                                placeholder="Readonly input here..." readonly>
+                            </fieldset>
+                          </div>
+
+                          <div class="has-success">
+                            <label class="form-label mt-4" for="inputValid">Valid input</label>
+                            <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
+                            <div class="valid-feedback">Success! You've done it.</div>
+                          </div>
+
+                          <div class="has-danger">
+                            <label class="form-label mt-4" for="inputInvalid">Invalid input</label>
+                            <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
+                            <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+                          </div>
+
+                          <div>
+                            <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Large input</label>
+                            <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg"
+                              id="inputLarge">
+                          </div>
+
+                          <div>
+                            <label class="col-form-label mt-4" for="inputDefault">Default input</label>
+                            <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                          </div>
+
+                          <div>
+                            <label class="col-form-label col-form-label-sm mt-4" for="inputSmall">Small input</label>
+                            <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"
+                              id="inputSmall">
+                          </div>
+
+                          <div>
+                            <label class="form-label mt-4">Input addons</label>
+                            <div>
+                              <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                <span class="input-group-text">.00</span>
+                              </div>
+                              <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Recipient's username"
+                                  aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-primary" type="button" id="button-addon2">Button</button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label class="form-label mt-4">Floating labels</label>
+                            <div class="form-floating mb-3">
+                              <input type="email" class="form-control" id="floatingInput"
+                                placeholder="name@example.com">
+                              <label for="floatingInput">Email address</label>
+                            </div>
+                            <div class="form-floating">
+                              <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                autocomplete="off">
+                              <label for="floatingPassword">Password</label>
+                            </div>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="submenu-utilities-bs" role="tabpanel"
                   aria-labelledby="submenu-utilities-bs-tab" tabindex="0">
@@ -2210,6 +2182,10 @@
                       href="#submenu-intro-cplx" role="tab" aria-controls="submenu-intro-cplx" aria-selected="true">
                       <i class="cpa-icons icon-link cpa-icon-target"></i>
                       Introducción</a>
+                    <a class="nav-link text-nowrap" id="submenu-panel-tab" data-bs-toggle="pill" href="#submenu-panel"
+                      role="tab" aria-controls="submenu-panel" aria-selected="true">
+                      <i class="cpa-icons icon-link cpa-icon-target"></i>
+                      Panel Lateral</a>
                     <a class="nav-link text-nowrap" id="submenu-dialog-tab" data-bs-toggle="pill" href="#submenu-dialog"
                       role="tab" aria-controls="submenu-dialog" aria-selected="false">
                       <i class="cpa-icons icon-link cpa-icon-target"></i>
@@ -2232,7 +2208,6 @@
               </div>
             </div>
             <div class="flex-grow-1">
-              <span id="top"></span>
               <div class="container">
                 <h1 class="text-dark">Componentes Compuestos</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
@@ -2250,15 +2225,168 @@
                     Praesent
                     mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
                   </p>
-                  <!-- CPA design ================================================== -->
+                </div>
+                <div class="tab-pane fade" id="submenu-panel" role="tabpanel" aria-labelledby="submenu-panel-tab"
+                  tabindex="0">
+                  <h2>Panel lateral</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+                    cursus
+                    ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+                    Praesent
+                    mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+                  </p>
+                  <!-- CPA Panel ================================================== -->
                   <div class="bs-docs-section">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="page-header">
-                          <h1 id="dialogs">Notificaciones</h1>
+                          <p>Panel auto ajustable, ancho dinámico, menú sencillo sin submenús.
+                          </p>
                         </div>
                       </div>
                     </div>
+                    <div class="bs-component">
+                      <div class="row g-0 overflow-hidden w-100" style="height:100vh">
+                        <aside class="panel col h-100 text-bg-dark col-auto position-relative order-first"
+                          style="display:none;">
+                          <span
+                            class="toggle-panel toggle-panel-EXAMPLE position-absolute end-0 bg-info rounded-circle z-3">
+                            <i class="cpa-icons cpa-icon-circle-left fs-4"></i>
+                          </span>
+                          <script type="application/javascript">
+                            (() => document.addEventListener('DOMContentLoaded', () => {
+                              function togglePanelMenu(evt) {
+                                const img = this.parentNode.querySelector('#logoImgEXAMPLE');
+                                const iconNode = this.querySelector('i');
+                                let imgSrc = img.src;
+                                let dislplayText;
+                                let isOpen = localStorage.getItem('panelIsOpen');
+                                isOpen = isOpen ? JSON.parse(isOpen) : false;
+                                isOpen = evt === 'init' ? !isOpen : isOpen;
+                                if (isOpen) {
+                                  imgSrc = '/_assets/img/logo-short.svg';
+                                  dislplayText = 'none';
+                                  iconNode.classList.replace('cpa-icon-circle-left', 'cpa-icon-circle-right');
+                                  this.parentNode.classList.remove('open');
+                                } else {
+                                  imgSrc = '/_assets/img/logo-full.svg';
+                                  dislplayText = null;
+                                  icon = 'cpa-icon-circle-right';
+                                  iconNode.classList.replace('cpa-icon-circle-right', 'cpa-icon-circle-left');
+                                  this.parentNode.classList.add('open');
+                                }
+                                img.src = imgSrc;
+                                const textButtons = document.getElementsByClassName('text-menu-EXAMPLE');
+
+                                for (const element of textButtons) {
+                                  element.style.display = dislplayText;
+                                }
+                                if (evt !== 'init')
+                                  localStorage.setItem('panelIsOpen', JSON.stringify(!isOpen));
+                                this.parentNode.style.display = null;
+                              }
+                              const btnToggleMenu = document.querySelector('.toggle-panel-EXAMPLE');
+                              btnToggleMenu.addEventListener('click', togglePanelMenu);
+                              togglePanelMenu.bind(btnToggleMenu)('init');
+                            }))();
+                          </script>
+                          <div class="h-100 p-3 overflow-y-auto" id="menu-tab" role="tablist"
+                            aria-orientation="vertical">
+                            <a class="nav-link active" id="menu-EXAMPLE1-link" data-bs-toggle="pill"
+                              href="#menu-EXAMPLE1" role="tab" aria-controls="menu-EXAMPLE1" aria-selected="true">
+                              <img src="/_assets/img/logo-full.svg" alt="CPA VISION" class="text-center d-block m-auto"
+                                height="70" id="logoImgEXAMPLE" />
+                            </a>
+                            <div class="menu py-4 d-flex flex-column gap-4">
+                              <a class="d-flex align-items-center text-truncate nav-link" id="menu-EXAMPLE2-tab"
+                                data-bs-toggle="pill" href="#menu-EXAMPLE2" role="tab" aria-controls="menu-EXAMPLE2"
+                                aria-selected="false">
+                                <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip"
+                                  data-bs-placement="right" data-bs-title="EXAMPLE 2"></i>
+                                <span class="text-menu-EXAMPLE ms-2 flex-grow-1">EXAMPLE 2</span>
+                              </a>
+                              <a class="d-flex align-items-center text-truncate nav-link" id="menu-EXAMPLE3-tab"
+                                data-bs-toggle="pill" href="#menu-EXAMPLE3" role="tab" aria-controls="menu-EXAMPLE3"
+                                aria-selected="true">
+                                <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip"
+                                  data-bs-placement="right" data-bs-title="EXAMPLE 3"></i>
+                                <span class="text-menu-EXAMPLE ms-2 flex-grow-1">EXAMPLE 3</span>
+                              </a>
+                              <a class="d-flex align-items-center text-truncate nav-link" id="menu-EXAMPLE4-tab"
+                                data-bs-toggle="pill" href="#menu-EXAMPLE4" role="tab" aria-controls="menu-EXAMPLE4"
+                                aria-selected="true">
+                                <i class="cpa-icons cpa-icon-target m-auto fs-3" data-bs-toggle="tooltip"
+                                  data-bs-placement="right" data-bs-title="EXAMPLE 4"></i>
+                                <span class="text-menu-EXAMPLE ms-2 flex-grow-1">EXAMPLE 4</span>
+                              </a>
+                            </div>
+                          </div>
+                        </aside>
+                        <main class="col h-100 overflow-x-hidden overflow-y-auto pb-5">
+                          <div class="container sticky-top" style="height: 90px;">
+                            <!-- HEADER -->
+                          </div>
+                          <div class="tab-content" id="menu-tabContent">
+                            <!-- CONTENT -->
+                          </div>
+                        </main>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="submenu-dialog" role="tabpanel" aria-labelledby="submenu-dialog-tab"
+                  tabindex="0">
+                  <h2>Diálogos</h2>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                    provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+                    fuga.
+                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
+                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
+                    earum
+                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
+                    perferendis doloribus asperiores repellat.</p>
+                </div>
+                <div class="tab-pane fade" id="submenu-inputs" role="tabpanel" aria-labelledby="submenu-inputs-tab"
+                  tabindex="0">
+                  <h2>Inputs</h2>
+                  <p>
+                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
+                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
+                    earum
+                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
+                    perferendis doloribus asperiores repellat.</p>
+                </div>
+                <div class="tab-pane fade" id="submenu-tables" role="tabpanel" aria-labelledby="submenu-tables-tab"
+                  tabindex="0">
+                  <h2>Tablas y Servicios</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+                    cursus
+                    ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+                    Praesent
+                    mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+                  </p>
+                </div>
+                <div class="tab-pane fade" id="submenu-notifications" role="tabpanel"
+                  aria-labelledby="submenu-notifications-tab" tabindex="0">
+                  <h2>Notificaciones</h2>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                    provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+                    fuga.
+                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
+                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
+                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
+                    earum
+                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
+                    perferendis doloribus asperiores repellat.</p>
+                  <!-- CPA Notificaciones ================================================== -->
+                  <div class="bs-docs-section">
                     <div class="row row-cols-2">
                       <div class="col">
                         <h2>Card</h2>
@@ -2378,121 +2506,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <div class="bs-docs-section">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="page-header">
-                          <h1 id="panel">Panel lateral</h1>
-                          <p>Panel auto ajustable, ancho dinámico, se ajusta al tamaño del contenido.
-                            <button class="btn btn-primary" id="toggleLogo"
-                              onclick="toggleLogo()">Colapsar/expandir</button>
-                          </p>
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="bs-component border">
-                      <div class="row g-0 overflow-hidden w-100" style="height:100vh">
-                        <div class="col h-100 overflow-y-auto overflow-x-hidden text-bg-dark col-auto p-3"
-                          style="max-width: 300px;">
-                          <img src="/_assets/img/logo-full.svg" alt="CPA VISION" class="text-center d-block m-auto"
-                            height="70" id="logoImg" />
-                          <div class="py-4 d-flex flex-column gap-4">
-                            <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip"
-                              data-bs-placement="right" data-bs-title="Menus En el Panel Lateral 1">
-                              <i class="cpa-icons cpa-icon-target m-auto fs-3"></i>
-                              <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 1</span>
-                            </div>
-                            <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip"
-                              data-bs-placement="right" data-bs-title="Menus En el Panel Lateral 2 más largo">
-                              <i class="cpa-icons cpa-icon-target m-auto fs-3"></i>
-                              <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 2 más largo</span>
-                            </div>
-                            <div class="d-flex align-items-center text-truncate" data-bs-toggle="tooltip"
-                              data-bs-placement="right"
-                              data-bs-title="Menus En el Panel Lateral 3 más, mucho más largo">
-                              <i class="cpa-icons cpa-icon-target m-auto fs-3"></i>
-                              <span class="text-menuElem ms-2 flex-grow-1">Menus En el Panel Lateral 3 más, mucho más
-                                largo</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col overflow-x-hidden overflow-y-auto">page content</div>
-                      </div>
-                      <script>
-                        function toggleLogo() {
-                          const img = document.getElementById('logoImg');
-                          let imgSrc = img.src;
-                          let dislplayText;
-                          if (imgSrc.endsWith('/_assets/img/logo-full.svg')) {
-                            imgSrc = '/_assets/img/logo-short.svg';
-                            dislplayText = 'none';
-                          } else {
-                            imgSrc = '/_assets/img/logo-full.svg';
-                            dislplayText = 'unset';
-                          }
-                          img.src = imgSrc;
-                          const textButtons = document.getElementsByClassName('text-menuElem');
-                          for (const element of textButtons) {
-                            element.style.display = dislplayText;
-                          }
-                        }
-                      </script>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="submenu-dialog" role="tabpanel" aria-labelledby="submenu-dialog-tab"
-                  tabindex="0">
-                  <h2>Diálogos</h2>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                    provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
-                    fuga.
-                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
-                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
-                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-                    earum
-                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-                    perferendis doloribus asperiores repellat.</p>
-                </div>
-                <div class="tab-pane fade" id="submenu-inputs" role="tabpanel" aria-labelledby="submenu-inputs-tab"
-                  tabindex="0">
-                  <h2>Inputs</h2>
-                  <p>
-                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
-                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
-                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-                    earum
-                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-                    perferendis doloribus asperiores repellat.</p>
-                </div>
-                <div class="tab-pane fade" id="submenu-tables" role="tabpanel" aria-labelledby="submenu-tables-tab"
-                  tabindex="0">
-                  <h2>Tablas y Servicios</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
-                    cursus
-                    ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-                    Praesent
-                    mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
-                  </p>
-                </div>
-                <div class="tab-pane fade" id="submenu-notifications" role="tabpanel"
-                  aria-labelledby="submenu-notifications-tab" tabindex="0">
-                  <h2>Notificaciones</h2>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                    provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
-                    fuga.
-                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                    eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
-                    assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum
-                    necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
-                    earum
-                    rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut
-                    perferendis doloribus asperiores repellat.</p>
                 </div>
               </div>
             </div>
@@ -2500,21 +2513,26 @@
         </div>
         <div class="tab-pane fade" id="menu-icons" role="tabpanel" aria-labelledby="menu-icons-tab" tabindex="0">
           <div class="container">
+            <h1 class="text-dark">Íconos</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
+              cursus
+              ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
+              mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
             <!-- Icons ================================================== -->
             <div class="bs-docs-section">
               <div class="row">
-                <div class="col">
-                  <div class="bs-component pt-5">
+                <div class="col-3">
+                  <div class="bs-component">
                     <i class="cpa-icons cpa-icon-monitor"></i>
                     <i class="cpa-icons cpa-icon-print"></i>
                     <i class="cpa-icons cpa-icon-circle"></i>
                   </div>
-                  <a href="./cpa-icons-v1.0/demo.html">Full list icons preview</a>
                 </div>
                 <div class="col">
 
                 </div>
               </div>
+              <a href="./cpa-icons-v1.0/demo.html">Ver lista completa de íconos.</a>
             </div>
           </div>
         </div>

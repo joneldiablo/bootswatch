@@ -12094,6 +12094,23 @@ nav[data-bs-theme=dark] .nav-link.active {
   border-bottom: 1px solid #7B879C;
 }
 
+.panel.open {
+  width: 300px;
+}
+.panel .toggle-panel {
+  margin-right: -7px;
+  top: 40px;
+  line-height: 1;
+  cursor: pointer;
+}
+.panel .menu .nav-link.active {
+  background-color: #fefefe;
+  color: #232A37;
+  border-radius: var(--bs-border-radius-pill);
+  padding: 1rem;
+  margin: -1rem;
+}
+
 @font-face {
   font-family: "cpa-icons";
   src: url("fonts/cpa-icons.ttf?gke2h2") format("truetype"), url("fonts/cpa-icons.woff?gke2h2") format("woff"), url("fonts/cpa-icons.svg?gke2h2#cpa-icons") format("svg");

@@ -54,3 +54,26 @@ nav {
 .nav-underline {
   border-bottom: 1px solid $gray-300;
 }
+
+.panel {
+  &.open {
+    width: 300px;
+  }
+
+  .toggle-panel {
+    margin-right: -7px;
+    top: 40px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .menu {
+    .nav-link.active {
+      background-color: $white;
+      color: $dark;
+      border-radius: var(--bs-border-radius-pill);
+      padding: 1rem;
+      margin: -1rem;
+    }
+  }
+}

@@ -64,13 +64,18 @@ iframe {
 
 .bs-component {
   position: relative;
+  margin-bottom: 3rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border: var(--bs-border-width) solid var(--bs-border-color-translucent);
+  border-radius: var(--bs-border-radius);
+  background-color: rgba(var(--bs-light-rgb), .5);
 
   +.bs-component {
     margin-top: 1rem;
-  }
-
-  .card {
-    margin-bottom: 1rem;
   }
 
   .modal {
@@ -91,7 +96,6 @@ iframe {
     position: relative;
     display: inline-block;
     width: 220px;
-    margin: 20px;
   }
 }
 
@@ -290,13 +294,6 @@ iframe {
   }
 }
 
-.bs-component>.btn,
-.bs-component>.btn-toolbar>.btn-group,
-.bs-component>.btn-group,
-#home .section-preview .card .btn-group {
-  margin-bottom: .25rem;
-}
-
 .go-top {
   &:not(:hover) {
     opacity: .5;
@@ -308,5 +305,14 @@ iframe {
 
   &.active {
     text-decoration: underline;
+  }
+}
+
+.bs-component {
+  aside.panel+main {
+    background-color: var(--bs-white);
+    border-right: 1px solid var(--bs-border-color-translucent);
+    border-top: 1px solid var(--bs-border-color-translucent);
+    border-bottom: 1px solid var(--bs-border-color-translucent);
   }
 }
