@@ -32,7 +32,7 @@ $orange: #F97316 !default;
 $yellow: #F4BC1B !default;
 $green: #84CC16 !default;
 $teal: #20c997 !default;
-$cyan: #06B6D4 !default;
+$cyan: #38A6EA !default;
 
 $primary: $blue !default;
 $secondary: $gray-600 !default;
@@ -48,7 +48,8 @@ $min-contrast-ratio: 2.05 !default;
 $body-color: $gray-900 !default;
 $body-bg: $white !default;
 
-$grays: ("50": $gray-50,
+$grays: (
+  "50": $gray-50,
   //"50": $gray-50,
   "100": $gray-100,
   "200": $gray-200,
@@ -60,6 +61,20 @@ $grays: ("50": $gray-50,
   "800": $gray-800,
   "900": $gray-900) !default;
 
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "excel": #71BF3E,
+  "pdf": #BB1D07,
+  ) !default;
+
 $rounded-radius: 3rem;
 
 // Links
@@ -70,16 +85,16 @@ $link-color: $primary !default;
 
 // stylelint-disable-next-line value-keyword-case
 $font-family-sans-serif: Roboto,
-Lato,
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-"Helvetica Neue",
-Arial,
-sans-serif,
-"Apple Color Emoji",
-"Segoe UI Emoji",
-"Segoe UI Symbol" !default;
+  Lato,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Helvetica Neue",
+  Arial,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol" !default;
 
 $font-size-base: 1rem !default;
 
@@ -146,9 +161,10 @@ $list-group-disabled-bg: $gray-200 !default;
 
 // Breadcrumbs
 
-$breadcrumb-padding-y: .375rem !default;
-$breadcrumb-padding-x: .75rem !default;
+$breadcrumb-padding-y: 0 !default;
+$breadcrumb-padding-x: 0 !default;
 $breadcrumb-border-radius: .25rem !default;
+$breadcrumb-margin-bottom: .3rem !default;
 
 // Close
 
