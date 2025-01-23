@@ -29,14 +29,18 @@ const purgeCss = async (cssFilePath, htmlDirPath, outputCssFilePath) => {
       throw new Error("PurgeCSS failed to produce results.");
     }
 
-    const purgedCss = purgeCSSResult[0].css;
+    let purgedCss = purgeCSSResult[0].css;
+
+    console.log("Removing multiline comments...");
+    // Step 2: Remove multiline comments
+    purgedCss = purgedCss.replace(/\/\*[\s\S]*?\*\//g, ""); // Regex to remove comments
 
     console.log("Formatting CSS...");
-    // Step 2: Format CSS using Prettier
+    // Step 3: Format CSS using Prettier
     const formattedCss = await prettier.format(purgedCss, { parser: "css" });
 
     console.log("Writing purged CSS to output...");
-    // Step 3: Write the formatted CSS to the output file
+    // Step 4: Write the formatted CSS to the output file
     fs.writeFileSync(outputCssFilePath, formattedCss, "utf8");
 
     console.log(`Purged CSS written to: ${outputCssFilePath}`);

@@ -47,7 +47,7 @@ nav {
 .input-group,
 .btn-group-vertical {
   .btn {
-    --bs-btn-border-radius: var(--bs-border-radius);
+    --#{$variable-prefix}btn-border-radius: var(--#{$variable-prefix}border-radius);
   }
 }
 
@@ -71,7 +71,7 @@ nav {
     .nav-link.active {
       background-color: $white;
       color: $dark;
-      border-radius: var(--bs-border-radius-pill);
+      border-radius: var(--#{$variable-prefix}border-radius-pill);
       padding: .5rem;
       margin: -.5rem;
     }
