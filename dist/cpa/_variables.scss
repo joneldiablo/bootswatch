@@ -29,8 +29,8 @@ $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
 $red: #DC2626 !default;
 $orange: #F97316 !default;
-$yellow: #F4BC1B !default;
-$green: #84CC16 !default;
+$yellow: #F28D0F !default;
+$green: #32AE27 !default;
 $teal: #20c997 !default;
 $cyan: #38A6EA !default;
 
@@ -47,6 +47,7 @@ $min-contrast-ratio: 2.05 !default;
 
 $body-color: $gray-900 !default;
 $body-bg: $white !default;
+$body-secondary-bg: #68768A !default;
 
 $grays: (
   "50": $gray-50,
@@ -74,7 +75,8 @@ $theme-colors: (
   "excel": #71BF3E,
   "pdf": #BB1D07,
   "note": #F4B416,
-  ) !default;
+  "table-light":#E2F5FD
+) !default;
 
 $rounded-radius: 3rem;
 
