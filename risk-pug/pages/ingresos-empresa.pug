@@ -1,18 +1,16 @@
-extends ../fragments/page.pug
+extends ../layouts/page.pug
 include ../mixins/panel.pug
 
-block vars
+prepend vars
   - title = 'Ingresos por Empresa'
-
-block content
-  include ../fragments/menus.pug
   - 
     breadcrumbLinks = [
       ['#', 'Inicio'],
-      ['#', 'Ingresos']
+      ['#', 'Ingresos', 'primary']
     ];
 
-  +panel('RESUMEN POR EMPRESA', breadcrumbLinks, panelLinks)
+block content
+  +panel('RESUMEN POR EMPRESA', breadcrumbLinks)
     .table-header
       .row.align-items-end.gap-2
         .col.col-auto
@@ -127,81 +125,82 @@ block content
                 Importe de Acuerdo a los CFDI's Facreview
 
               th(rowspan='2') Ingresos Nominales Facturados
-              th(rowspan='2') CPA Respond Ingresos Nominales Facturados
+              th.ps-4.position-relative(rowspan='2') 
+                button.abs-table-action.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-facturados-action(type='button')
+                  i.icon-link.material-symbols-outlined quick_reference
+                span.text-table-info.text-nowrap CPA Respond
+                br 
+                | Ingresos Nominales Facturados
               th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
                 Declarados de:
 
               th(rowspan='2')
-                | CPA Respond Ingresos 
+                span.text-table-info.text-nowrap CPA Respond 
+                | Ingresos 
+                br
                 span.text-nowrap Nominales Adicionales
+                br
                 | Declarados
               th(rowspan='2')
-                | CPA Respond Ingresos 
+                span.text-table-info.text-nowrap CPA Respond  
+                | Ingresos 
+                br
                 span.text-nowrap Nominales a Disminuir
+                br
                 | Declarados
               th(rowspan='2') Ingresos Nominales
-              th(rowspan='2') CPA Respond Ingresos Nominales Declarados
+              th.ps-4.position-relative(rowspan='2')
+                button.abs-table-action.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-declarados-action(type='button')
+                  i.icon-link.material-symbols-outlined quick_reference
+                span.text-table-info.text-nowrap CPA Respond
+                br
+                | Ingresos Nominales Declarados
               th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
                 Declarados de:
 
-              th(rowspan='2')
-                | CPA Respond Contabilidad Electrónica Fiscal 
+              th.ps-4.position-relative(rowspan='2')
+                .abs-table-action.d-grid#crcefir
+                  button.btn.btn-link.p-0#crcef-ingresos-registrados-action(type='button')
+                    i.icon-link.material-symbols-outlined edit_square
+                  button.btn.btn-link.p-0.link-success#crcef-ingresos-registrados-info(type='button')
+                    i.icon-link.material-symbols-outlined quick_reference
+                span.text-table-info.text-nowrap CPA Respond 
+                br
+                | Contabilidad Electrónica Fiscal 
                 span.text-nowrap Ingresos Registrados
               th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
                 Declarados de:
 
               th.min-width-none(rowspan='2') Notas
             tr.border-dark
-              th.border-table-start CFDI's Ingresos Vigentes
-              th CFDI's Notas de Crédito Vigentes
-              th.border-table-end CFDI's Cancelados
+              th.border-table-start Ingresos Vigentes
+              th 
+                span.text-nowrap Notas de Crédito
+                br
+                | Vigentes
+              th.border-table-end Cancelados
               th.border-table-start Adicionados
               th.border-end.border-dark disminuidos
               th.border-start.border-dark Ingresos de CFDI's
-              th Descuentos de Ingresos
-              th Notas de Crédito
-              th Descuentos Notas de Crédito
-              th.border-end.border-dark Cancelaciones
+              th.ps-4.position-relative
+                input.abs-table-action.form-check-input#descuentos-ingresos(type='checkbox' name='descuentos-ingresos')
+                | Descuentos de Ingresos
+              th.ps-4.position-relative
+                button.abs-table-action.btn.btn-link.link-primary.p-0#notas-credito-action(type='button' data-bs-target='#selector-notas-credito-modal' data-bs-toggle='modal' style='box-shadow: none;')
+                  i.material-symbols-outlined(style='margin-top: -4px;') edit_square
+                | Notas de Crédito
+              th.position-relative 
+                input.abs-table-action.form-check-input#descuentos-notas-cred(type='checkbox' name='descuentos-notas-cred')
+                | Descuentos Notas de Crédito
+              th.ps-4.position-relative.border-end.border-dark
+                input.abs-table-action.form-check-input#cancelaciones(type='checkbox' name='cancelaciones')
+                | Cancelaciones
               th.border-start.border-dark Menos
               th.border-end.border-dark Más
               th.border-start.border-dark Menos
               th.border-end.border-dark Más
               th.border-start.border-dark Menos
               th.border-end.border-dark Más
-            tr.text-center.align-middle
-              th.bg-table-light
-              th.bg-table-light.border-table-start.border-table-end(colspan='3')
-              th.bg-table-light.border-table-start.border-table-end(colspan='2')
-              th.bg-table-light.border-table-start
-              th.bg-table-light
-                div
-                  input.form-check-input#descuentos-ingresos(type='checkbox' name='descuentos-ingresos')
-                  label(for)
-              th.bg-table-light
-                div(style='margin-top: 5px; margin-bottom: -4px;')
-                  input.form-check-input#notas-credito(type='checkbox' name='notas-credito')
-                  label
-                    button.btn.btn-link.link-primary.p-0#notas-credito-action(type='button' data-bs-target='#selector-notas-credito-modal' data-bs-toggle='modal' style='box-shadow: none;')
-                      i.material-symbols-outlined(style='margin-top: -4px;') edit_square
-              th.bg-table-light
-                div
-                  input.form-check-input#descuentos-notas-cred(type='checkbox' name='descuentos-notas-cred')
-              th.bg-table-light.border-table-end
-                div
-                  input.form-check-input#cancelaciones(type='checkbox' name='cancelaciones')
-              th.bg-table-light
-              th.bg-table-light
-                button.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-facturados-action(type='button')
-                  i.icon-link.material-symbols-outlined quick_reference
-              th.bg-table-light.border-table-start.border-table-end(colspan='2')
-              th.bg-table-light(colspan='3')
-              th.bg-table-light
-                button.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-declarados-action(type='button')
-                  i.icon-link.material-symbols-outlined quick_reference
-              th.bg-table-light.border-table-start.border-table-end(colspan='2')
-              th.bg-table-light
-              th.bg-table-light.border-table-start.border-table-end(colspan='2')
-              th.bg-table-light.min-width-none
             tr
             tr#totals.fw-bold.border-top.border-bottom.border-danger.text-end
               td.text-end.text-uppercase(data-value='0')
@@ -234,7 +233,7 @@ block content
             tr
               td.month.text-start(data-value='6') Junio
               td.border-table-start(data-value='1557760')
-                button.btn.btn-outline-primary.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='6') 1,557,760
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='6') 1,557,760
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='6') 108
@@ -275,7 +274,7 @@ block content
             tr
               td.month.text-start(data-value='5') Mayo
               td.border-table-start(data-value='5571362')
-                button.btn.btn-outline-warning.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='5') 5,571,362
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='5') 5,571,362
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='5') 108
@@ -316,7 +315,7 @@ block content
             tr
               td.month.text-start(data-value='4') Abril
               td.border-table-start(data-value='5228741')
-                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='4') 5,228,741
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='4') 5,228,741
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='4') 108
@@ -357,7 +356,7 @@ block content
             tr
               td.month.text-start(data-value='3') Marzo
               td.border-table-start(data-value='5200188')
-                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='3') 5,200,188
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='3') 5,200,188
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='3') 108
@@ -398,7 +397,7 @@ block content
             tr
               td.month.text-start(data-value='2') Febrero
               td.border-table-start(data-value='4515072')
-                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='2') 4,515,072
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='2') 4,515,072
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='2') 108
@@ -439,7 +438,7 @@ block content
             tr
               td.month.text-start(data-value='1') Enero
               td.border-table-start(data-value='2616861')
-                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='1') 2,616,861
+                button.btn.btn-link.p-0.cfdis-ingresos-vigentes(data-id='1') 2,616,861
               td(data-value='126') 126
               td.border-table-end(data-value='108')
                 button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='1') 108

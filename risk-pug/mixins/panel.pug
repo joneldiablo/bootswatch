@@ -1,4 +1,4 @@
-mixin panel(title, breadcrumbLinks=[], panelLinks=[])
+mixin panel(title, breadcrumbLinks=[])
   .wrapper
     //  inicio BARRA LATERAL IZQUIERDA 
     .sidebar
@@ -137,8 +137,12 @@ mixin panel(title, breadcrumbLinks=[], panelLinks=[])
             nav.breadcrumb-container(aria-label='breadcrumb')
               ol.breadcrumb.text-body-secondary.text-uppercase
                 each link in breadcrumbLinks
-                  li.breadcrumb-item 
-                    a.link-underline-opacity-0.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(href=link[0])= link[1]
+                  if link[2]
+                    li.breadcrumb-item 
+                      a.link-underline-opacity-0.text-uppercase(class='link-'+link[2])(href=link[0])= link[1]
+                  else
+                    li.breadcrumb-item 
+                      a.link-underline-opacity-0.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(href=link[0])= link[1]
                 li.breadcrumb-item.active(aria-current='page')= title
             span.log-history.ms-auto
               button#log-history.btn.btn-sm.btn-link.text-decoration-none.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(type='button')

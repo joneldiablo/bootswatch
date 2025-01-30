@@ -1,0 +1,15 @@
+extends ../layouts/page.pug
+include ../mixins/panel.pug
+
+prepend vars
+  - title = "CFDI's Ingresos Vigentes"
+
+block content
+  - 
+    breadcrumbLinks = [
+      ['#', 'Inicio'],
+      ['#', 'Ingresos'],
+      ['./ingresos-empresa.html', 'Resumen por Empresa', 'primary']
+    ];
+
+  +panel("CFDI's Ingresos Vigentes", breadcrumbLinks)

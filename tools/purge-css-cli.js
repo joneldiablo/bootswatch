@@ -7,9 +7,10 @@ const { hideBin } = require("yargs/helpers");
 const purgeCss = require("./purge-css");
 
 const args = yargs(hideBin(process.argv))
-  .option("html", {
+  .option("input", {
+    alias: 'i',
     type: "string",
-    describe: "Path to the HTML file used for purging",
+    describe: "Path to the folder htmls used for purging",
     demandOption: true,
   })
   .option("output", {
@@ -24,10 +25,10 @@ const args = yargs(hideBin(process.argv))
 try {
   const cssFilePath = "./dist/cpa/bootstrap.css";
   // Procesar el archivo HTML y generar el output CSS
-  const htmlFilePath = path.resolve(args.html);
+  const htmlFilePath = path.resolve(args.input);
   const outputCssFilePath = args.output
     ? path.resolve(args.output)
-    : htmlFilePath.replace(/\.html$/, ".css");
+    : htmlFilePath + '/style.css';
 
   purgeCss(cssFilePath, htmlFilePath, outputCssFilePath)
     .then(() => {
