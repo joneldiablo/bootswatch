@@ -1,0 +1,50 @@
+block vars
+doctype html
+html(lang='es')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1')
+    meta(name='author' content='CPA Vision')
+    meta(name='copyright' content='CPA Vision')
+    block metas
+
+    // STYLES libraries
+    //  Google Material Symbols  
+    link(href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined' rel='stylesheet')
+    //  Font awesome  
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css' rel='stylesheet')
+    //  Tempus Dominus Styles 
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css' crossorigin='anonymous')
+    //   CPA CSS  
+    link(href='/assets/css/cpa-bs.css' rel='stylesheet')
+    link(href='/assets/css/cpa-new.css' rel='stylesheet')
+    link(href='/assets/css/ajustes.css' rel='stylesheet')
+    block links
+    // -------------
+
+    title RISK | #{title}
+
+    // SCRIPTS libraries
+    // Popperjs 
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js' integrity='sha256-BRqBN7dYgABqtY9Hd4ynE+1slnEw+roEPFzQ7TRRfcg=' crossorigin='anonymous')
+    // Bootstrap
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous')
+    //  Tempus Dominus JavaScript 
+    script(src='https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js' crossorigin='anonymous')
+    block scripts
+  body
+  
+    // Contenido
+    block content
+    // ---------------
+
+    // Elementos flotantes
+    block floatsPage
+    // ---------------
+
+    // Elementos de tipo cuadro de dialogo, modals, offcanvas, etc
+    block dialogsPage
+    // ---------------
+
+    // Scripts y otros
+    block footerPage

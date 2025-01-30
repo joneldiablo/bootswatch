@@ -1,0 +1,151 @@
+mixin panel(title, breadcrumbLinks=[], panelLinks=[])
+  .wrapper
+    //  inicio BARRA LATERAL IZQUIERDA 
+    .sidebar
+      .main-logo
+        img.main-logo(src='/assets/img/logo-risk-full.svg' alt='Logotipo CPA')
+      button.btn-collapse.text-center.d-flex.justify-content-center.align-items-center
+        span.material-symbols-outlined arrow_forward_ios
+      ul.nav-links.panel-menu
+        each link in panelLinks
+          li
+            a.item-nav.active(href=link[0])
+              i.material-symbols-outlined= link[1]
+              span.menu-label= link[2]
+      script.
+        let submenu = document.querySelectorAll(".nav-submenu");
+        for (var i = 0; i < submenu.length; i++) {
+          console.log(submenu[i])
+          submenu[i].addEventListener("click", (e) => {
+            let submenuParent = e.target.parentElement.parentElement;
+            submenuParent.classList.toggle("showMenu");
+          });
+        }
+
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".btn-collapse");
+        let openSidebar = JSON.parse(localStorage.getItem('openSidebar') || 'true');
+        if (!openSidebar) sidebar.classList.add("close");
+        sidebarBtn.addEventListener("click", () => {
+          sidebar.classList.add("animate");
+          sidebar.classList.toggle("close");
+          localStorage.setItem('openSidebar', JSON.stringify(!sidebar.classList.contains('close')));
+        });
+
+    //  fin BARRA LATERAL IZQUIERDA 
+    //  inicio SECCION MAIN 
+    #body-main.d-flex.flex-column
+      //  inicio HEADER 
+      header.d-flex.justify-content-between.align-items-center
+        #header-user.d-flex.justify-content-start.align-items-center
+          .user-div
+            .user-title BIENVENIDO:
+            .user-info Eder Bermudez
+          .user-div
+            .user-title RFC:
+            .user-info ABCD240101XY1
+          .user-div
+            .user-title(style="margin-bottom: -2px;") EMPRESA:
+            .user-info 
+              button.btn.btn-sm.p-0.btn-link.text-decoration-none(type="button" data-bs-toggle="dropdown" aria-expanded="false" style="line-height:1; margin-bottom: -4px; --cpa-theme-btn-color:var(--color-elementos-700);")
+                span 000 - CPA VISION MX
+                i.material-symbols-outlined.text-body-secondary.align-middle.down keyboard_arrow_down
+                i.material-symbols-outlined.text-body-secondary.align-middle.up keyboard_arrow_up
+              ul.dropdown-menu
+                li: a.dropdown-item(href="#") 000 - CPA VISION MX
+                li: a.dropdown-item(href="#") 000 - CPA VISION MX
+                li: a.dropdown-item(href="#") 000 - CPA VISION MX
+        #header-icons.d-flex
+          #iconTipoCambio.d-flex.align-items-center.line-right
+            i.cpa-header-tipodecambio
+            .ps-1
+              .user-title TC:
+              .user-info $ 19.23
+          button(type='button')
+            i.cpa-header-devoff
+          button(type='button')
+            i.cpa-header-tablero
+          button(type='button')
+            i.cpa-header-llaves
+          button(type='button')
+            i.cpa-header-sat.text-success
+          button(type='button')
+            i.cpa-header-cpanews
+          button(type='button')
+            i.cpa-header-cambiarempresa
+          button.line-right
+            i.cpa-header-cambiarproductos
+          .dropdown
+            button(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+              i.cpa-header-usuario
+            #user-menu.dropdown-menu
+              p.usuario-emp 2062 - GRUPO JUMEX
+              img.usuario-img.my-2(src='/assets/img-clientes/cliente_1.jpg' alt='Logotipo de Empresa')
+              p.usuario-nombre Eder Bermudez
+              p.usuario-posicion Gerente de Operaciones
+              p.usuario-tel +52 5512 3456
+              p.usuario-mail rocio.moreno@cpavs.mx
+              p.usuario-perfil Perfil de Administrador
+              ul.usuario-nav.mt-2.mb-0
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-usuario
+                    | Mi Perfil
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-calendario
+                    | Calendario
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-notif
+                    | Notificaciones
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-valorar
+                    | Valoración y Reseñas
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-capacitacion
+                    | Capacitaciones
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-manuales
+                    | Manual de Usuario
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-videos
+                    | Videos
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-ayuda
+                    | Ayuda
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-log
+                    | Registros de Actividad
+                li
+                  a.dropdown-item(href='#')
+                    i.cpa-header-cerrarsesion
+                    | Cerrar Sesión
+              .d-flex.mt-2
+                p.text-nowrap.usuario-ultimo.me-2 Ultimo acceso:
+                p.usuario-acceso 02 de agosto de 2024 10:18 hrs a través de Google Chrome
+      //  FIN HEADER 
+      main.flex-grow-1
+        section
+          .d-flex.align-items-end
+            nav.breadcrumb-container(aria-label='breadcrumb')
+              ol.breadcrumb.text-body-secondary.text-uppercase
+                each link in breadcrumbLinks
+                  li.breadcrumb-item 
+                    a.link-underline-opacity-0.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(href=link[0])= link[1]
+                li.breadcrumb-item.active(aria-current='page')= title
+            span.log-history.ms-auto
+              button#log-history.btn.btn-sm.btn-link.text-decoration-none.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(type='button')
+                i.material-symbols-outlined.me-2.align-bottom history
+                | Log
+
+          .title-container
+            h1.text-uppercase.text-dark.mb-4= title
+
+          block

@@ -21,7 +21,8 @@
     "release": "grunt release",
     "test": "npm run stylelint",
     "risk": "node ./tools/purge-css-cli.js --html='../risk-dark-maqueta-vanilla/index.html' -o='../risk-dark-maqueta-vanilla/assets/css/cpa-bs.css'",
-    "risk:build": "npm run build && node ./tools/purge-css-cli.js --html='../risk-dark-maqueta-vanilla/index.html' -o='../risk-dark-maqueta-vanilla/assets/css/cpa-bs.css'"
+    "risk:build": "npm run build && node ./tools/purge-css-cli.js --html='../risk-dark-maqueta-vanilla/index.html' -o='../risk-dark-maqueta-vanilla/assets/css/cpa-bs.css'",
+    "risk:pug": "./tools/convert-pug.js -i ./risk-pug/templates/  -o ../risk-dark-maqueta-vanilla/"
   },
   "files": [
     "dist/**/*.{css,scss,map}"
@@ -42,14 +43,19 @@
     "grunt-sass": "^3.1.0",
     "grunt-shell": "^4.0.0",
     "postcss": "^8.4.35",
+    "prettier": "^3.4.2",
     "prismjs": "^1.29.0",
+    "purgecss": "^7.0.2",
     "rtlcss": "^4.1.1",
     "sass": "^1.71.0",
     "serve": "^14.2.4",
     "stylelint": "^15.10.2",
     "stylelint-config-twbs-bootstrap": "^11.0.1",
-    "prettier": "^3.4.2",
-    "purgecss": "^7.0.2",
     "yargs": "^17.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "html2pug": "^4.0.0",
+    "pug": "^3.0.3"
   }
 }

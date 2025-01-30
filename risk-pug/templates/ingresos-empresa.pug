@@ -1,0 +1,723 @@
+extends ../fragments/page.pug
+include ../mixins/panel.pug
+
+block vars
+  - title = 'Ingresos por Empresa'
+
+block content
+  include ../fragments/menus.pug
+  - 
+    breadcrumbLinks = [
+      ['#', 'Inicio'],
+      ['#', 'Ingresos']
+    ];
+
+  +panel('RESUMEN POR EMPRESA', breadcrumbLinks, panelLinks)
+    .table-header
+      .row.align-items-end.gap-2
+        .col.col-auto
+          section.hstack.mt-3
+            .me-2
+              span.text-nowrap Ingresos Acumulables
+              br
+              span Declaración Anual
+            .rounded.overflow-hidden.hstack.position-relative.align-middle
+              .bg-body-secondary.text-white.h-100.d-flex.justify-content-center.align-items-center.p-2
+                i.material-symbols-outlined paid
+              .text-bg-info.h-100.d-flex.justify-content-end.align-items-center.px-3.py-2(style='min-width: 120px;')
+                span#ingresos-acumulables-anual 0.00
+        .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-xl-auto
+          button.ms-auto.btn.btn-success.btn-sm.text-nowrap#actualizar-informacion(type='button')
+            i.material-symbols-outlined.align-bottom.me-1 autorenew
+            span Actualizar Información
+          .vr.mx-2
+          form.hstack.gap-2.align-items-end#filter-table
+            fieldset.ejercicio-field
+              label.form-label(for='ejercicio') Ejercicio:
+              .input-group.input-group-sm#ejercio-input-gr
+                span.input-group-text.bg-white.border-end-0.material-symbols-outlined.cursor-pointer(data-td-target='#ejercio-input-gr' data-td-toggle='datetimepicker') calendar_month
+                input.form-control.text-end.date#ejercicio(name='ejercicio' type='number' placeholder='_ _ _ _' data-td-target='#ejercio-input-gr' min='2000', required)
+              script.
+
+                document.addEventListener('DOMContentLoaded', function () {
+                  const inputGrEjercicio = document.getElementById('ejercio-input-gr');
+                  const inputEjercicio = document.querySelector('#ejercio-input-gr input');
+                  const today = new Date();
+                  inputEjercicio.setAttribute('max', today.getFullYear());
+                  new tempusDominus.TempusDominus(inputGrEjercicio, {
+                    display: {
+                      components: {
+                        decades: false,
+                        year: true,
+                        month: false,
+                        date: false,
+                        hours: false,
+                        minutes: false,
+                        seconds: false
+                      },
+                      //theme: 'light'
+                    },
+                    localization: {
+                      format: 'yyyy',
+                    },
+                    restrictions: {
+                      minDate: '2000',
+                      maxDate: new Date()
+                    }
+                  });
+                });
+
+            button.btn.btn-primary.btn-sm.px-3.text-nowrap(type='submit')
+              i.material-symbols-outlined.align-bottom filter_alt
+              | Filtrar
+
+            script.
+
+              document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('#filter-table');
+                form.addEventListener('submit', function (event) {
+                  event.preventDefault();
+
+                  const formData = new FormData(form);
+                  formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                  });
+                  const formObject = Object.fromEntries(formData.entries());
+                  console.log(formObject);
+                });
+              });
+
+          fieldset.time-process-component
+            label.form-label Tiempo del Proceso:
+            .input-group.input-group-sm
+              span.input-group-text.bg-white.border-end-0.material-symbols-outlined update
+              input.form-control.text-center#time-process(name='time-process' type='text' placeholder='-------------', readonly, style='box-shadow:none;')
+              button.btn.btn-info.process-info#tiempo-proceso(type='button' data-bs-toggle='dropdown' data-bs-auto-close='outside' aria-expanded='false')
+                span.material-symbols-outlined.align-bottom schedule
+              .dropdown-menu.dropdown-menu-end
+                .container-fluid(style='min-width: 400px; max-width: 100wv;')
+                  h3.text-primary Datos del Proceso
+                  dl.row
+                    dt.text-nowrap.col-sm-4.text-end.text-dark Inicio:
+                    dd.text-nowrap.col-sm-8
+                      span#data-process-inicio 2024 -11-12 21:02:19
+                    dt.text-nowrap.col-sm-4.text-end.text-dark Fin:
+                    dd.text-nowrap.col-sm-8
+                      span#data-process-fin 2024 -11-12 21:02:02
+                    dt.text-nowrap.col-sm-4.text-end.text-dark Tiempo:
+                    dd.text-nowrap.col-sm-8
+                      span#data-process-tiempo 0 horas, 0 minutos, 3 segundos
+                    dt.text-nowrap.col-sm-4.text-end.text-dark Zona Horaria:
+                    dd.text-nowrap.col-sm-8
+                      span#data-process-zona-horaria America/Mexico City
+          .vr.ms-2
+          button.btn.btn-link.link-excel.p-0.btn-lg#hoja-calculo(type='button' style="margin-bottom: -.2rem")
+            i.cpa-file-xls.fs-1
+          button.btn.btn-link.link-pdf.p-0.btn-lg#pdf(type='button' style="margin-bottom: -.2rem")
+            i.cpa-file-pdf.fs-1
+    .table-element
+      .table-responsive.mt-4
+        table.table.table-striped.table-hover#table-ingresos-empresa
+          thead.text-center.text-uppercase
+            tr.border-dark
+              th(rowspan='2') Periodo
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='3') CFDI's Vigentes Conciliados
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2') CFDI's Por Fecha de Aplicación
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='5').
+                Importe de Acuerdo a los CFDI's Facreview
+
+              th(rowspan='2') Ingresos Nominales Facturados
+              th(rowspan='2') CPA Respond Ingresos Nominales Facturados
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+                Declarados de:
+
+              th(rowspan='2')
+                | CPA Respond Ingresos 
+                span.text-nowrap Nominales Adicionales
+                | Declarados
+              th(rowspan='2')
+                | CPA Respond Ingresos 
+                span.text-nowrap Nominales a Disminuir
+                | Declarados
+              th(rowspan='2') Ingresos Nominales
+              th(rowspan='2') CPA Respond Ingresos Nominales Declarados
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+                Declarados de:
+
+              th(rowspan='2')
+                | CPA Respond Contabilidad Electrónica Fiscal 
+                span.text-nowrap Ingresos Registrados
+              th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+                Declarados de:
+
+              th.min-width-none(rowspan='2') Notas
+            tr.border-dark
+              th.border-table-start CFDI's Ingresos Vigentes
+              th CFDI's Notas de Crédito Vigentes
+              th.border-table-end CFDI's Cancelados
+              th.border-table-start Adicionados
+              th.border-end.border-dark disminuidos
+              th.border-start.border-dark Ingresos de CFDI's
+              th Descuentos de Ingresos
+              th Notas de Crédito
+              th Descuentos Notas de Crédito
+              th.border-end.border-dark Cancelaciones
+              th.border-start.border-dark Menos
+              th.border-end.border-dark Más
+              th.border-start.border-dark Menos
+              th.border-end.border-dark Más
+              th.border-start.border-dark Menos
+              th.border-end.border-dark Más
+            tr.text-center.align-middle
+              th.bg-table-light
+              th.bg-table-light.border-table-start.border-table-end(colspan='3')
+              th.bg-table-light.border-table-start.border-table-end(colspan='2')
+              th.bg-table-light.border-table-start
+              th.bg-table-light
+                div
+                  input.form-check-input#descuentos-ingresos(type='checkbox' name='descuentos-ingresos')
+                  label(for)
+              th.bg-table-light
+                div(style='margin-top: 5px; margin-bottom: -4px;')
+                  input.form-check-input#notas-credito(type='checkbox' name='notas-credito')
+                  label
+                    button.btn.btn-link.link-primary.p-0#notas-credito-action(type='button' data-bs-target='#selector-notas-credito-modal' data-bs-toggle='modal' style='box-shadow: none;')
+                      i.material-symbols-outlined(style='margin-top: -4px;') edit_square
+              th.bg-table-light
+                div
+                  input.form-check-input#descuentos-notas-cred(type='checkbox' name='descuentos-notas-cred')
+              th.bg-table-light.border-table-end
+                div
+                  input.form-check-input#cancelaciones(type='checkbox' name='cancelaciones')
+              th.bg-table-light
+              th.bg-table-light
+                button.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-facturados-action(type='button')
+                  i.icon-link.material-symbols-outlined quick_reference
+              th.bg-table-light.border-table-start.border-table-end(colspan='2')
+              th.bg-table-light(colspan='3')
+              th.bg-table-light
+                button.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-declarados-action(type='button')
+                  i.icon-link.material-symbols-outlined quick_reference
+              th.bg-table-light.border-table-start.border-table-end(colspan='2')
+              th.bg-table-light
+              th.bg-table-light.border-table-start.border-table-end(colspan='2')
+              th.bg-table-light.min-width-none
+            tr
+            tr#totals.fw-bold.border-top.border-bottom.border-danger.text-end
+              td.text-end.text-uppercase(data-value='0')
+                b Total
+              td.border-table-start(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0')
+          tbody.text-end.align-middle
+            tr
+              td.month.text-start(data-value='6') Junio
+              td.border-table-start(data-value='1557760')
+                button.btn.btn-outline-primary.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='6') 1,557,760
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='6') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='6') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='6') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='100')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='6') 100.00
+              td.descuentos-ingresos-cell(data-value='1')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='6') 1.00
+              td.notas-credito-cell(data-value-nc-publico-gral='4' data-value-nc-aplicacion-ant='3' data-value-nc-con-uuid-rel='2' data-value-nc-sin-uuid-rel='1')
+                button.btn.btn-link.p-0.notas-credito(data-id='6') 2.00
+              td.descuentos-notas-cred-cell(data-value='3')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='6') 3.00
+              td.border-table-end.cancelaciones-cell(data-value='10')
+                button.btn.btn-link.p-0.cancelaciones(data-id='6') 10.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='6') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='6') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='6') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='6') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='6')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+            tr
+              td.month.text-start(data-value='5') Mayo
+              td.border-table-start(data-value='5571362')
+                button.btn.btn-outline-warning.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='5') 5,571,362
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='5') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='5') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='5') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='100')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='5') 100.00
+              td.descuentos-ingresos-cell(data-value='1')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='5') 1.00
+              td.notas-credito-cell(data-value-nc-publico-gral='1' data-value-nc-aplicacion-ant='2' data-value-nc-con-uuid-rel='3' data-value-nc-sin-uuid-rel='4')
+                button.btn.btn-link.p-0.notas-credito(data-id='5') 2.00
+              td.descuentos-notas-cred-cell(data-value='3')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='5') 3.00
+              td.border-table-end.cancelaciones-cell(data-value='10')
+                button.btn.btn-link.p-0.cancelaciones(data-id='5') 10.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='5') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='5') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='5') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='5') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='5')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+            tr
+              td.month.text-start(data-value='4') Abril
+              td.border-table-start(data-value='5228741')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='4') 5,228,741
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='4') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='4') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='4') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='4') 0.00
+              td.descuentos-ingresos-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='4') 0.00
+              td.notas-credito-cell(data-value-nc-publico-gral='0' data-value-nc-aplicacion-ant='0' data-value-nc-con-uuid-rel='0' data-value-nc-sin-uuid-rel='0')
+                button.btn.btn-link.p-0.notas-credito(data-id='4') 0.00
+              td.descuentos-notas-cred-cell(data-value='0')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='4') 0.00
+              td.border-table-end.cancelaciones-cell(data-value='0')
+                button.btn.btn-link.p-0.cancelaciones(data-id='4') 0.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='4') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='4') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='4') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='4') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='4')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+            tr
+              td.month.text-start(data-value='3') Marzo
+              td.border-table-start(data-value='5200188')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='3') 5,200,188
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='3') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='3') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='3') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='3') 0.00
+              td.descuentos-ingresos-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='3') 0.00
+              td.notas-credito-cell(data-value-nc-publico-gral='0' data-value-nc-aplicacion-ant='0' data-value-nc-con-uuid-rel='0' data-value-nc-sin-uuid-rel='0')
+                button.btn.btn-link.p-0.notas-credito(data-id='3') 0.00
+              td.descuentos-notas-cred-cell(data-value='0')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='3') 0.00
+              td.border-table-end.cancelaciones-cell(data-value='0')
+                button.btn.btn-link.p-0.cancelaciones(data-id='3') 0.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='3') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='3') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='3') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='3') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='3')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+            tr
+              td.month.text-start(data-value='2') Febrero
+              td.border-table-start(data-value='4515072')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='2') 4,515,072
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='2') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='2') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='2') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='2') 0.00
+              td.descuentos-ingresos-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='2') 0.00
+              td.notas-credito-cell(data-value-nc-publico-gral='0' data-value-nc-aplicacion-ant='0' data-value-nc-con-uuid-rel='0' data-value-nc-sin-uuid-rel='0')
+                button.btn.btn-link.p-0.notas-credito(data-id='2') 0.00
+              td.descuentos-notas-cred-cell(data-value='0')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='2') 0.00
+              td.border-table-end.cancelaciones-cell(data-value='0')
+                button.btn.btn-link.p-0.cancelaciones(data-id='2') 0.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='2') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='2') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='2') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='2') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='2')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+            tr
+              td.month.text-start(data-value='1') Enero
+              td.border-table-start(data-value='2616861')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-ingresos-vigentes(data-id='1') 2,616,861
+              td(data-value='126') 126
+              td.border-table-end(data-value='108')
+                button.btn.btn-outline-success.btn-sm.rounded.py-0.px-2.cfdis-cancelados(data-id='1') 108
+              td.border-table-start(data-value='1')
+                button.btn.btn-link.p-0.cfdis-adicionados(data-id='1') 1
+              td.border-table-end(data-value='1')
+                button.btn.btn-link.p-0.cfdis-disminuidos(data-id='1') 1
+              td.border-table-start.ingresos-cfdis-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.ingresos-cfdis(data-id='1') 0.00
+              td.descuentos-ingresos-cell(data-value='0')
+                button.btn.btn-sm.btn-outline-success.py-0.px-2.rounded.descuentos-ingresos(data-id='1') 0.00
+              td.notas-credito-cell(data-value-nc-publico-gral='0' data-value-nc-aplicacion-ant='0' data-value-nc-con-uuid-rel='0' data-value-nc-sin-uuid-rel='0')
+                button.btn.btn-link.p-0.notas-credito(data-id='1') 0.00
+              td.descuentos-notas-cred-cell(data-value='0')
+                button.btn.btn-link.p-0.descuentos-notas-cred(data-id='1') 0.00
+              td.border-table-end.cancelaciones-cell(data-value='0')
+                button.btn.btn-link.p-0.cancelaciones(data-id='1') 0.00
+              td.total-ingresos-cell(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-fac(data-id='1') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-nominales-disminuir(data-id='1') 0.00
+              td(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.respond-ingresos-nominales-dec(data-id='1') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td(data-value='0')
+                button.btn.btn-link.p-0.ingresos-registrados(data-id='1') 0.00
+              td.border-table-start(data-value='0') 0.00
+              td.border-table-end(data-value='0') 0.00
+              td.text-center(data-value='0')
+                button.btn.btn-sm.btn-link.p-0.link-note(data-id='1')
+                  i.material-symbols-outlined.icon-link sticky_note_2
+
+block dialogsPage
+  .modal.fade#selector-notas-credito-modal
+    .modal-dialog.modal-lg(role='document')
+      .modal-content.position-relative
+        button.btn-close.btn-close-white.position-absolute.end-0.p-3(type='button' data-bs-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true')
+        .modal-header.text-bg-dark.justify-content-center
+          h5.modal-title.text-uppercase Notas de Crédito
+        .modal-body
+          form#notas-credito-form
+            table.table.table-striped.table-hover
+              thead
+                tr.text-uppercase.text-center
+                  th
+                  th No. CFDI's
+                  th Importe
+                  th Supuesto
+              tbody
+                tr
+                  td.text-center
+                    input.form-check-input#nc-publico-gral(type='checkbox' value='nc-publico-gral')
+                  td.text-end 552,283
+                  td.text-end 3,130,102,893.03
+                  td CFDI's Tipo E Público en General
+                tr
+                  td.text-center
+                    input.form-check-input#nc-aplicacion-ant(type='checkbox' value='nc-aplicacion-ant')
+                  td.text-end 0
+                  td.text-end 0.00
+                  td CFDI's Tipo E Crédito por Aplicación de Anticipos
+                tr
+                  td.text-center
+                    input.form-check-input#nc-con-uuid-rel(type='checkbox' value='nc-con-uuid-rel')
+                  td.text-end 16,165
+                  td.text-end 60,469,361.53
+                  td CFDI's Tipo E Crédito con UUID Relacionado
+                tr
+                  td.text-center
+                    input.form-check-input#nc-sin-uuid-rel(type='checkbox' value='nc-sin-uuid-rel')
+                  td.text-end 1
+                  td.text-end 825.01
+                  td CFDI's Tipo E sin UUID Relacionado
+        .modal-footer.bg-light.border-0
+          button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
+            i.material-symbols-outlined.align-bottom close
+            | Cerrar
+
+          button.btn.btn-primary(type='submit' data-bs-dismiss='modal' form='notas-credito-form')
+            i.material-symbols-outlined.align-bottom check
+            | Aplicar
+
+  .modal.fade#declaraciones-mensuales-modal
+    .modal-dialog.modal-xl(role='document')
+      .modal-content.position-relative
+        button.btn-close.btn-close-white.position-absolute.end-0.p-3(type='button' data-bs-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true')
+        .modal-header.text-bg-dark.justify-content-center
+          h5.modal-title.text-uppercase
+            | Declaraciones mensuales &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; Ejercicio: 
+            span#ejercicio-selected 2024
+        .modal-body
+          .table-responsive
+            table.table.table-striped
+              thead.text-uppercase.text-center
+                tr.text-bg-dark
+                  th.text-bg-white(rowspan='2' style='min-width: 140px;') Empresa
+                  th.text-bg-dark(colspan='2') Enero
+                  th.text-bg-dark(colspan='2') Febrero
+                  th.text-bg-dark(colspan='2') Marzo
+                  th.text-bg-dark(colspan='2') Abril
+                  th.text-bg-dark(colspan='2') Mayo
+                  th.text-bg-dark(colspan='2') Junio
+                  th.text-bg-dark(colspan='2') Julio
+                  th.text-bg-dark(colspan='2') Agosto
+                  th.text-bg-dark(colspan='2') Septiembre
+                  th.text-bg-dark(colspan='2') Octubre
+                  th.text-bg-dark(colspan='2') Noviembre
+                  th.text-bg-dark(colspan='2') Diciembre
+                tr
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+                  th N
+                  th C
+              tbody.text-center
+                tr
+                  td.text-start 11641 - CPA VISION SAPI DE CV
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-primary remove
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-danger close
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-danger close
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+                  td.mes-n
+                    i.material-symbols-outlined.text-success check
+                  td.mes-c
+                    i.material-symbols-outlined.text-success check
+          .row.gx-0.gy-2
+            .col.col-12.col-lg-6
+              .accordion#complementaria-accordion
+                .accordion-item.rounded-0
+                  h2.accordion-header.bg-light.text-primary.border-bottom
+                    button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#complementaria-collapse' aria-expanded='true' aria-controls='complementaria-collapse')
+                      i.material-symbols-outlined.align-text-top.up expand_circle_up
+                      i.material-symbols-outlined.align-text-top.down expand_circle_down
+                      | Declaración complementaria
+
+                  #complementaria-collapse.accordion-collapse.collapse(data-bs-parent='#complementaria-accordion')
+                    .accordion-body.p-2
+                      .text-success.mb-0.fw-bolder
+                        span.text-uppercase Periodo: 
+                        span.periodo-selected Enero
+                      .table-responsive
+                        table.table.table-striped.table-hover
+                          thead.text-uppercase.text-center
+                            tr
+                              th Operación
+                              th Presentación
+                              th Declaración
+                              th acuse
+                              th pago
+                          tbody.text-center.align-middle
+                            tr
+                              td 240410356999
+                              td 09/12/2024
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+            .col.col-12.col-lg-6
+              .accordion#normal-accordion
+                .accordion-item.rounded-0
+                  h2.accordion-header.bg-light.text-primary.border-bottom
+                    button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#normal-collapse' aria-expanded='true' aria-controls='normal-collapse')
+                      i.material-symbols-outlined.align-text-top.up expand_circle_up
+                      i.material-symbols-outlined.align-text-top.down expand_circle_down
+                      | Declaración normal
+
+                  #normal-collapse.accordion-collapse.collapse(data-bs-parent='#normal-accordion')
+                    .accordion-body.p-2
+                      .text-success.mb-0.fw-bolder
+                        span.text-uppercase Periodo: 
+                        span.periodo-selected Enero
+                      .table-responsive
+                        table.table.table-striped.table-hover
+                          thead.text-uppercase.text-center
+                            tr
+                              th Operación
+                              th Presentación
+                              th Declaración
+                              th acuse
+                              th pago
+                          tbody.text-center.align-middle
+                            tr
+                              td 240410356999
+                              td 09/12/2024
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                            tr
+                              td 240410356999
+                              td 09/12/2024
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+                              td
+                                a.link-pdf.text-decoration-none.fs-1(href='#')
+                                  i.cpa-file-pdf
+        .modal-footer.bg-light.border-0(style='min-height: 46px;').
+
+block footerPage
+  script(src='/assets/js/ingresos.js')

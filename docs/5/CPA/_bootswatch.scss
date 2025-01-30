@@ -8,7 +8,7 @@
 
 .navbar,
 nav {
-  &[data-bs-theme="dark"] {
+  &[data-cpa-theme="dark"] {
     .nav-link.active {
       background: $gray-50;
       border-radius: $btn-border-radius;
