@@ -49,6 +49,17 @@ const purgeCss = async (cssFilePath, htmlDirPath, outputCssFilePath) => {
     purgedCss = purgedCss.replace(/\/\*[\s\S]*?\*\//g, ""); // Regex to remove comments
     purgedCss = purgedCss.replace(/\.cpa-theme :root/g, ".cpa-theme"); // Regex to remove root
     purgedCss = purgedCss.replace(/\.cpa-theme body \{[\s\S]*?\}/gm, ""); // Regex to remove body style
+    purgedCss = purgedCss.replace(/\s*[^\{\}]+\{\s*\}/g, ""); // Regex to remove empty style
+    purgedCss = purgedCss.replace(
+      /((?:\.\w+[\s.]*)+)\.cpa-theme((?:\s*\.\w+[\s.]*)+)\{/g,
+      ".cpa-theme $1$2{"
+    );// Regex to fix order style
+    
+    //.modal.fade .cpa-theme .modal-dialog {
+    //  .modal.fade .cpa-theme .modal-dialog {
+    //.modal.show .cpa-theme .modal-dialog {
+
+    
 
     console.log("Formatting CSS...");
     // Step 3: Format CSS using Prettier
