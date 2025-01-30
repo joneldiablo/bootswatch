@@ -47,6 +47,8 @@ const purgeCss = async (cssFilePath, htmlDirPath, outputCssFilePath) => {
     console.log("Removing multiline comments...");
     // Step 2: Remove multiline comments
     purgedCss = purgedCss.replace(/\/\*[\s\S]*?\*\//g, ""); // Regex to remove comments
+    purgedCss = purgedCss.replace(/\.cpa-theme :root/g, ".cpa-theme"); // Regex to remove root
+    purgedCss = purgedCss.replace(/\.cpa-theme body \{[\s\S]*?\}/gm, ""); // Regex to remove body style
 
     console.log("Formatting CSS...");
     // Step 3: Format CSS using Prettier

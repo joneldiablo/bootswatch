@@ -1,5 +1,9 @@
 @import "../../node_modules/bootstrap/scss/functions";
 @import "variables";
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "bootswatch";
+
+.cpa-theme {
+  @import "../../node_modules/bootstrap/scss/bootstrap";
+  @import "bootswatch";
+}
+
 @import "../../cpa-icons-v1.0/style";
