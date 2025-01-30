@@ -1,0 +1,113 @@
+thead.text-center.text-uppercase
+  tr.border-dark
+    th(rowspan='2') Periodo
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='3') CFDI's Vigentes Conciliados
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2') CFDI's Por Fecha de Aplicación
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='5').
+      Importe de Acuerdo a los CFDI's Facreview
+
+    th(rowspan='2') Ingresos Nominales Facturados
+    th.ps-4.position-relative(rowspan='2') 
+      button.abs-table-action.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-facturados-action(type='button')
+        i.icon-link.material-symbols-outlined quick_reference
+      span.text-table-info.text-nowrap CPA Respond
+      br 
+      | Ingresos Nominales Facturados
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+      Declarados de:
+
+    th(rowspan='2')
+      span.text-table-info.text-nowrap CPA Respond 
+      | Ingresos 
+      br
+      span.text-nowrap Nominales Adicionales
+      br
+      | Declarados
+    th(rowspan='2')
+      span.text-table-info.text-nowrap CPA Respond  
+      | Ingresos 
+      br
+      span.text-nowrap Nominales a Disminuir
+      br
+      | Declarados
+    th(rowspan='2') Ingresos Nominales
+    th.ps-4.position-relative(rowspan='2')
+      button.abs-table-action.btn.btn-link.p-0.link-success#cpa-respond-ingresos-nominales-declarados-action(type='button')
+        i.icon-link.material-symbols-outlined quick_reference
+      span.text-table-info.text-nowrap CPA Respond
+      br
+      | Ingresos Nominales Declarados
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+      Declarados de:
+
+    th.ps-4.position-relative(rowspan='2')
+      .abs-table-action.d-grid#crcefir
+        button.btn.btn-link.p-0#crcef-ingresos-registrados-action(type='button')
+          i.icon-link.material-symbols-outlined edit_square
+        button.btn.btn-link.p-0.link-success#crcef-ingresos-registrados-info(type='button')
+          i.icon-link.material-symbols-outlined quick_reference
+      span.text-table-info.text-nowrap CPA Respond 
+      br
+      | Contabilidad Electrónica Fiscal 
+      span.text-nowrap Ingresos Registrados
+    th.text-bg-dark.border-table-start.border-table-end.align-middle(colspan='2').
+      Declarados de:
+
+    th.min-width-none(rowspan='2') Notas
+  tr.border-dark
+    th.border-table-start Ingresos Vigentes
+    th 
+      span.text-nowrap Notas de Crédito
+      br
+      | Vigentes
+    th.border-table-end Cancelados
+    th.border-table-start Adicionados
+    th.border-end.border-dark disminuidos
+    th.border-start.border-dark Ingresos de CFDI's
+    th.ps-4.position-relative
+      input.abs-table-action.form-check-input#descuentos-ingresos(type='checkbox' name='descuentos-ingresos')
+      | Descuentos de Ingresos
+    th.ps-4.position-relative
+      button.abs-table-action.btn.btn-link.link-primary.p-0#notas-credito-action(type='button' data-bs-target='#selector-notas-credito-modal' data-bs-toggle='modal' style='box-shadow: none;')
+        i.material-symbols-outlined(style='margin-top: -4px;') edit_square
+      | Notas de Crédito
+    th.position-relative 
+      input.abs-table-action.form-check-input#descuentos-notas-cred(type='checkbox' name='descuentos-notas-cred')
+      | Descuentos Notas de Crédito
+    th.ps-4.position-relative.border-end.border-dark
+      input.abs-table-action.form-check-input#cancelaciones(type='checkbox' name='cancelaciones')
+      | Cancelaciones
+    th.border-start.border-dark Menos
+    th.border-end.border-dark Más
+    th.border-start.border-dark Menos
+    th.border-end.border-dark Más
+    th.border-start.border-dark Menos
+    th.border-end.border-dark Más
+  tr
+  tr#totals.fw-bold.border-top.border-bottom.border-danger.text-end
+    td.text-end.text-uppercase(data-value='0')
+      b Total
+    td.border-table-start(data-value='0') 0
+    td(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td.border-table-start(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td.border-table-start(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td.border-table-start(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td(data-value='0') 0
+    td.border-table-start(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td(data-value='0') 0
+    td.border-table-start(data-value='0') 0
+    td.border-table-end(data-value='0') 0
+    td(data-value='0')
