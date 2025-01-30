@@ -13,3 +13,95 @@ block content
     ];
 
   +panel("CFDI's Ingresos Vigentes", breadcrumbLinks)
+    .table-header 
+      .row.align-items-end.gap-2
+        .col.col-auto.hstack.gap-2
+          fieldset.corte-visor-sat
+            label.form-label Corte Visor SAT:
+            .input-group.input-group-sm
+              i.input-group-text.bg-white.border-end-0.material-symbols-outlined update
+              input.form-control.text-center#time-sat(name='time-sat' type='text' placeholder='-------------', readonly, style='box-shadow:none;' value="28 Dic 24 0:00 am")
+              button.btn.btn-info#time-sat-action(type='button')
+                i.material-symbols-outlined image
+          fieldset.descarga-cpa
+            label.form-label Descarga CPA:
+            .input-group.input-group-sm
+              i.input-group-text.bg-white.border-end-0.material-symbols-outlined calendar_month
+              input.form-control.text-center#time-cpa(name='time-cpa' type='text' placeholder='-------------', readonly, style='box-shadow:none;' value="28 Dic 24 0:00 am")
+        .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-xl-auto
+          include ../layouts/table-actions.pug
+    section.content-gral
+      .row.g-0.mt-4
+        .col.col-12.col-md-6.col-lg-4
+          .card.rounded-4
+            .card-header.bg-transparent.border-0
+              h2.text-center.text-uppercase CFDI's Conciliados
+            .card-body 
+              table.table.table-striped.table-hover
+                thead.text-uppercase.text-center
+                  tr
+                    th periodo
+                    th facreview
+                    th risk
+                    th visor sat
+                tbody
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 
+                  tr
+                    td 
+                    td 
+                    td 
+                    td 

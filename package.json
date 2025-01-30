@@ -20,9 +20,10 @@
     "stylelint": "stylelint \"dist/**/*.scss\"",
     "release": "grunt release",
     "test": "npm run stylelint",
-    "risk": "node ./tools/purge-css-cli.js -i='../risk-dark-maqueta-vanilla/public/' -o='../risk-dark-maqueta-vanilla/public/assets/css/cpa-bs.css'",
-    "risk:build": "npm run build && node ./tools/purge-css-cli.js -i='../risk-dark-maqueta-vanilla/public/' -o='../risk-dark-maqueta-vanilla/public/assets/css/cpa-bs.css'",
-    "risk:pug": "./tools/convert-pug.js -i ./risk-pug/pages/  -o ../risk-dark-maqueta-vanilla/public/"
+    "risk:purge": "node ./tools/purge-css-cli.js -i='../risk-dark-maqueta-vanilla/public/' -o='../risk-dark-maqueta-vanilla/public/assets/css/cpa-bs.css'",
+    "risk:build": "npm run build && yarn risk:purge",
+    "risk:pug": "./tools/convert-pug.js -i ./risk-pug/pages/  -o ../risk-dark-maqueta-vanilla/public/",
+    "risk": "yarn risk:pug && yarn risk:purge"
   },
   "files": [
     "dist/**/*.{css,scss,map}"
