@@ -98,7 +98,7 @@ const main = async (args) => {
       return true;
     }
   } catch (error) {
-    console.error('❌ ERROR:', error.message);
+    console.error('❌ ERROR:', error);
     process.exit(1);
   }
 };

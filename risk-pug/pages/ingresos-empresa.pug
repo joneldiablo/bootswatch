@@ -1,5 +1,6 @@
 extends ../layouts/page.pug
 include ../mixins/panel.pug
+include ../mixins/modal.pug
 
 prepend vars
   - title = 'Ingresos por Empresa'
@@ -25,10 +26,7 @@ block content
               .text-bg-info.h-100.d-flex.justify-content-end.align-items-center.px-3.py-2(style='min-width: 120px;')
                 span#ingresos-acumulables-anual 0.00
         .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-xl-auto
-          button.ms-auto.btn.btn-success.btn-sm.text-nowrap#actualizar-informacion(type='button')
-            i.material-symbols-outlined.align-bottom.me-1 autorenew
-            span Actualizar Información
-          include ../layouts/table-actions.pug
+          include ../layouts/table-actions-in-emp.pug
     .table-element
       .table-responsive.mt-4
         table.table.table-striped.table-hover#table-ingresos-empresa
@@ -282,252 +280,253 @@ block content
                   i.material-symbols-outlined.icon-link sticky_note_2
 
 block dialogsPage
-  .modal.fade#selector-notas-credito-modal
-    .modal-dialog.modal-lg(role='document')
-      .modal-content.position-relative
-        button.btn-close.btn-close-white.position-absolute.end-0.p-3(type='button' data-bs-dismiss='modal' aria-label='Close')
-          span(aria-hidden='true')
-        .modal-header.text-bg-dark.justify-content-center
-          h5.modal-title.text-uppercase Notas de Crédito
-        .modal-body
-          form#notas-credito-form
-            table.table.table-striped.table-hover
-              thead
-                tr.text-uppercase.text-center
-                  th
-                  th No. CFDI's
-                  th Importe
-                  th Supuesto
-              tbody
-                tr
-                  td.text-center
-                    input.form-check-input#nc-publico-gral(type='checkbox' value='nc-publico-gral')
-                  td.text-end 552,283
-                  td.text-end 3,130,102,893.03
-                  td CFDI's Tipo E Público en General
-                tr
-                  td.text-center
-                    input.form-check-input#nc-aplicacion-ant(type='checkbox' value='nc-aplicacion-ant')
-                  td.text-end 0
-                  td.text-end 0.00
-                  td CFDI's Tipo E Crédito por Aplicación de Anticipos
-                tr
-                  td.text-center
-                    input.form-check-input#nc-con-uuid-rel(type='checkbox' value='nc-con-uuid-rel')
-                  td.text-end 16,165
-                  td.text-end 60,469,361.53
-                  td CFDI's Tipo E Crédito con UUID Relacionado
-                tr
-                  td.text-center
-                    input.form-check-input#nc-sin-uuid-rel(type='checkbox' value='nc-sin-uuid-rel')
-                  td.text-end 1
-                  td.text-end 825.01
-                  td CFDI's Tipo E sin UUID Relacionado
-              tfoot 
-                tr
-                tr#totals-nc.fw-bold.border-top.border-bottom.border-danger.text-end
-                  td
-                  td(data-value='568449') 568,449
-                  td(data-value='3190573079.57') 3,190,573,079.57
-                  td
-        .modal-footer.bg-light.border-0
-          button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
-            i.material-symbols-outlined.align-bottom close
-            | Cerrar
+  - 
+    sncmOpts = {
+      dialogClasses:'modal-lg',
+      title: 'Notas de Crédito',
+      btnCancel: {
+        icon: 'close',
+        label:'Cerrar'
+      },
+      btnContinue: {
+        icon: 'check',
+        label: 'Aplicar',
+        type: 'submit',
+        dismiss: true,
+        form: 'notas-credito-form'
+      },
+    };
+  +modal('selector-notas-credito-modal', sncmOpts)
+    form#notas-credito-form
+      table.table.table-striped.table-hover
+        thead
+          tr.text-uppercase.text-center
+            th
+            th No. CFDI's
+            th Importe
+            th Supuesto
+        tbody
+          tr
+            td.text-center
+              input.form-check-input#nc-publico-gral(type='checkbox' value='nc-publico-gral')
+            td.text-end 552,283
+            td.text-end 3,130,102,893.03
+            td CFDI's Tipo E Público en General
+          tr
+            td.text-center
+              input.form-check-input#nc-aplicacion-ant(type='checkbox' value='nc-aplicacion-ant')
+            td.text-end 0
+            td.text-end 0.00
+            td CFDI's Tipo E Crédito por Aplicación de Anticipos
+          tr
+            td.text-center
+              input.form-check-input#nc-con-uuid-rel(type='checkbox' value='nc-con-uuid-rel')
+            td.text-end 16,165
+            td.text-end 60,469,361.53
+            td CFDI's Tipo E Crédito con UUID Relacionado
+          tr
+            td.text-center
+              input.form-check-input#nc-sin-uuid-rel(type='checkbox' value='nc-sin-uuid-rel')
+            td.text-end 1
+            td.text-end 825.01
+            td CFDI's Tipo E sin UUID Relacionado
+        tfoot 
+          tr
+          tr#totals-nc.fw-bold.border-top.border-bottom.border-danger.text-end
+            td
+            td(data-value='568449') 568,449
+            td(data-value='3190573079.57') 3,190,573,079.57
+            td
 
-          button.btn.btn-primary(type='submit' data-bs-dismiss='modal' form='notas-credito-form')
-            i.material-symbols-outlined.align-bottom check
-            | Aplicar
+  - 
+    dmmOpts = {
+      dialogClasses:'modal-xl',
+      title: 'Declaraciones mensuales &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; Ejercicio: <span id="ejercicio-selected">2024</span>'
+    };
+  +modal('declaraciones-mensuales-modal', dmmOpts)
+    .table-responsive
+      table.table.table-striped
+        thead.text-uppercase.text-center
+          tr.text-bg-dark
+            th.text-bg-white(rowspan='2' style='min-width: 140px;') Empresa
+            th.text-bg-dark(colspan='2') Enero
+            th.text-bg-dark(colspan='2') Febrero
+            th.text-bg-dark(colspan='2') Marzo
+            th.text-bg-dark(colspan='2') Abril
+            th.text-bg-dark(colspan='2') Mayo
+            th.text-bg-dark(colspan='2') Junio
+            th.text-bg-dark(colspan='2') Julio
+            th.text-bg-dark(colspan='2') Agosto
+            th.text-bg-dark(colspan='2') Septiembre
+            th.text-bg-dark(colspan='2') Octubre
+            th.text-bg-dark(colspan='2') Noviembre
+            th.text-bg-dark(colspan='2') Diciembre
+          tr
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+            th N
+            th C
+        tbody.text-center
+          tr
+            td.text-start 11641 - CPA VISION SAPI DE CV
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-primary remove
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-danger close
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-danger close
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+            td.mes-n
+              i.material-symbols-outlined.text-success check
+            td.mes-c
+              i.material-symbols-outlined.text-success check
+    .row.gx-0.gy-2
+      .col.col-12.col-lg-6
+        .accordion#complementaria-accordion
+          .accordion-item.rounded-0
+            h2.accordion-header.bg-light.text-primary.border-bottom
+              button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#complementaria-collapse' aria-expanded='true' aria-controls='complementaria-collapse')
+                i.material-symbols-outlined.align-text-top.up expand_circle_up
+                i.material-symbols-outlined.align-text-top.down expand_circle_down
+                | Declaración complementaria
 
-  .modal.fade#declaraciones-mensuales-modal
-    .modal-dialog.modal-xl(role='document')
-      .modal-content.position-relative
-        button.btn-close.btn-close-white.position-absolute.end-0.p-3(type='button' data-bs-dismiss='modal' aria-label='Close')
-          span(aria-hidden='true')
-        .modal-header.text-bg-dark.justify-content-center
-          h5.modal-title.text-uppercase
-            | Declaraciones mensuales &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; Ejercicio: 
-            span#ejercicio-selected 2024
-        .modal-body
-          .table-responsive
-            table.table.table-striped
-              thead.text-uppercase.text-center
-                tr.text-bg-dark
-                  th.text-bg-white(rowspan='2' style='min-width: 140px;') Empresa
-                  th.text-bg-dark(colspan='2') Enero
-                  th.text-bg-dark(colspan='2') Febrero
-                  th.text-bg-dark(colspan='2') Marzo
-                  th.text-bg-dark(colspan='2') Abril
-                  th.text-bg-dark(colspan='2') Mayo
-                  th.text-bg-dark(colspan='2') Junio
-                  th.text-bg-dark(colspan='2') Julio
-                  th.text-bg-dark(colspan='2') Agosto
-                  th.text-bg-dark(colspan='2') Septiembre
-                  th.text-bg-dark(colspan='2') Octubre
-                  th.text-bg-dark(colspan='2') Noviembre
-                  th.text-bg-dark(colspan='2') Diciembre
-                tr
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-                  th N
-                  th C
-              tbody.text-center
-                tr
-                  td.text-start 11641 - CPA VISION SAPI DE CV
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-primary remove
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-danger close
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-danger close
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-                  td.mes-n
-                    i.material-symbols-outlined.text-success check
-                  td.mes-c
-                    i.material-symbols-outlined.text-success check
-          .row.gx-0.gy-2
-            .col.col-12.col-lg-6
-              .accordion#complementaria-accordion
-                .accordion-item.rounded-0
-                  h2.accordion-header.bg-light.text-primary.border-bottom
-                    button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#complementaria-collapse' aria-expanded='true' aria-controls='complementaria-collapse')
-                      i.material-symbols-outlined.align-text-top.up expand_circle_up
-                      i.material-symbols-outlined.align-text-top.down expand_circle_down
-                      | Declaración complementaria
+            #complementaria-collapse.accordion-collapse.collapse(data-bs-parent='#complementaria-accordion')
+              .accordion-body.p-2
+                .text-success.mb-0.fw-bolder
+                  span.text-uppercase Periodo: 
+                  span.periodo-selected Enero
+                .table-responsive
+                  table.table.table-striped.table-hover
+                    thead.text-uppercase.text-center
+                      tr
+                        th Operación
+                        th Presentación
+                        th Declaración
+                        th acuse
+                        th pago
+                    tbody.text-center.align-middle
+                      tr
+                        td 240410356999
+                        td 09/12/2024
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+      .col.col-12.col-lg-6
+        .accordion#normal-accordion
+          .accordion-item.rounded-0
+            h2.accordion-header.bg-light.text-primary.border-bottom
+              button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#normal-collapse' aria-expanded='true' aria-controls='normal-collapse')
+                i.material-symbols-outlined.align-text-top.up expand_circle_up
+                i.material-symbols-outlined.align-text-top.down expand_circle_down
+                | Declaración normal
 
-                  #complementaria-collapse.accordion-collapse.collapse(data-bs-parent='#complementaria-accordion')
-                    .accordion-body.p-2
-                      .text-success.mb-0.fw-bolder
-                        span.text-uppercase Periodo: 
-                        span.periodo-selected Enero
-                      .table-responsive
-                        table.table.table-striped.table-hover
-                          thead.text-uppercase.text-center
-                            tr
-                              th Operación
-                              th Presentación
-                              th Declaración
-                              th acuse
-                              th pago
-                          tbody.text-center.align-middle
-                            tr
-                              td 240410356999
-                              td 09/12/2024
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-            .col.col-12.col-lg-6
-              .accordion#normal-accordion
-                .accordion-item.rounded-0
-                  h2.accordion-header.bg-light.text-primary.border-bottom
-                    button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#normal-collapse' aria-expanded='true' aria-controls='normal-collapse')
-                      i.material-symbols-outlined.align-text-top.up expand_circle_up
-                      i.material-symbols-outlined.align-text-top.down expand_circle_down
-                      | Declaración normal
+            #normal-collapse.accordion-collapse.collapse(data-bs-parent='#normal-accordion')
+              .accordion-body.p-2
+                .text-success.mb-0.fw-bolder
+                  span.text-uppercase Periodo: 
+                  span.periodo-selected Enero
+                .table-responsive
+                  table.table.table-striped.table-hover
+                    thead.text-uppercase.text-center
+                      tr
+                        th Operación
+                        th Presentación
+                        th Declaración
+                        th acuse
+                        th pago
+                    tbody.text-center.align-middle
+                      tr
+                        td 240410356999
+                        td 09/12/2024
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                      tr
+                        td 240410356999
+                        td 09/12/2024
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
+                        td
+                          a.link-pdf.text-decoration-none.fs-1(href='#')
+                            i.cpa-file-pdf
 
-                  #normal-collapse.accordion-collapse.collapse(data-bs-parent='#normal-accordion')
-                    .accordion-body.p-2
-                      .text-success.mb-0.fw-bolder
-                        span.text-uppercase Periodo: 
-                        span.periodo-selected Enero
-                      .table-responsive
-                        table.table.table-striped.table-hover
-                          thead.text-uppercase.text-center
-                            tr
-                              th Operación
-                              th Presentación
-                              th Declaración
-                              th acuse
-                              th pago
-                          tbody.text-center.align-middle
-                            tr
-                              td 240410356999
-                              td 09/12/2024
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                            tr
-                              td 240410356999
-                              td 09/12/2024
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-                              td
-                                a.link-pdf.text-decoration-none.fs-1(href='#')
-                                  i.cpa-file-pdf
-        .modal-footer.bg-light.border-0(style='min-height: 46px;').
-
+//-block scripts 
+  script(src='/assets/libs/html5sortable-0.13.3/dist/html5sortable.min.js')
 block footerPage
+  script(src='/assets/js/globals.js')
+  script(src='/assets/js/drag-sort.js')
+  script(src='/assets/js/cols-selector.js')
   script(src='/assets/js/ingresos.js')

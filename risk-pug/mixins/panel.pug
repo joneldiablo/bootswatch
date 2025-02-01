@@ -56,13 +56,6 @@ mixin panel(title, breadcrumbLinks=[])
                 li: a.dropdown-item(href="#") 000 - CPA VISION MX
                 li: a.dropdown-item(href="#") 000 - CPA VISION MX
         #header-icons.d-flex
-          #iconTipoCambio.d-flex.align-items-center.line-right
-            i.cpa-header-tipodecambio
-            .ps-1
-              .user-title TC:
-              .user-info $ 19.23
-          button(type='button')
-            i.cpa-header-devoff
           button(type='button')
             i.cpa-header-tablero
           button(type='button')
@@ -139,7 +132,7 @@ mixin panel(title, breadcrumbLinks=[])
                 each link in breadcrumbLinks
                   if link[2]
                     li.breadcrumb-item 
-                      a.link-underline-opacity-0.text-uppercase(class='link-'+link[2])(href=link[0])= link[1]
+                      a.link-underline-opacity-0.text-uppercase(class='link-'+link[2] href=link[0])= link[1]
                   else
                     li.breadcrumb-item 
                       a.link-underline-opacity-0.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(href=link[0])= link[1]

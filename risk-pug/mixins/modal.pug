@@ -1,0 +1,22 @@
+mixin modal(id, opts={}) 
+  - const { dialogClasses, title, btnCancel, btnContinue } = opts;
+  .modal.fade(id=id)
+    .modal-dialog(class=dialogClasses role='document')
+      .modal-content.position-relative
+        button.btn-close.btn-close-white.position-absolute.end-0.p-3(type='button' data-bs-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true')
+        .modal-header.text-bg-dark.justify-content-center
+          h5.modal-title.text-uppercase!= title
+        .modal-body
+          block
+        .modal-footer.bg-light.border-0(style='min-height: 46px;')
+          if btnCancel
+            button.btn(class=btnCancel.classes || 'btn-secondary' type='button' data-bs-dismiss='modal')
+              if btnCancel.icon
+                i.material-symbols-outlined.me-2= btnCancel.icon
+              = btnCancel.label || btnCancel || 'Cancelar'
+          if btnContinue
+            button.btn(class=btnContinue.classes || 'btn-primary' type=btnContinue.type || 'button' form=btnContinue.form data-bs-dismiss=btnContinue.dismiss?'modal':undefined)
+              if btnContinue.icon
+                i.material-symbols-outlined.me-2= btnContinue.icon
+              = btnContinue.label || btnContinue || 'Continuar'
