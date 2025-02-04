@@ -1,0 +1,100 @@
+extends ../layouts/page.pug
+include ../mixins/panel.pug
+
+prepend vars
+  - title = "IVA"
+
+block content
+  - 
+    breadcrumbLinks = [
+      ['#', 'Inicio'],
+      ['#', '.......']
+    ];
+
+  +panel("IVA", breadcrumbLinks)
+    .table-header 
+      .row.align-items-end.gap-2
+        .col.col-auto
+          form.hstack.align-items-end.gap-2#filter-table
+            fieldset.search-by
+              label.form-label Buscar por XXXXXXXX:
+              .input-group.input-group-sm
+                input.form-control.border-end-0#search-by(name='search-by' type='search' placeholder='Buscar...')
+                i.input-group-text.bg-white.border-start-0.material-symbols-outlined search
+            .vr
+            fieldset.periodo
+              label.form-label Periodo:
+              .input-group.input-group-sm
+                i.input-group-text.bg-white.border-end-0.material-symbols-outlined calendar_month
+                select.form-select.border-start-0.text-center#periodo(name='periodo')
+                  option(value="1") Enero
+                  option(value="2") Febrero
+                  option(value="3") Marzo
+                  option(value="4") Abril
+                  option(value="5") Mayo
+                  option(value="6") Junio
+                  option(value="7") Julio
+                  option(value="8") Agosto
+                  option(value="9") Septiembre
+                  option(value="10") Octubre
+                  option(value="11") Noviembre
+                  option(value="12") Diciembre 
+            fieldset.ejercicio-field
+              label.form-label(for='ejercicio') Ejercicio:
+              .input-group.input-group-sm#ejercio-input-gr
+                span.input-group-text.bg-white.border-end-0.material-symbols-outlined.cursor-pointer(data-td-target='#ejercio-input-gr' data-td-toggle='datetimepicker') calendar_month
+                input.form-control.text-end.date#ejercicio(name='ejercicio' type='number' placeholder='_ _ _ _' data-td-target='#ejercio-input-gr' min='2000', required)
+              script.
+
+                document.addEventListener('DOMContentLoaded', function () {
+                  const inputGrEjercicio = document.getElementById('ejercio-input-gr');
+                  const inputEjercicio = document.querySelector('#ejercio-input-gr input');
+                  const today = new Date();
+                  inputEjercicio.setAttribute('max', today.getFullYear());
+                  new tempusDominus.TempusDominus(inputGrEjercicio, {
+                    display: {
+                      components: {
+                        decades: false,
+                        year: true,
+                        month: false,
+                        date: false,
+                        hours: false,
+                        minutes: false,
+                        seconds: false
+                      },
+                      //theme: 'light'
+                    },
+                    localization: {
+                      format: 'yyyy',
+                    },
+                    restrictions: {
+                      minDate: '2000',
+                      maxDate: new Date()
+                    }
+                  });
+                });
+
+            button.btn.btn-primary.btn-sm.px-3.text-nowrap(type='submit')
+              i.material-symbols-outlined.align-bottom filter_alt
+              | Filtrar
+
+            script.
+
+              document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('#filter-table');
+                form.addEventListener('submit', function (event) {
+                  event.preventDefault();
+
+                  const formData = new FormData(form);
+                  formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                  });
+                  const formObject = Object.fromEntries(formData.entries());
+                  console.log(formObject);
+                });
+              });
+        .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-xl-auto
+          include ../layouts/table-actions-iva.pug
+    section.content-gral
+append footerPage
+  script(src='/assets/js/globals.js')

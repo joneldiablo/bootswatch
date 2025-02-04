@@ -32,76 +32,103 @@ block content
           include ../layouts/table-actions.pug
     section.content-gral
       .row.g-0.mt-4
-        .col.col-12.col-md-6.col-lg-4
+        .col.col-12.col-md-6.col-xxl-5
           .card.rounded-4
-            .card-header.bg-transparent.border-0
-              h2.text-center.text-uppercase CFDI's Conciliados
-            .card-body 
-              table.table.table-striped.table-hover
-                thead.text-uppercase.text-center
-                  tr
-                    th periodo
-                    th facreview
-                    th risk
-                    th visor sat
-                tbody
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
-                  tr
-                    td 
-                    td 
-                    td 
-                    td 
+            .card-header.bg-transparent.border-0.py-3
+              h2.text-center.text-uppercase.mb-0 CFDI's Conciliados
+            .card-body.pt-0
+              #conciliados-anio
+              template#conciliados-mes-ejemplo-vanilla
+                table.table.table-striped.table-hover
+                  thead.text-uppercase.text-center
+                    tr
+                      th.colh-indicator
+                      th.colh-mes periodo
+                      th.colh-facreview facreview
+                      th.colh-risk risk
+                      th.colh-vsat visor sat
+                  tbody
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Enero
+                      td.table-cell.col-facreview 328
+                      td.table-cell.col-risk 146
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Febrero
+                      td.table-cell.col-facreview 335
+                      td.table-cell.col-risk 160
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Marzo
+                      td.table-cell.col-facreview 305
+                      td.table-cell.col-risk 167
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Abril
+                      td.table-cell.col-facreview 297
+                      td.table-cell.col-risk 144
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Mayo
+                      td.table-cell.col-facreview 328
+                      td.table-cell.col-risk 164
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Junio
+                      td.table-cell.col-facreview 367
+                      td.table-cell.col-risk 199
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Julio
+                      td.table-cell.col-facreview 392
+                      td.table-cell.col-risk 195
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Agosto
+                      td.table-cell.col-facreview 310
+                      td.table-cell.col-risk 153
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Septiembre
+                      td.table-cell.col-facreview 303
+                      td.table-cell.col-risk 154
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Octubre
+                      td.table-cell.col-facreview 311
+                      td.table-cell.col-risk 160
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Noviembre
+                      td.table-cell.col-facreview 299
+                      td.table-cell.col-risk 173
+                      td.table-cell.col-vsat ---
+                    tr
+                      td.table-cell.col-indicator: i.material-symbols-outlined.text-warning error
+                      td.table-cell.col-mes Diciembre
+                      td.table-cell.col-facreview 473
+                      td.table-cell.col-risk 237
+                      td.table-cell.col-vsat ---
+
+        .col.col-12.col-md-6.col-xxl-7
+          .container-fluid
+            h3.mb-4.text-uppercase Integración de CFDI's Conciliados <span id="mes-seleccionado">Enero</span>
+            #conciliacion-mes.w-100
+            template 
+              .self-align-end
+            h3.my-4.text-uppercase Diferencias
+            table.table.table-striped.table-hover
+append footerPage
+  script(src='/assets/js/globals.js')
+  script(src='/assets/js/ingresos-vigentes.js')

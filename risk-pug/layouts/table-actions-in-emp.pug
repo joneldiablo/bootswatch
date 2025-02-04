@@ -8,12 +8,12 @@ block startActions
 block endActions 
   button.btn.btn-outline-info.rounded-circle.d-flex.align-items-center.justify-content-center#columns-sorter(type='button' style="width:2.5rem; height:2.5rem;" data-bs-toggle="dropdown" data-bs-auto-close="outside")
     i.material-symbols-outlined splitscreen_vertical_add
-  .dropdown-menu
+  .dropdown-menu(style="max-width:320px")
     .p-3
       .d-flex.justify-content-between
         b.fs-4 Editor de Columnas
         button.btn.btn-link.link-muted.text-decoration-none(type="button") Reestablecer
-    #column-selector.overflow-auto(style="max-height:50vh")
+    #column-selector.overflow-auto(style="max-height:40vh")
     .p-3 
       .d-flex.justify-content-center.gap-5
         button.btn.btn-secondary(type="button" data-bs-dismiss="dropdown") Cancelar
