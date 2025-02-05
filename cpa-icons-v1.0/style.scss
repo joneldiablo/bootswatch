@@ -3,9 +3,9 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
   src:
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?gke2h2') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?gke2h2') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?gke2h2##{$icomoon-font-family}') format('svg');
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?dbt1oe') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?dbt1oe') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?dbt1oe##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.cpa-icon-time-details {
+  &:before {
+    content: $cpa-icon-time-details; 
+  }
+}
 .cpa-icon-ingresos {
   &:before {
     content: $cpa-icon-ingresos; 

@@ -5,7 +5,7 @@ block formFilterActions
     fieldset.ejercicio-field
       label.form-label(for='ejercicio') Ejercicio:
       .input-group.input-group-sm#ejercio-input-gr
-        span.input-group-text.bg-white.border-end-0.material-symbols-outlined.cursor-pointer(data-td-target='#ejercio-input-gr' data-td-toggle='datetimepicker') calendar_month
+        i.input-group-text.bg-white.border-end-0.material-symbols-outlined.cursor-pointer(data-td-target='#ejercio-input-gr' data-td-toggle='datetimepicker') calendar_month
         input.form-control.text-end.date#ejercicio(name='ejercicio' type='number' placeholder='_ _ _ _' data-td-target='#ejercio-input-gr' min='2000', required)
       script.
 
@@ -60,10 +60,10 @@ block formFilterActions
 fieldset.time-process-component
   label.form-label Tiempo del Proceso:
   .input-group.input-group-sm
-    span.input-group-text.bg-white.border-end-0.material-symbols-outlined update
+    i.input-group-text.bg-white.border-end-0.material-symbols-outlined update
     input.form-control.text-center#time-process(name='time-process' type='text' placeholder='-------------', readonly, style='box-shadow:none;')
     button.btn.btn-info.process-info#tiempo-proceso(type='button' data-bs-toggle='dropdown' data-bs-auto-close='outside' aria-expanded='false')
-      span.material-symbols-outlined.align-bottom schedule
+      i.cpa-icons.cpa-icon-time-details.align-text-top
     .dropdown-menu.dropdown-menu-end
       .container-fluid(style='min-width: 400px; max-width: 100wv;')
         h3.text-primary Datos del Proceso

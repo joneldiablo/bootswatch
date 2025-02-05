@@ -23,7 +23,9 @@
     "risk:purge": "node ./tools/purge-css-cli.js -i='../risk-dark-maqueta-vanilla/public/' -o='../risk-dark-maqueta-vanilla/public/assets/css/cpa-bs.css'",
     "risk:build": "npm run build && yarn risk:purge",
     "risk:pug": "./tools/convert-pug.js -i ./risk-pug/pages/  -o ../risk-dark-maqueta-vanilla/public/",
-    "risk": "yarn risk:pug && yarn risk:purge"
+    "risk": "yarn risk:pug && yarn risk:purge",
+    "cove:pug": "./tools/convert-pug.js -i ./pdf-pug/pages/  -o ../pdf-templates/",
+    "cove:pdf": "../../pdfs/generate-pdf.php --html ../pdf-templates/cove/index.html"
   },
   "files": [
     "dist/**/*.{css,scss,map}"

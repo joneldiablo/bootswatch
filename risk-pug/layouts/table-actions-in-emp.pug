@@ -2,8 +2,8 @@ extends ./table-actions.pug
 
 block startActions 
   button.ms-auto.btn.btn-success.btn-sm.text-nowrap#actualizar-informacion(type='button')
-    i.material-symbols-outlined.align-bottom.me-1 autorenew
-    span.d-none.d-xl-inline Actualizar 
+    i.material-symbols-outlined.align-bottom autorenew
+    span.d-none.d-xl-inline.ms-1 Actualizar 
       span.d-none.d-xxl-inline Información
 block endActions 
   button.btn.btn-outline-info.rounded-circle.d-flex.align-items-center.justify-content-center#columns-sorter(type='button' style="width:2.5rem; height:2.5rem;" data-bs-toggle="dropdown" data-bs-auto-close="outside")
@@ -12,7 +12,7 @@ block endActions
     .p-3
       .d-flex.justify-content-between
         b.fs-4 Editor de Columnas
-        button.btn.btn-link.link-muted.text-decoration-none(type="button") Reestablecer
+        button.btn.btn-link.link-muted.text-decoration-none#reset-columns(type="button") Reestablecer
     #column-selector.overflow-auto(style="max-height:40vh")
     .p-3 
       .d-flex.justify-content-center.gap-5
