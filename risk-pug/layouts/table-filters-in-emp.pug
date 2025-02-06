@@ -1,0 +1,11 @@
+extends ./table-filters.pug
+
+block fieldsFilterForm
+  include ./search-by.pug
+  .vr
+
+block afterFilterForm 
+  button.ms-auto.btn.btn-success.btn-sm.text-nowrap#actualizar-informacion(type='button')
+    i.material-symbols-outlined.align-bottom autorenew
+    span.d-none.d-xl-inline.ms-1 Actualizar 
+      span.d-none.d-xxl-inline Información

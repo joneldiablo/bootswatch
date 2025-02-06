@@ -1,0 +1,16 @@
+extends ./table-filters.pug
+
+block beforeFilterForm
+  fieldset.corte-visor-sat
+    label.form-label Corte Visor SAT:
+    .input-group.input-group-sm
+      i.input-group-text.bg-white.border-end-0.material-symbols-outlined update
+      input.form-control.text-center#time-sat(name='time-sat' type='text' placeholder='-------------', readonly, style='box-shadow:none;' value="28 Dic 24 0:00 am")
+      button.btn.btn-success#time-sat-action(type='button')
+        i.material-symbols-outlined plagiarism
+  fieldset.descarga-cpa
+    label.form-label Descarga CPA:
+    .input-group.input-group-sm
+      i.input-group-text.bg-white.border-end-0.material-symbols-outlined calendar_month
+      input.form-control.text-center#time-cpa(name='time-cpa' type='text' placeholder='-------------', readonly, style='box-shadow:none;' value="28 Dic 24 0:00 am")
+  .vr

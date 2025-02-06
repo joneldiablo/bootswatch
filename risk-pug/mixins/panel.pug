@@ -1,4 +1,4 @@
-mixin panel(title, breadcrumbLinks=[])
+mixin panel(title, breadcrumbLinks=[], titleBc)
   .wrapper
     //  inicio BARRA LATERAL IZQUIERDA 
     .sidebar
@@ -48,7 +48,7 @@ mixin panel(title, breadcrumbLinks=[])
             .user-title(style="margin-bottom: -2px;") EMPRESA:
             .user-info 
               button.btn.btn-sm.p-0.btn-link.text-decoration-none(type="button" data-bs-toggle="dropdown" aria-expanded="false" style="line-height:1; margin-bottom: -4px; --cpa-theme-btn-color:var(--color-elementos-700);")
-                span 000 - CPA VISION MX
+                span 13066 - MANUFACTURERA DE TELAS MEXICANAS SA DE CV
                 i.material-symbols-outlined.text-body-secondary.align-middle.down keyboard_arrow_down
                 i.material-symbols-outlined.text-body-secondary.align-middle.up keyboard_arrow_up
               ul.dropdown-menu
@@ -61,7 +61,7 @@ mixin panel(title, breadcrumbLinks=[])
           button(type='button')
             i.cpa-header-llaves
           button(type='button')
-            i.cpa-header-sat.text-success
+            i.cpa-header-sat
           button(type='button')
             i.cpa-header-cpanews
           button(type='button')
@@ -132,13 +132,13 @@ mixin panel(title, breadcrumbLinks=[])
                 each link in breadcrumbLinks
                   if link[2]
                     li.breadcrumb-item 
-                      a.link-underline-opacity-0.text-uppercase(class='link-'+link[2] href=link[0])= link[1]
+                      a.text-decoration-none.text-uppercase(class='link-'+link[2] href=link[0])= link[1]
                   else
                     li.breadcrumb-item 
-                      a.link-underline-opacity-0.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(href=link[0])= link[1]
-                li.breadcrumb-item.active(aria-current='page')= title
+                      a.text-decoration-none.link-muted.text-uppercase(href=link[0])= link[1]
+                li.breadcrumb-item.active(aria-current='page')= (titleBc || title)
             span.log-history.ms-auto
-              button#log-history.btn.btn-sm.btn-link.text-decoration-none.link-body-emphasis.text-uppercase.link-opacity-50.link-opacity-75-hover(type='button' style="margin-top: -2rem;")
+              button#log-history.btn.btn-sm.btn-link.text-decoration-none.link-muted.text-uppercase(type='button' style="margin-top: -2rem;")
                 i.material-symbols-outlined.me-2.align-bottom history
                 | Log
 

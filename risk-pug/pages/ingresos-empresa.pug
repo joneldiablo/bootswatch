@@ -7,25 +7,16 @@ prepend vars
   - 
     breadcrumbLinks = [
       ['#', 'Inicio'],
-      ['#', 'Ingresos', 'primary']
+      ['#', 'Ingresos']
     ];
 
 block content
-  +panel('RESUMEN POR EMPRESA', breadcrumbLinks)
+  +panel('Resumen Ingresos por Empresa', breadcrumbLinks, 'Ingresos por Empresa')
     .table-header
       .row.align-items-end.gap-2
         .col.col-auto
-          section.hstack.mt-3
-            .me-2
-              span.text-nowrap Ingresos Acumulables
-              br
-              span Declaración Anual
-            .rounded.overflow-hidden.hstack.position-relative.align-middle
-              .bg-body-secondary.text-white.h-100.d-flex.justify-content-center.align-items-center.p-2
-                i.material-symbols-outlined paid
-              .text-bg-info.h-100.d-flex.justify-content-end.align-items-center.px-3.py-2(style='min-width: 120px;')
-                span#ingresos-acumulables-anual 0.00
-        .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-xl-auto
+          include ../layouts/table-filters-in-emp.pug
+        .ms-auto.table-actions.hstack.align-items-end.gap-2.col-12.col-md-auto
           include ../layouts/table-actions-in-emp.pug
     .table-element
       .table-responsive.mt-4
@@ -278,6 +269,45 @@ block content
               td.text-center(data-value='0')
                 button.btn.btn-sm.btn-link.p-0.link-note(data-id='1')
                   i.material-symbols-outlined.icon-link sticky_note_2
+          tfoot 
+            tr
+            tr#totals.fw-bold.border-top.border-bottom.border-danger.text-end
+              td.text-end.text-uppercase(data-value='0')
+                b Total
+              td.border-table-start(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0') 0
+              td.border-table-start(data-value='0') 0
+              td.border-table-end(data-value='0') 0
+              td(data-value='0')
+
+    .table-footer 
+      .row.mt-2
+        .col.col-auto.ms-auto
+          .border.rounded.hstack.overflow-hidden
+            .text-uppercase.text-nowrap.p-2.pt-3.bg-white
+              i.material-symbols-outlined.me-2.align-top(style="margin-top:-7px") paid 
+              | Ingresos Acumulables Declaración Anual
+            .text-bg-danger.p-2.pt-3.text-end(style="min-width:100px")
+              | 0.00
 
 block dialogsPage
   - 
@@ -302,6 +332,7 @@ block dialogsPage
         thead
           tr.text-uppercase.text-center
             th
+              input.form-check-input#nc-toggle-all(type='checkbox' value='nc-toggle-all')
             th No. CFDI's
             th Importe
             th Supuesto
@@ -523,8 +554,6 @@ block dialogsPage
                           a.link-pdf.text-decoration-none.fs-1(href='#')
                             i.cpa-file-pdf
 
-//-block scripts 
-  script(src='/assets/libs/html5sortable-0.13.3/dist/html5sortable.min.js')
 block footerPage
   script(src='/assets/js/globals.js')
   script(src='/assets/js/drag-sort.js')
