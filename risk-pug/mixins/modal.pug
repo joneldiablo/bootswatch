@@ -13,10 +13,10 @@ mixin modal(id, opts={})
           if btnCancel
             button.btn(class=btnCancel.classes || 'btn-secondary' type='button' data-bs-dismiss='modal')
               if btnCancel.icon
-                i.material-symbols-outlined.me-2= btnCancel.icon
+                i.material-symbols-outlined.me-2.align-bottom= btnCancel.icon
               = btnCancel.label || btnCancel || 'Cancelar'
           if btnContinue
             button.btn(class=btnContinue.classes || 'btn-primary' type=btnContinue.type || 'button' form=btnContinue.form data-bs-dismiss=btnContinue.dismiss?'modal':undefined)
               if btnContinue.icon
-                i.material-symbols-outlined.me-2= btnContinue.icon
+                i.material-symbols-outlined.me-2.align-bottom= btnContinue.icon
               = btnContinue.label || btnContinue || 'Continuar'
