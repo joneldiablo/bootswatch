@@ -1,8 +1,8 @@
 extends ./table-actions.pug
 
 block endActions 
-  button.btn.btn-outline-info.rounded-circle.d-flex.align-items-center.justify-content-center#columns-sorter(type='button' style="width:2.5rem; height:2.5rem;" data-bs-toggle="dropdown" data-bs-auto-close="outside")
-    i.material-symbols-outlined splitscreen_vertical_add
+  button.btn.btn-link.link-info.text-decoration-none.p-0#columns-sorter(type='button' data-bs-toggle="dropdown" data-bs-auto-close="outside")
+    i.material-symbols-outlined.fs-1 splitscreen_vertical_add
   .dropdown-menu(style="max-width:320px")
     .p-3
       .d-flex.justify-content-between
