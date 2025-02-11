@@ -1,6 +1,7 @@
 extends ../layouts/page.pug
 include ../mixins/panel.pug
 include ../mixins/modal.pug
+include ../mixins/accordion-item.pug
 
 prepend vars
   - title = 'Ingresos por Empresa'
@@ -20,6 +21,7 @@ block content
           include ../layouts/table-actions-in-emp.pug
     .table-element
       .w-100.mt-4#table-ingresos-empresa-tbtr
+      // version fija/estática de la misma tabla (esto, al estar dentro de una etiqueta template no es visible)
       template#table-ingresos-empresa-vanilla
         .table-responsive.mt-4
           table.table.table-striped.table-hover#table-ingresos-empresa
@@ -300,15 +302,16 @@ block content
                 td.border-table-start(data-value='0') 0
                 td.border-table-end(data-value='0') 0
                 td(data-value='0')
+      // termina version estatica de tabla
 
     .table-footer 
       .row.mt-2
         .col.col-auto.ms-auto
-          .border.rounded.hstack.overflow-hidden
-            .text-uppercase.text-nowrap.p-2.bg-white
+          button.btn.btn-sm.rounded.border.border-secondary.hstack.overflow-hidden(type="button" data-bs-toggle="modal" data-bs-target="#dec-anuales-empresa-modal")
+            .text-uppercase.text-nowrap
               i.material-symbols-outlined.me-2.align-middle(style="margin-top:-3px") paid 
               | Ingresos Acumulables Declaración Anual
-            .text-bg-primary.p-2.text-end.fs-5(style="min-width:130px; height:37px;")
+            .text-bg-primary.text-end.fs-5.ms-2.d-flex.align-items-end.justify-content-end.iada-square
               | 0.00
 
 block dialogsPage
@@ -374,7 +377,11 @@ block dialogsPage
   - 
     dmmOpts = {
       dialogClasses:'modal-xl',
-      title: 'Declaraciones mensuales &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; Ejercicio: <span id="ejercicio-selected">2024</span>'
+      title: 'Declaraciones mensuales &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; Ejercicio: <span id="ejercicio-selected">2024</span>',
+      btnCancel: {
+        icon: 'close',
+        label:'Cerrar'
+      }
     };
   +modal('declaraciones-mensuales-modal', dmmOpts)
     .table-responsive
@@ -395,33 +402,36 @@ block dialogsPage
             th.text-bg-dark(colspan='2') Noviembre
             th.text-bg-dark(colspan='2') Diciembre
           tr
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
-            th N
-            th C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
+            th.mes-n N
+            th.mes-c C
         tbody.text-center
           tr
-            td.text-start 11641 - CPA VISION SAPI DE CV
+            td.text-start 
+              small ABC 201201 XYZ
+              br
+              span CPA VISION SAPI DE CV
             td.mes-n
               i.material-symbols-outlined.text-success check
             td.mes-c
@@ -470,91 +480,99 @@ block dialogsPage
               i.material-symbols-outlined.text-success check
             td.mes-c
               i.material-symbols-outlined.text-success check
-    .row.gx-0.gy-2
+    .row.g-2
       .col.col-12.col-lg-6
         .accordion#complementaria-accordion
-          .accordion-item.rounded-0
-            h2.accordion-header.bg-light.text-primary.border-bottom
-              button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#complementaria-collapse' aria-expanded='true' aria-controls='complementaria-collapse')
-                i.material-symbols-outlined.align-text-top.up expand_circle_up
-                i.material-symbols-outlined.align-text-top.down expand_circle_down
-                | Declaración complementaria
-
-            #complementaria-collapse.accordion-collapse.collapse(data-bs-parent='#complementaria-accordion')
-              .accordion-body.p-2
-                .text-success.mb-0.fw-bolder
-                  span.text-uppercase Periodo: 
-                  span.periodo-selected Enero
-                .table-responsive
-                  table.table.table-striped.table-hover
-                    thead.text-uppercase.text-center
-                      tr
-                        th Operación
-                        th Presentación
-                        th Declaración
-                        th acuse
-                        th pago
-                    tbody.text-center.align-middle
-                      tr
-                        td 240410356999
-                        td 09/12/2024
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
+          - 
+            opts1 = {
+              label: 'Declaración complementaria <span class="periodo-selected">Enero</span>',
+              accordionClasses: 'rounded-0',
+              headerClasses: 'bg-light text-primary border-bottom',
+              buttonClasses: 'btn btn-link link-primary w-100 rounded-0 text-start text-decoration-none fs-4',
+              bodyClasses: 'p-2',
+              custom: true
+            };
+          +accordionItem('complementaria-collapse', 'complementaria-accordion', opts1)
+            .table-responsive
+              table.table.table-striped.table-hover
+                thead.text-uppercase.text-center
+                  tr
+                    th Operación
+                    th Presentación
+                    th Declaración
+                    th acuse
+                    th pago
+                tbody.text-center.align-middle
+                  tr
+                    td 240410356999
+                    td 09/12/2024
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
       .col.col-12.col-lg-6
         .accordion#normal-accordion
-          .accordion-item.rounded-0
-            h2.accordion-header.bg-light.text-primary.border-bottom
-              button.btn.btn-link.link-primary.w-100.rounded-0.text-start.text-decoration-none.fs-4.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#normal-collapse' aria-expanded='true' aria-controls='normal-collapse')
-                i.material-symbols-outlined.align-text-top.up expand_circle_up
-                i.material-symbols-outlined.align-text-top.down expand_circle_down
-                | Declaración normal
+          - 
+            opts2 = {
+              label: 'Declaración normal <span class="periodo-selected">Enero</span>',
+              accordionClasses: 'rounded-0',
+              headerClasses: 'bg-light text-primary border-bottom',
+              buttonClasses: 'btn btn-link link-primary w-100 rounded-0 text-start text-decoration-none fs-4',
+              bodyClasses: 'p-2',
+              custom: true
+            };
+          +accordionItem('normal-collapse', 'normal-accordion', opts2)
+            .table-responsive
+              table.table.table-striped.table-hover
+                thead.text-uppercase.text-center
+                  tr
+                    th Operación
+                    th Presentación
+                    th Declaración
+                    th acuse
+                    th pago
+                tbody.text-center.align-middle
+                  tr
+                    td 240410356999
+                    td 09/12/2024
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                  tr
+                    td 240410356999
+                    td 09/12/2024
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
+                    td
+                      a.link-pdf.text-decoration-none.fs-1(href='#')
+                        i.cpa-file-pdf
 
-            #normal-collapse.accordion-collapse.collapse(data-bs-parent='#normal-accordion')
-              .accordion-body.p-2
-                .text-success.mb-0.fw-bolder
-                  span.text-uppercase Periodo: 
-                  span.periodo-selected Enero
-                .table-responsive
-                  table.table.table-striped.table-hover
-                    thead.text-uppercase.text-center
-                      tr
-                        th Operación
-                        th Presentación
-                        th Declaración
-                        th acuse
-                        th pago
-                    tbody.text-center.align-middle
-                      tr
-                        td 240410356999
-                        td 09/12/2024
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                      tr
-                        td 240410356999
-                        td 09/12/2024
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
-                        td
-                          a.link-pdf.text-decoration-none.fs-1(href='#')
-                            i.cpa-file-pdf
+  - 
+    daemOpts = {
+      dialogClasses: 'modal-xl',
+      title: 'Declaraciones Anuales por Empresa',
+      btnCancel: {
+        icon: 'close',
+        label:'Cerrar'
+      }
+    };
+  +modal('dec-anuales-empresa-modal', daemOpts)
+    | hola mundo
 
 block footerPage
   script(src='/assets/js/globals.js')
