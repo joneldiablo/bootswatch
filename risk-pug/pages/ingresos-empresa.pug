@@ -2,6 +2,7 @@ extends ../layouts/page.pug
 include ../mixins/panel.pug
 include ../mixins/modal.pug
 include ../mixins/accordion-item.pug
+include ../mixins/xlsx-pdf-actions.pug
 
 prepend vars
   - title = 'Ingresos por Empresa'
@@ -302,7 +303,7 @@ block content
                 td.border-table-start(data-value='0') 0
                 td.border-table-end(data-value='0') 0
                 td(data-value='0')
-      // termina version estatica de tabla
+      // termina version estática de tabla
 
     .table-footer 
       .row.mt-2
@@ -572,7 +573,13 @@ block dialogsPage
       }
     };
   +modal('dec-anuales-empresa-modal', daemOpts)
-    | hola mundo
+    .d-flex.justify-content-between.mb-4
+      .hstack.gap-2
+        small.text-muted.text-uppercase Empresa:
+        b.fs-5.text-uppercase.text-nowrap 13066 - Manufacturera de Telas Mexicanas SA de CV
+      .ms-auto 
+        +xlsxPdfActions({xlsx:'anual-emp-hoja-calculo',pdf:'anual-emp-pdf'})
+    #table-dec-anual-empresa.w-100
 
 block footerPage
   script(src='/assets/js/globals.js')

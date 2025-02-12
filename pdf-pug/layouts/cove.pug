@@ -1,5 +1,13 @@
-extends ../../layouts/file.pug
+extends ./layouts/file.pug
 include ../../mixins/page.pug
+
+block vars 
+  - 
+    folioRfc = '{{folio_rfc}}';
+    folioFecha = '{{folio_fecha}}';
+    folioTipo = '{{folio_tipo}}';
+    folioLuExp = '{{folio_lu_exp}}';
+    emisorRazon = '{{emisor_razon}}';
 
 block content 
   +page('custom')
@@ -9,20 +17,20 @@ block content
         td(style="width: 35%;")
           .small-bolder.mb-2.text-primary.text-uppercase / Folio
           .px-2
-            h2 COVE2476327B5
+            h2= folioRfc
             table 
               tr
                 th Fecha
                 td :
-                td 2024-11-27 T13:08:46
+                td= folioFecha
               tr 
                 th Tipo de Comprobante
                 td :
-                td Ingreso
+                td= folioTipo
               tr 
                 th Lugar de Expedición
                 td :
-                td 88240
+                td= folioLuExp
         td(style="width: 10%;")
         td(style="width: 55%;")
           h1.text-end.text-primary.m-0.text-uppercase
@@ -36,7 +44,7 @@ block content
         td(style="width: 30%;")
           .small-bolder.mb-2.text-primary.text-uppercase / Emisor
           .px-2
-            h3 AUTOZONE TEXAS, LLC
+            h3= emisorRazon
             table 
               tr
                 th RFC

@@ -1,3 +1,4 @@
+include ../mixins/xlsx-pdf-actions.pug
 block startActions
 
 fieldset.time-process-component
@@ -25,7 +26,4 @@ fieldset.time-process-component
             span#data-process-zona-horaria America/Mexico City
 .vr.ms-2
 block endActions
-button.btn.btn-link.link-excel.p-0.btn-lg#hoja-calculo(type='button' style="margin-bottom: -.5rem")
-  i.cpa-file-xls.fs-1
-button.btn.btn-link.link-pdf.p-0.btn-lg#pdf(type='button' style="margin-bottom: -.5rem")
-  i.cpa-file-pdf.fs-1
++xlsxPdfActions({xlsx:'hoja-calculo',pdf:'pdf'})

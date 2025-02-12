@@ -25,7 +25,8 @@
     "risk:pug": "./tools/convert-pug.js -i ./risk-pug/pages/  -o ../risk-dark-maqueta-vanilla/public/",
     "risk": "yarn risk:pug && yarn risk:purge",
     "cove:pug": "./tools/convert-pug.js -i ./pdf-pug/pages/  -o ../pdf-templates/",
-    "cove:pdf": "../../pdfs/generate-pdf.php --html ../pdf-templates/cove/index.html"
+    "cove:pdf": "../../pdfs/generate-pdf.php --html ../pdf-templates/cove/index.html",
+    "cove": "yarn cove:pug && yarn cove:pdf"
   },
   "files": [
     "dist/**/*.{css,scss,map}"
