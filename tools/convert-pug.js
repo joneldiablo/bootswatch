@@ -1,32 +1,13 @@
-#!/usr/bin/env node
-require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const pug = require('pug');
-const yargs = require('yargs');
-const { hideBin } = require('yargs/helpers');
+const chokidar = require('chokidar');
 
-const args = yargs(hideBin(process.argv))
-  .option('input', {
-    alias: 'i',
-    type: 'string',
-    describe: 'Path to the directory containing Pug files',
-    demandOption: true,
-  })
-  .option('output', {
-    alias: 'o',
-    type: 'string',
-    describe: 'Path to the output directory',
-  })
-  .option('watch', {
-    alias: 'w',
-    type: 'boolean',
-    describe: 'Watch for changes and recompile automatically',
-    default: false,
-  })
-  .help()
-  .alias('help', 'h').argv;
-
+/**
+ * Recursively processes a directory, compiling Pug files to HTML.
+ * @param {string} inputDir - Path to the directory containing Pug files.
+ * @param {string} outputDir - Path to the output directory.
+ */
 const processDirectory = (inputDir, outputDir) => {
   const files = fs.readdirSync(inputDir);
 
@@ -47,6 +28,11 @@ const processDirectory = (inputDir, outputDir) => {
   });
 };
 
+/**
+ * Compiles a single Pug file into an HTML file.
+ * @param {string} inputFilePath - Path to the Pug file.
+ * @param {string} outputFilePath - Path to save the generated HTML.
+ */
 const compilePug = (inputFilePath, outputFilePath) => {
   console.log(`Compiling: ${inputFilePath}`);
   const compiledFunction = pug.compileFile(inputFilePath, { pretty: true });
@@ -55,17 +41,20 @@ const compilePug = (inputFilePath, outputFilePath) => {
   console.log(`✅ HTML generated: ${outputFilePath}`);
 };
 
+/**
+ * Watches a directory for changes and recompiles Pug files on modification.
+ * @param {string} inputDir - Path to the directory to watch.
+ * @param {string} outputDir - Path to the output directory.
+ */
 const watchFiles = (inputDir, outputDir) => {
   console.log('Watching for file changes...');
-
-  const chokidar = require('chokidar');
 
   chokidar.watch(inputDir, { 
     persistent: true, 
     ignoreInitial: false, 
     awaitWriteFinish: true, 
-    usePolling: true,  // 🔥 Habilita el uso de polling
-    interval: 1000,  // ⏳ Intervalo de polling en milisegundos
+    usePolling: true,  
+    interval: 1000,  
   })
     .on('add', filePath => {
       if (filePath.endsWith('.pug')) {
@@ -83,40 +72,8 @@ const watchFiles = (inputDir, outputDir) => {
     });
 };
 
-
-const main = async (args) => {
-  try {
-    const inputDir = path.resolve(args.input);
-    if (!fs.existsSync(inputDir) || !fs.statSync(inputDir).isDirectory()) {
-      throw new Error('Input directory not found or is not a directory');
-    }
-
-    const outputDir = args.output ? path.resolve(args.output) : path.join(inputDir, 'output');
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    console.log('Scanning for Pug files recursively...');
-    processDirectory(inputDir, outputDir);
-
-    if (args.watch) {
-      watchFiles(inputDir, outputDir);
-    } else {
-      console.log('✅ All Pug files processed successfully');
-      return true;
-    }
-  } catch (error) {
-    console.error('❌ ERROR:', error);
-    process.exit(1);
-  }
+module.exports = {
+  processDirectory,
+  compilePug,
+  watchFiles
 };
-
-main(args)
-  .then(() => {
-    console.log('DONE');
-    if (!args.watch) process.exit();
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
