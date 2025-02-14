@@ -1,9 +1,0 @@
-append vars
-  - blocks = {}
-
-mixin setBlock(key)
-  - blocks[key] = this.block
-
-mixin getBlock(key)
-  if blocks[key]
-    != blocks[key]
