@@ -23,12 +23,14 @@
     "risk:purge": "node ./tools/purge-css-cli.js -i='../risk-dark-maqueta-vanilla/public/' -o='../risk-dark-maqueta-vanilla/public/assets/css/cpa-bs.css'",
     "risk:pug": "./tools/convert-pug.js -i ./risk-pug/pages/  -o ../risk-dark-maqueta-vanilla/public/",
     "risk": "yarn risk:pug && yarn risk:purge",
+    "risk:watch": "nodemon --watch ./risk-pug --ext pug --legacy-watch --exec 'yarn risk'",
     "cove:pug": "./tools/convert-pug.js -i ./pdf-pug/pages/  -o ../pdf-templates/",
     "cove:pdf": "../../pdfs/generate-pdf.php --html ../pdf-templates/cove",
     "cove": "yarn cove:pug && yarn cove:pdf",
     "ds:purge": "node ./tools/purge-css-cli.js -i='../ds/public/' -o='../ds/public/assets/css/cpa-bs.css'",
     "ds:pug": "./tools/convert-pug.js -i ./ds-pug/pages/  -o ../ds/public/",
-    "ds": "yarn ds:pug && yarn ds:purge"
+    "ds": "yarn ds:pug && yarn ds:purge",
+    "ds:watch": "nodemon --watch ./ds-pug --ext pug --legacy-watch --exec 'yarn ds'"
   },
   "files": [
     "dist/**/*.{css,scss,map}"
@@ -36,9 +38,9 @@
   "devDependencies": {
     "@lodder/grunt-postcss": "^3.1.1",
     "autoprefixer": "^10.4.17",
-    "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.10.5",
-    "grunt": "^1.6.1",
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-concat": "^2.1.0",
     "grunt-contrib-connect": "^4.0.0",
@@ -48,20 +50,21 @@
     "grunt-html": "^17.0.0",
     "grunt-sass": "^3.1.0",
     "grunt-shell": "^4.0.0",
+    "grunt": "^1.6.1",
+    "html2pug": "^4.0.0",
+    "nodemon": "^3.1.9",
     "postcss": "^8.4.35",
     "prettier": "^3.4.2",
     "prismjs": "^1.29.0",
+    "pug": "^3.0.3",
     "purgecss": "^7.0.2",
     "rtlcss": "^4.1.1",
     "sass": "^1.71.0",
     "serve": "^14.2.4",
-    "stylelint": "^15.10.2",
     "stylelint-config-twbs-bootstrap": "^11.0.1",
+    "stylelint": "^15.10.2",
     "yargs": "^17.7.2"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "html2pug": "^4.0.0",
-    "pug": "^3.0.3"
   }
 }

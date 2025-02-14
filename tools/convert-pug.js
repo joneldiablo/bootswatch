@@ -57,9 +57,16 @@ const compilePug = (inputFilePath, outputFilePath) => {
 
 const watchFiles = (inputDir, outputDir) => {
   console.log('Watching for file changes...');
+
   const chokidar = require('chokidar');
 
-  chokidar.watch(inputDir, { persistent: true, ignoreInitial: false, awaitWriteFinish: true })
+  chokidar.watch(inputDir, { 
+    persistent: true, 
+    ignoreInitial: false, 
+    awaitWriteFinish: true, 
+    usePolling: true,  // 🔥 Habilita el uso de polling
+    interval: 1000,  // ⏳ Intervalo de polling en milisegundos
+  })
     .on('add', filePath => {
       if (filePath.endsWith('.pug')) {
         const relativePath = path.relative(inputDir, filePath);
@@ -75,6 +82,7 @@ const watchFiles = (inputDir, outputDir) => {
       }
     });
 };
+
 
 const main = async (args) => {
   try {
