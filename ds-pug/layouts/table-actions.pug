@@ -1,0 +1,29 @@
+include ../mixins/xlsx-pdf-actions.pug
+block startActions
+
+fieldset.time-process-component
+  label.form-label Tiempo del Proceso:
+  .input-group.input-group-sm
+    i.input-group-text.bg-white.border-end-0.material-symbols-outlined update
+    input.form-control.text-center#time-process(name='time-process' type='text' placeholder='-------------', readonly, style='box-shadow:none;')
+    button.btn.btn-info.process-info#tiempo-proceso(type='button' data-bs-toggle='dropdown' data-bs-auto-close='outside' aria-expanded='false')
+      i.cpa-icons.cpa-icon-time-details.align-text-top
+    .dropdown-menu.dropdown-menu-end
+      .container-fluid(style='min-width: 400px; max-width: 100wv;')
+        h3.text-primary Datos del Proceso
+        dl.row.mb-0
+          dt.text-nowrap.col-sm-4.text-end.text-dark Inicio:
+          dd.text-nowrap.col-sm-8
+            span#data-process-inicio 2024 -11-12 21:02:19
+          dt.text-nowrap.col-sm-4.text-end.text-dark Fin:
+          dd.text-nowrap.col-sm-8
+            span#data-process-fin 2024 -11-12 21:02:02
+          dt.text-nowrap.col-sm-4.text-end.text-dark Tiempo:
+          dd.text-nowrap.col-sm-8
+            span#data-process-tiempo 0 horas, 0 minutos, 3 segundos
+          dt.text-nowrap.col-sm-4.text-end.text-dark Zona Horaria:
+          dd.text-nowrap.col-sm-8
+            span#data-process-zona-horaria America/Mexico City
+.vr.ms-2
+block endActions
++xlsxPdfActions({xlsx:'hoja-calculo',pdf:'pdf'})

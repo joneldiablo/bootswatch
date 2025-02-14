@@ -48,6 +48,13 @@ const purgeCss = async (cssFilePath, htmlDirPath, outputCssFilePath) => {
         'border-primary',
         'rounded',
         'bg-primary-subtle',
+        'fs-3',
+        'fade',
+        'tooltip',
+        'bs-tooltip-auto',
+        'tooltip-arrow',
+        'tooltip-inner',
+        /data-popper-placement.*/
       ]
     });
 

@@ -1,0 +1,60 @@
+.hstack.gap-2.align-items-end
+  block beforeFilterForm
+  form.hstack.gap-2.align-items-end#filter-table
+    block fieldsFilterForm
+    fieldset.ejercicio-field
+      label.form-label(for='ejercicio') Ejercicio:
+      .input-group.input-group-sm#ejercio-input-gr
+        i.input-group-text.bg-white.border-end-0.material-symbols-outlined.cursor-pointer(data-td-target='#ejercio-input-gr' data-td-toggle='datetimepicker') calendar_month
+        input.form-control.text-end.date#ejercicio(name='ejercicio' type='number' placeholder='_ _ _ _' data-td-target='#ejercio-input-gr' min='2000', required)
+      script.
+
+        document.addEventListener('DOMContentLoaded', function () {
+          const inputGrEjercicio = document.getElementById('ejercio-input-gr');
+          const inputEjercicio = document.querySelector('#ejercio-input-gr input');
+          const today = new Date();
+          inputEjercicio.setAttribute('max', today.getFullYear());
+          new tempusDominus.TempusDominus(inputGrEjercicio, {
+            display: {
+              components: {
+                decades: false,
+                year: true,
+                month: false,
+                date: false,
+                hours: false,
+                minutes: false,
+                seconds: false
+              },
+              //theme: 'light'
+            },
+            localization: {
+              format: 'yyyy',
+            },
+            restrictions: {
+              minDate: '2000',
+              maxDate: new Date()
+            }
+          });
+        });
+    
+    button.btn.btn-primary.btn-sm.px-3.text-nowrap(type='submit')
+      i.material-symbols-outlined.align-bottom filter_alt
+      | Filtrar
+
+    script.
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('#filter-table');
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          formData.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+          });
+          const formObject = Object.fromEntries(formData.entries());
+          console.log(formObject);
+        });
+      });
+
+  block afterFilterForm

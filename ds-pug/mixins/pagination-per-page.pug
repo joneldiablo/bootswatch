@@ -1,0 +1,7 @@
+mixin paginationPerPage(pages=[], texts={})
+  - texts = Object.assign({last:'Last',next:'Next'},texts);
+  nav&attributes
+    ul.pagination.mb-0.pagination-sm
+      each page in pages
+        li(class=['page-item', (page.classes || '')])
+          a.page-link(href=page.link data-page=(page.data||page.label))= page.label

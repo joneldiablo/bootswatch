@@ -1,0 +1,15 @@
+extends ./table-actions.pug
+
+block endActions 
+  button.btn.btn-link.link-info.text-decoration-none.p-0#columns-sorter(type='button' data-bs-toggle="dropdown" data-bs-auto-close="outside")
+    i.material-symbols-outlined.fs-1 splitscreen_vertical_add
+  .dropdown-menu(style="max-width:320px")
+    .p-3
+      .d-flex.justify-content-between
+        b.fs-4 Editor de Columnas
+        button.btn.btn-link.link-muted.text-decoration-none#reset-columns(type="button") Reestablecer
+    #column-selector.overflow-auto(style="max-height:40vh")
+    .p-3 
+      .d-flex.justify-content-center.gap-5
+        button.btn.btn-secondary(type="button" data-bs-dismiss="dropdown") Cancelar
+        button.btn.btn-primary#save-column-changes(type="button" data-bs-dismiss="dropdown") Guardar

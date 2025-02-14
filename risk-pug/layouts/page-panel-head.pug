@@ -1,0 +1,13 @@
+extends ../layouts/page.pug
+include ../mixins/panel.pug
+include ../mixins/modal.pug
+include ../mixins/accordion-item.pug
+include ../mixins/xlsx-pdf-actions.pug
+
+block content
+  +panel(titleVisible, breadcrumbLinks, titleBC)
+    block panelContent
+block footerPage
+  script(src='/assets/js/globals.js')
+  script(src='/assets/js/drag-sort.js')
+  script(src='/assets/js/cols-selector.js')

@@ -1,13 +1,41 @@
-extends ./layouts/file.pug
-include ../../mixins/page.pug
+extends ./file.pug
+include ../mixins/page.pug
 
 block vars 
   - 
-    folioRfc = '{{folio_rfc}}';
-    folioFecha = '{{folio_fecha}}';
-    folioTipo = '{{folio_tipo}}';
-    folioLuExp = '{{folio_lu_exp}}';
     emisorRazon = '{{emisor_razon}}';
+    emisorRegimen = '{{emisor_regimen}}';
+    emisorRfc = '{{emisor_rfc}}';
+    facturaFecha = '{{factura_fecha}}';
+    facturaFechaTimbrado = '{{factura_fecha_timbrado}}';
+    facturaFolio = '{{factura_folio}}';
+    facturaLuExp = '{{factura_lu_exp}}';
+    facturaMoneda = '{{factura_moneda}}';
+    facturaPagina = '{{factura_pagina}}';
+    facturaPaginasTotal = '{{factura_paginas_total}}';
+    facturaTipo = '{{factura_tipo}}';
+    facturaUuid = '{{factura_uuid}}';
+    faturaTotal = '{{fatura_total}}';
+    filas = [
+      {
+        filaDescripcion: '{{fila_descripcion}}',
+        filaCantidad: '{{fila_cantidad}}',
+        filaValorUnitario: '{{fila_valor_unitario}}',
+        filaImporte: '{{fila_importe}}',
+      },
+      {
+        filaDescripcion: '{{fila_descripcion}}',
+        filaCantidad: '{{fila_cantidad}}',
+        filaValorUnitario: '{{fila_valor_unitario}}',
+        filaImporte: '{{fila_importe}}',
+      }
+    ];
+    receptorDomicilio = '{{receptor_domicilio}}';
+    receptorRazon = '{{receptor_razon}}';
+    receptorRegimen = '{{receptor_regimen}}';
+    receptorRfc = '{{receptor_rfc}}';
+    receptorUsoCfdi = '{{receptor_uso_cfdi}}';
+    timbreRfc = '{{timbre_rfc}}';
 
 block content 
   +page('custom')
@@ -17,20 +45,20 @@ block content
         td(style="width: 35%;")
           .small-bolder.mb-2.text-primary.text-uppercase / Folio
           .px-2
-            h2= folioRfc
+            h2= facturaFolio
             table 
               tr
                 th Fecha
                 td :
-                td= folioFecha
+                td= facturaFecha
               tr 
                 th Tipo de Comprobante
                 td :
-                td= folioTipo
+                td= facturaTipo
               tr 
                 th Lugar de Expedición
                 td :
-                td= folioLuExp
+                td= facturaLuExp
         td(style="width: 10%;")
         td(style="width: 55%;")
           h1.text-end.text-primary.m-0.text-uppercase
@@ -49,72 +77,57 @@ block content
               tr
                 th RFC
                 td :
-                td ZCO980914I98
+                td= emisorRfc
               tr 
                 th Régimen Fiscal
                 td :
-                td 601
+                td= emisorRegimen
         td(style="width: 20%;")
         td(style="width: 30%;") 
           .small-bolder.mb-2.text-primary.text-uppercase / Receptor
           .px-2
-            h3 Zone Compra S. de R.L. de C.V.
+            h3= receptorRazon
             table 
               tr
                 th RFC
                 td :
-                td ZCO980914I98
+                td= receptorRfc
               tr 
                 th Régimen Fiscal
                 td :
-                td 601
+                td= receptorRegimen
               tr 
                 th Domicilio Fiscal
                 td :
-                td 88240
+                td= receptorDomicilio
               tr 
                 th Uso CFDI 
                 td :
-                td G01
+                td= receptorUsoCfdi
         td(style="width: 5%;")
 
-    table.table.table-striped.mb-4
+    table.table.table-striped.mb-4.table-description
       thead 
         tr.text-uppercase 
           th.gray-1.position-relative
-            span.triangle.triangle-white
-            | Descripción
+            img.bg-ht(src="./bg-gray-1.png")
+            span.position-absolute.center Descripción
           th.gray-2.position-relative
-            span.triangle.triangle-gray-1
-            | Cantidad
+            img.bg-ht(src="./bg-gray-2.png")
+            span.position-absolute.center Cantidad
           th.gray-3.position-relative 
-            span.triangle.triangle-gray-2
-            | Valor Unitario
+            img.bg-ht(src="./bg-gray-3.png")
+            span.position-absolute.center Valor Unitario
           th.gray-4.position-relative
-            span.triangle.triangle-gray-3
-            | Importe
-            span.triangle.triangle-end.triangle-gray-4
+            img.bg-ht(src="./bg-gray-4.png")
+            span.position-absolute.center Importe
       tbody 
-        tr 
-          td.text-uppercase Aditivo para Motor
-          td.text-end 132.00
-          td.text-end $ 4.170000
-          td.text-end $ 550.4400
-        tr 
-          td.text-uppercase Aditivo para Aceite
-          td.text-end 144.000
-          td.text-end $ 8.800000
-          td.text-end $ 1,267.2000
-        tr 
-          td.text-uppercase Preparaciones Lubricantes
-          td.text-end 24.000
-          td.text-end $ 6.590000
-          td.text-end $ 158.1600
-        tr 
-          td.text-uppercase Aditivos para Gasolina
-          td.text-end 328.000
-          td.text-end $ 20.110000
-          td.text-end $ 6596.0800
+        each row in filas
+          tr 
+            td.text-uppercase= row.filaDescripcion
+            td.text-end= row.filaCantidad
+            td.text-end= row.filaValorUnitario
+            td.text-end= row.filaImporte
     table
       tr
         td(style="width:30%")
@@ -125,40 +138,39 @@ block content
               tr 
                 td: h3 Total
                 td(style="width: 40%")
-                td.text-center.text-bg-primary.py-1.px-4.display-5.position-relative
-                  span.triangle.triangle-white
-                  | $74,617.84
-                  span.triangle.triangle-end.triangle-primary
+                td.text-center.text-bg-primary.py-1.px-4.display-5.position-relative(style="height:22px;min-width:95px;")
+                  img.bg-ht(src="./bg-primary.png")
+                  span.position-absolute.center= faturaTotal
             table
               tr 
                 td(style="width: 50%"): h4 Moneda
                 td(style="width: 12%").text-end :
-                td(style="width: 38%") USD
+                td(style="width: 38%")= facturaMoneda
 
     table
       tr
         td.align-middle(style="width: 40%")
           .small-bolder.mb-2.text-primary.text-uppercase / Timbre Fiscal Digital
           .px-2
-            h3 ZONE COMPRA S. DE R.L. DE C.V.
+            h3= receptorRazon
             table 
               tr
                 th(style="width: 40%") UUID
                 td(style="width: 4%") :
-                td(style="width: 56%") EJEMPLO-1234-5678-9101
+                td(style="width: 56%")= facturaUuid
               tr
                 th Fecha Timbrado
                 td :
-                td 2024-11-27T13:09:00
+                td= facturaFechaTimbrado
               tr.align-bottom
                 th RFC Proveedor Certificado
                 td :
-                td AAA010101AAA
+                td= timbreRfc
         td(style="width: 60%")
     .pagination    
       span.text-uppercase Pag&nbsp;&nbsp;
-      span.pag-actual 1
+      span.pag-actual= facturaPagina
       | &nbsp;|&nbsp;
-      span.pag-total 2
+      span.pag-total= facturaPaginasTotal
     img.header-img(src="./header.png")
     img.footer-img(src="./bottom.png")

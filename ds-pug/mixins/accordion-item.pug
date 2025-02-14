@@ -1,0 +1,16 @@
+mixin accordionItem(id, parent, {label, accordionClasses, headerClasses, buttonClasses, bodyClasses, collapsed=true, custom=false, titleTag='h2'}={})
+  - headerClasses = ['accordion-header', headerClasses];
+  - buttonClasses = [buttonClasses];
+  - if(!custom)buttonClasses.push('accordion-button');
+  - if(collapsed)buttonClasses.push('collapsed');
+  - headerClasses=headerClasses.flat().filter(Boolean).join(' ');
+  - buttonClasses=buttonClasses.flat().filter(Boolean).join(' ');
+  .accordion-item(class=accordionClasses)
+    #{titleTag}(class=headerClasses)
+      button(type='button' data-bs-toggle='collapse' class=buttonClasses aria-controls=id data-bs-target='#'+id aria-expanded=!collapsed)
+        i.material-symbols-outlined.align-text-top.up expand_circle_up
+        i.material-symbols-outlined.align-text-top.down expand_circle_down
+        != label
+    .accordion-collapse.collapse(id=id data-bs-parent='#'+parent)
+      .accordion-body(class=bodyClasses)
+        block

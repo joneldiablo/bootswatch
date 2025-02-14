@@ -1,0 +1,15 @@
+mixin pagination(options)
+  - if (!options)
+    -
+      options = [
+        [10, 10],
+        [50, 50],
+        [100, 100],
+        [500, 500]
+      ];  
+  fieldset.hstack.align-items-center.text-body-secondary
+    label.form-label.text-nowrap.mb-0 Mostrar
+    select#pagination.form-select.form-select-sm.mx-2(name='pagination' style='max-width: 80px;')
+      each opt in options
+        option(value=opt[0])= opt[1]
+    label.form-label.text-nowrap.mb-0(for='pagination') Registros por página

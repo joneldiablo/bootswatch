@@ -1,0 +1,7 @@
+mixin xlsxPdfActions({xlsx, pdf})
+  if xlsx
+    button.btn.btn-link.link-excel.p-0.btn-lg(id=xlsx type='button' style="margin-bottom: -.5rem")
+      i.cpa-file-xls.fs-1
+  if pdf
+    button.btn.btn-link.link-pdf.p-0.btn-lg(id=pdf type='button' style="margin-bottom: -.5rem")
+      i.cpa-file-pdf.fs-1
